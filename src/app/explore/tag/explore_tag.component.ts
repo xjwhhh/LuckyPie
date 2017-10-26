@@ -17,6 +17,7 @@ export class ExploreTagComponent implements OnInit {
   shares: Share[];
 
   selectedTag:String;
+  selectedArea:String;
 
   getShares(): void {
     this.exploreService.getShares().then(shares => this.shares = shares);
@@ -36,6 +37,11 @@ export class ExploreTagComponent implements OnInit {
   	  }
 
     gotoTagDetail(): void {
-    this.router.navigate(['/explore/tag',this.selectedTag]);
+    this.router.navigate(['/explore/tagdetail',this.selectedTag]);
+  }
+
+  showAllTags():void{
+    this.selectedArea="Style";
+    this.router.navigate(['/explore/showalltags',this.selectedArea]);
   }
 }

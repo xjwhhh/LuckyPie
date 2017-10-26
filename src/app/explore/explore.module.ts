@@ -9,7 +9,9 @@ import {ExploreDateComponent} from './date/explore_date.component';
 import {ExploreTagComponent} from './tag/explore_tag.component';
 import {ExplorePhotographerComponent} from './photographer/explore_photographer.component';
 import {ExploreModelComponent} from './model/explore_model.component';
+import {ExploreTagDetailComponent} from './tagdetail/tag_detail.component';
 import {ExploreRoutingModule} from './explore-routing.module';
+import {ExploreShowAllTagsComponent} from './alltags/all_tags.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import {ExploreRoutingModule} from './explore-routing.module';
     ExploreTagComponent,
     ExplorePhotographerComponent,
     ExploreModelComponent,
+    ExploreTagDetailComponent,
+    ExploreShowAllTagsComponent,
   ],
   providers: [ExploreService],
   bootstrap: [ExploreComponent]

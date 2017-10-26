@@ -36,6 +36,20 @@ export class ExploreService {
       .catch(this.handleError);
   }
 
+    getSharesByTag(selectedTag:string): Promise<Share[]> {
+    return this.http.get(this.sharesUrl)
+      .toPromise()
+      .then(response => response.json() as Share[])
+      .catch(this.handleError);
+  }
+
+      getAllTags(selectedTag:string): Promise<Share[]> {
+    return this.http.get(this.sharesUrl)
+      .toPromise()
+      .then(response => response.json() as Share[])
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
@@ -43,7 +57,11 @@ export class ExploreService {
 
   setSelectedTag(selectedTag:String){
       this.selectedTag=selectedTag;
-      console.log(this.selectedTag);
+      // console.log(this.selectedTag);
+  }
+
+  getSelectedTag():String{
+    return this.selectedTag;
   }
 
 
