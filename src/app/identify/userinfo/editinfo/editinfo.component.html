@@ -1,0 +1,26 @@
+<form [formGroup]="editInfoForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-group">
+    <label>姓名</label>
+    <input class="form-control" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label>性别</label>
+    <select class="form-control" fromControName="gender">
+      <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>身份</label>
+    <select class="form-control" fromControName="identify">
+      <option *ngFor="let identify of identifies" [value]="identify">{{identify}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>电话</label>
+    <input type="tel" class="form-control" formControlName="tel">
+  </div>
+  <div class="form-group">
+    <label>邮件地址</label>
+    <input type="email" class="form-control" formControlName="email">
+  </div>
+</form>

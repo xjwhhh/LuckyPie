@@ -1,0 +1,71 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<div class="row">
+  <P style="height: 20px"></P>
+</div>
+<div class="row">
+  <!-- <div class="col-md-1"></div> -->
+  <div class="col-md-8">
+    <form [formGroup]="activityForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label>面向地区</label>
+        <select class="form-control" fromControName="photoRegion">
+          <option *ngFor="let address of addresses" [value]="address">{{address}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>费用</label>
+        <select class="form-control" fromControName="costType">
+          <option *ngFor="let costType of costTypes" [value]="costType">{{costType}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>发布内容</label>
+        <input class="form-control" formControlName="desc" placeholder="比如自我介绍，对应征者的要求等">
+      </div>
+      <div formArrayName="tags">
+        <div class="row">
+          <label>添加标签</label>
+        </div>
+        <div class="row">
+          <div *ngFor="let tag of Tags">
+            <div class="col-md-1">
+              <span (click)="onClickTag(tag)">{{tag}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div formArrayName="photos">
+        <div class="row">
+          <label>添加图片</label>
+          <label>最多添加九张，每张大小不超过20M</label>
+        </div>
+        <div class="row">
+          <div *ngFor="let photo of photos.controls; let i=index" [formGroupName]="i">
+            <div class="col-md-4">
+              <div class="form-group">
+                <img src="{{photo.value.url}}" width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <p>注意事项 </p>
+    <p>1 了解乐拍约拍机制：发布约拍信息，有意的模特或摄影应征发起约拍，你就可以看到对方联系方式。同样你发起约拍对方也可以看到你的联系方式。 </p>
+    <p>注：勿在约拍信息和图片中留联系方式。 </p>
+    <p>2 摄会社作品发布原则：我们默认所有摄影、模特、化妆师等发布的图片/相册/作品均为个人原创作品，尊重他人劳动成果和作品。 </p>
+    <p>注：引用他人作品务必注明来源和出处，明确表明非个人作品，如被原摄影投诉侵删。 </p>
+    <p>3 信息发布请遵循相关法律法规、道德伦理和摄会社社区发布原则。 </p>
+    <p>注：约拍作品禁露点；发布信息两天通过一条，重复发布以后一条为准。 </p>
+    <p>4 所有对约拍信息的处理遵循第1、2、3条。 </p>
+  </div>
+</div>
