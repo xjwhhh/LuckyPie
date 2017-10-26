@@ -6,6 +6,8 @@ import {Addresses, CostTypes, Identifies, Genders} from 'app/entity/entity';
 
 @Injectable()
 export class ExploreService {
+
+  private selectedTag:String;
   constructor(private http: Http) {
   }
 
@@ -37,6 +39,11 @@ export class ExploreService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
+  }
+
+  setSelectedTag(selectedTag:String){
+      this.selectedTag=selectedTag;
+      console.log(this.selectedTag);
   }
 
 

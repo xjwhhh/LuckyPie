@@ -12,11 +12,11 @@ import {PostService} from 'app/post/post.service';
 
 
 @Component({
-  selector: 'post-photo',
+  selector: 'post-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.css'],
 })
-export class PostPhotoComponent implements OnInit {
+export class PostShareComponent implements OnInit {
   photoForm: FormGroup;
   Tags: String[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童摄影", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "宝丽来", "清新", "婚礼", "cosplay", "胶片", "黑白", "纪实", "日系"];
   selectedTags: String[] = [];

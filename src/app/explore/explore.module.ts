@@ -5,8 +5,8 @@ import {
 } from 'app/explore/explore.service';
 
 import {ExploreComponent} from './explore.component';
-import {ExplorePostComponent} from './post/explore_post.component';
-import {ExplorePhotoComponent} from './photo/explore_photo.component';
+import {ExploreDateComponent} from './date/explore_date.component';
+import {ExploreTagComponent} from './tag/explore_tag.component';
 import {ExplorePhotographerComponent} from './photographer/explore_photographer.component';
 import {ExploreModelComponent} from './model/explore_model.component';
 import {ExploreRoutingModule} from './explore-routing.module';
@@ -18,8 +18,8 @@ import {ExploreRoutingModule} from './explore-routing.module';
   ],
   declarations: [
     ExploreComponent,
-    ExplorePostComponent,
-    ExplorePhotoComponent,
+    ExploreDateComponent,
+    ExploreTagComponent,
     ExplorePhotographerComponent,
     ExploreModelComponent,
   ],

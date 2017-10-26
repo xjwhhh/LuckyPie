@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -8,11 +8,11 @@ import {
 
 
 @Component({
-  selector: 'explore-post',
-  templateUrl: './explore_post.component.html',
-  styleUrls: ['./explore_post.component.css'],
+  selector: 'explore-date',
+  templateUrl: './explore_date.component.html',
+  styleUrls: ['./explore_date.component.css'],
 })
-export class ExplorePostComponent implements OnInit {
+export class ExploreDateComponent implements OnInit {
   addresses: String[];
   costTypes: String[];
   identifies: String[];
@@ -20,7 +20,15 @@ export class ExplorePostComponent implements OnInit {
   shares: Share[];
 
 
-  constructor(private exploreService: ExploreService) {
+  constructor(private exploreService: ExploreService) {}
+
+
+  ngOnInit(): void {
+    this.getAddresses();
+    this.getCostTypes();
+    this.getIdentifies();
+    this.getGenders();
+    this.getShares();
   }
 
   getAddresses(): void {
@@ -44,13 +52,6 @@ export class ExplorePostComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    this.getAddresses();
-    this.getCostTypes();
-    this.getIdentifies();
-    this.getGenders();
-    this.getShares();
-  }
 
   selectAddress(selectedAddress: String): void {
     console.log(selectedAddress);

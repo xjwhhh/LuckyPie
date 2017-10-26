@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {ExploreComponent} from './explore.component';
-import {ExplorePostComponent} from './post/explore_post.component';
-import {ExplorePhotoComponent} from './photo/explore_photo.component';
+import {ExploreDateComponent} from './date/explore_date.component';
+import {ExploreTagComponent} from './tag/explore_tag.component';
 import {ExplorePhotographerComponent} from './photographer/explore_photographer.component';
 import {ExploreModelComponent} from './model/explore_model.component';
 
@@ -15,15 +15,15 @@ const ExploreRoutes: Routes = [
     children: [
       {
         path: '',
-        component: ExplorePostComponent,
+        component: ExploreDateComponent,
       },
       {
         path: 'post',
-        component: ExplorePostComponent,
+        component: ExploreDateComponent,
       },
       {
-        path: 'photo',
-        component: ExplorePhotoComponent,
+        path: 'tag',
+        component: ExploreTagComponent,
       },
       {
         path: 'photographer',

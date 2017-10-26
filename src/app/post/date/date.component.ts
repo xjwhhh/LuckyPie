@@ -13,11 +13,11 @@ import {PostService} from 'app/post/post.service';
 
 
 @Component({
-  selector: 'post-activity',
+  selector: 'post-date',
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.css'],
 })
-export class PostActivityComponent implements OnInit {
+export class PostDateComponent implements OnInit {
   activityForm: FormGroup;
 
   addresses: String[];
