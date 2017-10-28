@@ -35,8 +35,8 @@ const ExploreRoutes: Routes = [
         path: 'model',
         component: ExploreModelComponent,
       },
-      { path: 'tagdetail/:selectedTag', component: ExploreTagDetailComponent},
-      { path: 'showalltags/:selectedArea', component: ExploreShowAllTagsComponent},
+      {path: 'tagdetail/:selectedTag', component: ExploreTagDetailComponent},
+      {path: 'showalltags/:selectedArea', component: ExploreShowAllTagsComponent},
     ]
   }
 ];

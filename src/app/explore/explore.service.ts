@@ -7,7 +7,8 @@ import {Addresses, CostTypes, Identifies, Genders} from 'app/entity/entity';
 @Injectable()
 export class ExploreService {
 
-  private selectedTag:String;
+  private selectedTag: String;
+
   constructor(private http: Http) {
   }
 
@@ -36,14 +37,14 @@ export class ExploreService {
       .catch(this.handleError);
   }
 
-    getSharesByTag(selectedTag:string): Promise<Share[]> {
+  getSharesByTag(selectedTag: string): Promise<Share[]> {
     return this.http.get(this.sharesUrl)
       .toPromise()
       .then(response => response.json() as Share[])
       .catch(this.handleError);
   }
 
-      getAllTags(selectedTag:string): Promise<Share[]> {
+  getAllTags(selectedTag: string): Promise<Share[]> {
     return this.http.get(this.sharesUrl)
       .toPromise()
       .then(response => response.json() as Share[])
@@ -55,12 +56,12 @@ export class ExploreService {
     return Promise.reject(error.message || error);
   }
 
-  setSelectedTag(selectedTag:String){
-      this.selectedTag=selectedTag;
-      // console.log(this.selectedTag);
+  setSelectedTag(selectedTag: String) {
+    this.selectedTag = selectedTag;
+    // console.log(this.selectedTag);
   }
 
-  getSelectedTag():String{
+  getSelectedTag(): String {
     return this.selectedTag;
   }
 

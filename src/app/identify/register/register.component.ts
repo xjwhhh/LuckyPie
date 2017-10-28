@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Location} from '@angular/common';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'register',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   // styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor(private location: Location,private router:Router) {
+  constructor(private location: Location, private router: Router) {
   }
 
   gotoLogin(): void {

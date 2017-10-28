@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
   Share
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { Router } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'explore-all-tags',
@@ -20,7 +20,8 @@ export class ExploreShowAllTagsComponent implements OnInit {
   selectedArea: String;
   selectedTag: String;
 
-  constructor(private route: ActivatedRoute, private exploreService: ExploreService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private exploreService: ExploreService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.getAllTags();

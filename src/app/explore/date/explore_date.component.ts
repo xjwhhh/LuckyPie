@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -20,7 +20,8 @@ export class ExploreDateComponent implements OnInit {
   shares: Share[];
 
 
-  constructor(private exploreService: ExploreService) {}
+  constructor(private exploreService: ExploreService) {
+  }
 
 
   ngOnInit(): void {
@@ -50,7 +51,6 @@ export class ExploreDateComponent implements OnInit {
   getShares(): void {
     this.exploreService.getShares().then(shares => this.shares = shares);
   }
-
 
 
   selectAddress(selectedAddress: String): void {

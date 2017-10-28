@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
   Share
 } from 'app/entity/entity';
-import { Location } from '@angular/common'
+import {Location} from '@angular/common'
+
 @Component({
   selector: 'explore-tag-detail',
   templateUrl: './tag_detail.component.html',
@@ -15,11 +16,12 @@ import { Location } from '@angular/common'
 export class ExploreTagDetailComponent implements OnInit {
   shares: Share[];
   selectedTag: String;
-  constructor(private route: ActivatedRoute, private exploreService: ExploreService) {}
+  type: String;//最新或热门
+  constructor(private route: ActivatedRoute, private exploreService: ExploreService) {
+  }
 
   ngOnInit(): void {
     this.getShares();
-
   }
 
   getShares() {
@@ -29,6 +31,16 @@ export class ExploreTagDetailComponent implements OnInit {
         this.exploreService.getSharesByTag(selectedTag).then(shares => this.shares = shares);
       }
     });
+  }
+
+//选择热门分享
+  selectHotShares() {
+    console.log("hot");
+  }
+
+//选择最新分享
+  selectNewShares() {
+    console.log("new");
   }
 
 
