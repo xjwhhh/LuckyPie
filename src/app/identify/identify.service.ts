@@ -1,15 +1,19 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
+import {Headers, Http,RequestOptions,URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Identifies, Genders, Album} from 'app/entity/entity';
+import {Identifies, Genders, Album,User} from 'app/entity/entity';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class IdentifyService {
-  constructor(private http: Http) {
+  user:User=new User();
+
+  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  options = new RequestOptions({ headers: this.headers });
+  constructor(private http: Http,private router:Router) {
   }
 
   private userAlbumsUrl = 'http://localhost:3000/albums';
-
 
   getUserAlbums(): Promise<Album[]> {
     return this.http.get(this.userAlbumsUrl)
@@ -31,6 +35,23 @@ export class IdentifyService {
   getGenders(): Promise<String[]> {
     return Promise.resolve(Genders);
   }
+
+
+  private loginUrl='http://localhost/LuckyPie-Server/api/post/user/login';
+  login(account:string,password:string):Promise<User>{
+    let data = new URLSearchParams();
+    data.append("account",account);
+    data.append("password",password);
+    return this.http.post(this.loginUrl, data,this.options)
+      .toPromise()
+      .then(response => response.json() as User )
+      .catch(this.handleError);
+  }
+
+  // gotoUserInfo(){
+  //   this.router.navigate(['/identify/info',this.user.account]);
+  // }
+
 
 
 }
