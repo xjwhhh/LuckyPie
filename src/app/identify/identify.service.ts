@@ -48,6 +48,17 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
+  private registerUrl='http://localhost/LuckyPie-Server/api/post/user/register';
+    register(account:string,password:string):Promise<User>{
+    let data = new URLSearchParams();
+    data.append("account",account);
+    data.append("password",password);
+    return this.http.post(this.registerUrl, data,this.options)
+      .toPromise()
+      .then(response => response.json() as User )
+      .catch(this.handleError);
+  }
+
   // gotoUserInfo(){
   //   this.router.navigate(['/identify/info',this.user.account]);
   // }

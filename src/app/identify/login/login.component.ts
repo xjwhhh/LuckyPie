@@ -23,14 +23,11 @@ export class LoginComponent implements OnInit{
 
 
 	login(account:string,password:string){
-		if(account==""&&password!=""){
+		if(account==""){
 			alert("未输入用户名");
 		}
-		else if(password==""&&account!=""){
+		else if(password==""){
 			alert("未输入密码");
-		}
-		else if(password==""&&account==""){
-			alert("未输入用户名和密码");
 		}
 		else{
 		this.identifyService.login(account,password).then(user=> this.user=user);
@@ -41,8 +38,12 @@ export class LoginComponent implements OnInit{
 		
 	}
 
+	gotoRegister(){
+		 this.router.navigate(['/identify/register']);
+	}
+
 	gotoUserInfo(){
 		this.router.navigate(['/identify/info',this.user.account]);
 		// this.identifyService.gotoUserInfo()
-;	}
+	}
 }

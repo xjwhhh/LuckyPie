@@ -39,10 +39,10 @@
           账号
         </div>
         <div class="col-md-8">
-          <input type="text">
+          <input type="text" #account>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <P style="height: 10px"></P>
       </div>
       <div class="row">
@@ -52,7 +52,7 @@
         <div class="col-md-8">
           <input type="text">
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <P style="height: 10px"></P>
       </div>
@@ -61,7 +61,7 @@
           密码
         </div>
         <div class="col-md-8">
-          <input type="password">
+          <input type="password" #password>
         </div>
       </div>
       <div class="row">
@@ -72,7 +72,7 @@
           确认密码
         </div>
         <div class="col-md-8">
-          <input type="password">
+          <input type="password" #ensurePassword>
         </div>
       </div>
       <div class="row">
@@ -81,11 +81,11 @@
       <div class="row">
         <div class="col-md-8">
           <label (click)="gotoLogin()">已有账号，直接登录</label>
-          <a href="http://localhost:4200/identify/login">已有账号，直接登录</a>
+          <!-- <a href="http://localhost:4200/identify/login">已有账号，直接登录</a> -->
         </div>
         <div class="col-md-4">
           <div align="right">
-            <button type="submit">
+            <button type="button" (click)="register(account.value,password.value,ensurePassword.value)">
               注册
             </button>
           </div>
