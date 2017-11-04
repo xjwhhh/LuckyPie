@@ -10,20 +10,24 @@
   <div class="col-md-8">
     <form [formGroup]="activityForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
-        <label>面向地区</label>
-        <select class="form-control" fromControName="photoRegion">
+        <label>拍摄地区</label>
+        <select class="form-control" fromControName="photoRegion" #photoAddress>
           <option *ngFor="let address of addresses" [value]="address">{{address}}</option>
         </select>
       </div>
       <div class="form-group">
+        <label>拍摄时间</label>
+        <input type="date" class="form-control" fromControName="photoRegion" #photoTime>
+      </div>
+      <div class="form-group">
         <label>费用</label>
-        <select class="form-control" fromControName="costType">
+        <select class="form-control" fromControName="costType" #cost>
           <option *ngFor="let costType of costTypes" [value]="costType">{{costType}}</option>
         </select>
       </div>
       <div class="form-group">
         <label>发布内容</label>
-        <input class="form-control" formControlName="desc" placeholder="比如自我介绍，对应征者的要求等">
+        <input class="form-control" formControlName="desc" placeholder="比如自我介绍，对应征者的要求等" #desc>
       </div>
       <div formArrayName="tags">
         <div class="row">
@@ -46,7 +50,7 @@
           <div *ngFor="let photo of photos.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
               <div class="form-group">
-                <img src="{{photo.value.url}}" width="100%">
+                <img src="{{photo.value.url}}" width="100%" (click)="deleteImage(photo.value.url)">
               </div>
             </div>
           </div>
@@ -56,6 +60,9 @@
         </div>
       </div>
     </form>
+    <div>
+      <button type="button" (click)="upload(photoAddress.value,photoTime.value,cost.value,desc.value)">上传</button>
+    </div>
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">

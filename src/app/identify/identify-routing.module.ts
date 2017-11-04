@@ -17,10 +17,10 @@ const IdentifyRoutes: Routes = [
     path: 'identify',
     component: IdentifyComponent,
     children: [
-    {
-      path:'',
-      component:LoginComponent,
-    },
+      {
+        path: '',
+        component: LoginComponent,
+      },
       {
         path: 'info/:id',
         component: UserInfoComponent,

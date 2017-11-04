@@ -8,7 +8,7 @@ import {
   FileUploader
 } from 'ng2-file-upload';
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Photo} from 'app/entity/entity';
+import {Photo, Dating} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
 
 
@@ -20,14 +20,16 @@ import {PostService} from 'app/post/post.service';
 export class PostDateComponent implements OnInit {
   activityForm: FormGroup;
 
-  addresses: String[];
-  costTypes: String[];
-  Tags: String[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童摄影", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "宝丽来", "清新", "婚礼", "cosplay", "胶片", "黑白", "纪实", "日系"];
-  selectedTags: String[] = [];
+  addresses: string[];
+  costTypes: string[];
+  Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童摄影", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "宝丽来", "清新", "婚礼", "cosplay", "胶片", "黑白", "纪实", "日系"];
+  selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
 
-  imageurls: string[] = [];
+  imageUrls: string[] = [];
+
+  dating: Dating;
 
 
   constructor(private fb: FormBuilder, private postService: PostService) {
@@ -52,6 +54,7 @@ export class PostDateComponent implements OnInit {
       power: '',
       sidekick: '',
       photoRegion: '',
+      photoTime: '',
       costType: '',
       desc: '',
       photos: this.fb.array([]),
@@ -91,10 +94,24 @@ export class PostDateComponent implements OnInit {
   };
 
   selectedFileOnChanged() {
+    let isExist = false;
+    let index = 0;
+
+
+    // console.log(this.uploader.queue.length);
+    // console.log(this.imageUrls.length);
+    //todo 九张图的限制
+    // if (this.imageUrls.length>9) {
+    //   alert("不得上传超过九张图");
+    //   // this.uploader.queue.splice(this.uploader.queue.length-1,1);
+    //   console.log(this.imageUrls.length);
+    //   console.log("out")
+    // } else {
     //选择图片
     let $this = this; //区别于new FileReader()中的this
-    let selectedArr = this.imageurls; //存储选择的图片
+    let selectedArr = this.imageUrls; //存储选择的图片
     this.uploader.queue.forEach((q, i) => {
+      // console.log(i);
       let reader = new FileReader();
       reader.readAsDataURL(q.some); //生成base64图片地址，实现本地预览。
       reader.onload = function () {
@@ -107,26 +124,44 @@ export class PostDateComponent implements OnInit {
           });
           if (!isSame) {
             //避免选择相同的图片
-            selectedArr.push(this.result);
-            $this.imageurls.push(this.result);
+            // selectedArr.push(this.result);
+            $this.imageUrls.push(this.result);
             $this.photos.push($this.fb.group(new Photo(this.result)));
+            // console.log($this.imageUrls.length);
           }
           // Todo 删除失败 Cannot read property 'remove' of undefined
           else {
             // console.log( $this.uploader.queue[i]);
             // $this.uploader.queue[i].remove(); //如果已经选择，就需要在队列中移除该图片
-            // console.log($this.uploader.queue);
+
+            $this.uploader.queue.splice(i, 1);
+            // index = i;
+            // isExist = true;
+            // console.log("dup");
+            // $this.uploader.queue.splice(index, 1);
+            // console.log($this.uploader.queue.length);
+            // break;
+
           }
         } else {
-          selectedArr.push(this.result);
-          $this.imageurls.push(this.result);
+          // selectedArr.push(this.result);
+          $this.imageUrls.push(this.result);
           $this.photos.push($this.fb.group(new Photo(this.result)));
+          // console.log($this.imageUrls.length);
         }
       }
     });
+
+    // }
+    // console.log("end");
+    //   console.log(isExist);
+    //  if (isExist) {
+    //    this.uploader.queue.splice(index, 1);
+    //    console.log("delete");
+    //  }
   }
 
-  onClickTag(tagValue: String) {
+  onClickTag(tagValue: string) {
     let isExist = false;
     let index = -1;
     this.selectedTags.forEach((tag, i) => {
@@ -137,9 +172,47 @@ export class PostDateComponent implements OnInit {
     });
     if (isExist) {
       this.selectedTags.splice(index, 1);
-    }
-    else {
+    } else {
       this.selectedTags.push(tagValue);
+    }
+  }
+
+  deleteImage(imageUrl: string) {
+    this.imageUrls.forEach((url, i) => {
+      if (url == imageUrl) {
+        this.imageUrls.splice(i, 1);
+        //todo uploader.queue裡的無法刪除，再次添加時會在加進來
+        // console.log(this.imageUrls.length);
+        this.uploader.queue.splice(i, 1);
+        // console.log(this.uploader.queue.length);
+
+        this.photos.removeAt(i);
+      }
+      // console.log(i);
+    });
+  }
+
+  upload(photoAddress: string, photoTime: string, cost: string, desc: string) {
+    if (photoAddress == "") {
+      alert("未填写拍摄地点");
+    } else if (photoTime == "") {
+      alert("未填写拍摄时间");
+    } else if (cost == "") {
+      alert("未填写费用要求");
+    } else if (desc == "") {
+      alert("未填写约拍描述");
+    } else {
+      this.dating = new Dating();
+      this.dating.userId = 1;
+      this.dating.photoAddress = photoAddress;
+      this.dating.photoTime = photoTime;
+      this.dating.cost = cost;
+      this.dating.desc = desc;
+      this.dating.imageUrls = this.imageUrls;
+      this.dating.postTime = "new Date()";
+      this.dating.tags = this.selectedTags;
+      console.log(JSON.stringify(this.dating));
+      this.postService.uploadDating(JSON.stringify(this.dating));
     }
   }
 }

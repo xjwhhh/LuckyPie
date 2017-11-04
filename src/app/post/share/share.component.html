@@ -10,7 +10,7 @@
     <form [formGroup]="photoForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
         <label>发布内容</label>
-        <input class="form-control" formControlName="desc">
+        <input class="form-control" formControlName="desc" #desc>
       </div>
       <div formArrayName="tags">
         <div class="row">
@@ -33,7 +33,7 @@
           <div *ngFor="let photo of photos.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
               <div class="form-group">
-                <img src="{{photo.value.url}}" width="100%">
+                <img src="{{photo.value.url}}" width="100%" (click)="deleteImage(photo.value.url)">
               </div>
             </div>
           </div>
@@ -43,6 +43,9 @@
         </div>
       </div>
     </form>
+    <div>
+      <button type="button" (click)="upload(desc.value)">上传</button>
+    </div>
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">
