@@ -157,8 +157,8 @@ export class PostShareComponent implements OnInit {
       this.share.userId = 1;
       this.share.desc = desc;
       this.share.imageUrls = this.imageUrls;
-      this.share.postTime = ",,,";
-      this.share.postAddress = ",,,";
+      this.share.postTime = '1';
+      this.share.postAddress = '1';
       this.share.tags = this.selectedTags;
       this.postService.uploadShare(JSON.stringify(this.share));
     }

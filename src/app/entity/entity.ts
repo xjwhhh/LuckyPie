@@ -96,7 +96,7 @@ export const Addresses: string[] = ["全部", "北京", "天津", "上海", "重
 
 export const CostTypes: string[] = ["全部", "互免", "收費", "付費", "協商"];
 
-export const Identifies: string[] = ["全部", "模特", "攝影師"];
+export const Identities: string[] = ["全部", "模特", "攝影師"];
 
 export const Genders: string[] = ["全部", "男", "女"];
 

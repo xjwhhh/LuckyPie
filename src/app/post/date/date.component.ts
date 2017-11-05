@@ -209,7 +209,8 @@ export class PostDateComponent implements OnInit {
       this.dating.cost = cost;
       this.dating.desc = desc;
       this.dating.imageUrls = this.imageUrls;
-      this.dating.postTime = "new Date()";
+      this.dating.postTime = 'new Date()';
+      this.dating.postAddress = 'new Date()';
       this.dating.tags = this.selectedTags;
       console.log(JSON.stringify(this.dating));
       this.postService.uploadDating(JSON.stringify(this.dating));

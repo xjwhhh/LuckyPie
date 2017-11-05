@@ -9,8 +9,8 @@ import {IdentifyService} from 'app/identify/identify.service';
 })
 export class UserEditInfoComponent implements OnInit {
 
-  identifies: String[];
-  genders: String[];
+  identities: string[];
+  genders: string[];
 
 
   editInfoForm: FormGroup;
@@ -18,8 +18,14 @@ export class UserEditInfoComponent implements OnInit {
   constructor(private fb: FormBuilder, private identifyService: IdentifyService) {
   }
 
-  getIdentifies() {
-    this.identifyService.getIdentifies().then(identifies => this.identifies = identifies);
+  ngOnInit(): void {
+    this.createForm();
+    this.getGenders();
+    this.getIdentities();
+  }
+
+  getIdentities() {
+    this.identifyService.getIdentities().then(identities => this.identities = identities);
   }
 
   getGenders() {
@@ -36,11 +42,6 @@ export class UserEditInfoComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.createForm();
-    this.getGenders();
-    this.getIdentifies();
-  }
 
   //    get basicInfo(): FormGroup {
   //    return this.basicInfoForm as FormGroup;

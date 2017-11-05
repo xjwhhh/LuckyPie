@@ -17,8 +17,8 @@ export class ExploreTagComponent implements OnInit {
 
   shares: Share[];
 
-  selectedTag: String;
-  selectedArea: String;
+  selectedTag: string;
+  selectedArea: string;
 
   getShares(): void {
     this.exploreService.getShares().then(shares => this.shares = shares);

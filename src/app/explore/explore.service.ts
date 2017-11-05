@@ -1,30 +1,37 @@
 import {Injectable} from '@angular/core';
 import {Share} from 'app/entity/entity';
-import {Headers, Http} from '@angular/http';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Addresses, CostTypes, Identifies, Genders} from 'app/entity/entity';
+import {Addresses, CostTypes, Identities, Genders} from 'app/entity/entity';
 
 @Injectable()
 export class ExploreService {
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
   private selectedTag: String;
 
   constructor(private http: Http) {
   }
 
-  getAddresses(): Promise<String[]> {
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
+  }
+
+  getAddresses(): Promise<string[]> {
     return Promise.resolve(Addresses);
   }
 
-  getCostTypes(): Promise<String[]> {
+  getCostTypes(): Promise<string[]> {
     return Promise.resolve(CostTypes);
   }
 
-  getIdentifies(): Promise<String[]> {
-    return Promise.resolve(Identifies);
+  getIdentities(): Promise<string[]> {
+    return Promise.resolve(Identities);
   }
 
-  getGenders(): Promise<String[]> {
+  getGenders(): Promise<string[]> {
     return Promise.resolve(Genders);
   }
 
@@ -51,18 +58,41 @@ export class ExploreService {
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
-
-  setSelectedTag(selectedTag: String) {
+  setSelectedTag(selectedTag: string) {
     this.selectedTag = selectedTag;
     // console.log(this.selectedTag);
   }
 
   getSelectedTag(): String {
     return this.selectedTag;
+  }
+
+  getDating() {
+
+  }
+
+  getHotPhotographer() {
+
+  }
+
+  getBestPhotographer() {
+
+  }
+
+  getNewPhotographer() {
+
+  }
+
+  getHotModel() {
+
+  }
+
+  getBestModel() {
+
+  }
+
+  getNewModel() {
+
   }
 
 

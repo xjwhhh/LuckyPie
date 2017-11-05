@@ -163,8 +163,8 @@ export class PostAlbumComponent implements OnInit {
       this.album.name = name;
       this.album.desc = desc;
       this.album.imageUrls = this.imageUrls;
-      this.album.createTime = ",,,";
-      this.album.updateTime = ",,,";
+      this.album.createTime = '1';
+      this.album.updateTime = '1';
       this.album.tags = this.selectedTags;
       this.postService.uploadAlbum(JSON.stringify(this.album));
     }

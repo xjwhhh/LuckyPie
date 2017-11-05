@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Identifies, Genders, Album, User} from 'app/entity/entity';
+import {Identities, Genders, Album, User} from 'app/entity/entity';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -29,11 +29,11 @@ export class IdentifyService {
   }
 
 
-  getIdentifies(): Promise<String[]> {
-    return Promise.resolve(Identifies);
+  getIdentities(): Promise<string[]> {
+    return Promise.resolve(Identities);
   }
 
-  getGenders(): Promise<String[]> {
+  getGenders(): Promise<string[]> {
     return Promise.resolve(Genders);
   }
 

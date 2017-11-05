@@ -15,10 +15,10 @@ import {Router} from '@angular/router';
 })
 export class ExploreShowAllTagsComponent implements OnInit {
 
-  alltags: String[];
+  alltags: string[];
   shares: Share[];
-  selectedArea: String;
-  selectedTag: String;
+  selectedArea: string;
+  selectedTag: string;
 
   constructor(private route: ActivatedRoute, private exploreService: ExploreService, private router: Router) {
   }

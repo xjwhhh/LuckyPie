@@ -5,6 +5,7 @@ import {
 import {
   Share
 } from 'app/entity/entity';
+import {URLSearchParams} from '@angular/http';
 
 
 @Component({
@@ -13,11 +14,16 @@ import {
   styleUrls: ['./explore_date.component.css'],
 })
 export class ExploreDateComponent implements OnInit {
-  addresses: String[];
-  costTypes: String[];
-  identifies: String[];
-  genders: String[];
+  addresses: string[];
+  costTypes: string[];
+  identities: string[];
+  genders: string[];
   shares: Share[];
+
+  selectedAddress: string = '';
+  selectedCostType: string = '';
+  selectedIdentity: string = '';
+  selectedGender: string = '';
 
 
   constructor(private exploreService: ExploreService) {
@@ -27,7 +33,7 @@ export class ExploreDateComponent implements OnInit {
   ngOnInit(): void {
     this.getAddresses();
     this.getCostTypes();
-    this.getIdentifies();
+    this.getIdentities();
     this.getGenders();
     this.getShares();
   }
@@ -40,8 +46,8 @@ export class ExploreDateComponent implements OnInit {
     this.exploreService.getCostTypes().then(costTypes => this.costTypes = costTypes);
   }
 
-  getIdentifies(): void {
-    this.exploreService.getIdentifies().then(identifies => this.identifies = identifies);
+  getIdentities(): void {
+    this.exploreService.getIdentities().then(identities => this.identities = identities);
   }
 
   getGenders(): void {
@@ -53,19 +59,32 @@ export class ExploreDateComponent implements OnInit {
   }
 
 
-  selectAddress(selectedAddress: String): void {
+  selectAddress(selectedAddress: string): void {
     console.log(selectedAddress);
+    this.selectedAddress = selectedAddress;
   }
 
-  selectCost(selectedCostType: String): void {
+  selectCost(selectedCostType: string): void {
     console.log(selectedCostType);
+    this.selectedCostType = selectedCostType;
   }
 
-  selectIdentify(selectedIdentify: String): void {
-    console.log(selectedIdentify);
+  selectIdentity(selectedIdentity: string): void {
+    console.log(selectedIdentity);
+    this.selectedIdentity = selectedIdentity;
   }
 
-  selectGender(selectedGender: String): void {
+  selectGender(selectedGender: string): void {
     console.log(selectedGender);
+    this.selectedGender = selectedGender;
+  }
+
+  createData() {
+    let data = new URLSearchParams();
+    data.append("address", this.selectedAddress);
+    data.append("cost", this.selectedCostType);
+    data.append("identity", this.selectedIdentity);
+    data.append("gender", this.selectedGender);
+    return data;
   }
 }
