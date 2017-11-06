@@ -22,17 +22,24 @@ export class ExplorePhotographerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectHotPhotographers();
   }
 
   selectHotPhotographers() {
+    this.exploreService.getHotPhotographer();
+    console.log("1");
 
   }
 
   selectBestPhotographers() {
+    this.exploreService.getBestPhotographer();
+    console.log("1");
 
   }
 
   selectNewPhotographers() {
+    this.exploreService.getNewPhotographer();
+    console.log("1");
 
   }
 

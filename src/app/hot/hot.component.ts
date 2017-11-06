@@ -27,7 +27,7 @@ export class HotComponent implements OnInit {
   }
 
   getShares(): void {
-    this.hotService.getHotShares().then(shares => this.shares = shares);
+    this.hotService.getHotShares();
   }
 
   ngOnInit(): void {

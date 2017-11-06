@@ -5,15 +5,16 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HotService {
-  private hotSharesUrl = 'http://localhost:3000/shares';
 
   constructor(private http: Http) {
   }
 
-  getHotShares(): Promise<Share[]> {
-    return this.http.get(this.hotSharesUrl)
+  private getHotSharesUrl = 'http://localhost/LuckyPie-Server/api/get/hotshare';
+
+  getHotShares() {
+    this.http.get(this.getHotSharesUrl)
       .toPromise()
-      .then(response => response.json() as Share[])
+      .then(response => console.log(response))
       .catch(this.handleError);
   }
 

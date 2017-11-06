@@ -3,7 +3,7 @@ import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
-  Share
+  Share, Dating
 } from 'app/entity/entity';
 import {URLSearchParams} from '@angular/http';
 
@@ -24,6 +24,8 @@ export class ExploreDateComponent implements OnInit {
   selectedCostType: string = '';
   selectedIdentity: string = '';
   selectedGender: string = '';
+
+  datings: Dating[];
 
 
   constructor(private exploreService: ExploreService) {
@@ -62,21 +64,29 @@ export class ExploreDateComponent implements OnInit {
   selectAddress(selectedAddress: string): void {
     console.log(selectedAddress);
     this.selectedAddress = selectedAddress;
+    let data = this.createData();
+    this.exploreService.getDating(data);
   }
 
   selectCost(selectedCostType: string): void {
     console.log(selectedCostType);
     this.selectedCostType = selectedCostType;
+    let data = this.createData();
+    this.exploreService.getDating(data);
   }
 
   selectIdentity(selectedIdentity: string): void {
     console.log(selectedIdentity);
     this.selectedIdentity = selectedIdentity;
+    let data = this.createData();
+    this.exploreService.getDating(data);
   }
 
   selectGender(selectedGender: string): void {
     console.log(selectedGender);
     this.selectedGender = selectedGender;
+    let data = this.createData();
+    this.exploreService.getDating(data);
   }
 
   createData() {

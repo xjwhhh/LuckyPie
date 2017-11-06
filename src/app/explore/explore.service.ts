@@ -35,12 +35,12 @@ export class ExploreService {
     return Promise.resolve(Genders);
   }
 
-  private sharesUrl = 'http://localhost:3000/shares';
+  private sharesUrl = 'http://localhost/LuckyPie-Server/api/post/explore/share';
 
-  getShares(): Promise<Share[]> {
+  getShares() {
     return this.http.get(this.sharesUrl)
       .toPromise()
-      .then(response => response.json() as Share[])
+      .then(response => console.log(response))
       .catch(this.handleError);
   }
 
@@ -67,32 +67,72 @@ export class ExploreService {
     return this.selectedTag;
   }
 
-  getDating() {
+  private getDatingUrl = 'http://localhost/LuckyPie-Server/api/post/explore/dating';
 
+  getDating(data: URLSearchParams) {
+    this.http.post(this.getDatingUrl, data, this.options)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
   }
+
+  private getHotPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/hot';
 
   getHotPhotographer() {
+    this.http.get(this.getHotPhotographerUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
 
   }
+
+  private getBestPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/best';
 
   getBestPhotographer() {
+    this.http.get(this.getBestPhotographerUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
 
   }
+
+  private getNewPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/new';
 
   getNewPhotographer() {
+    this.http.get(this.getNewPhotographerUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
 
   }
+
+  private getHotModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/hot';
 
   getHotModel() {
+    this.http.get(this.getHotModelUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
 
   }
+
+  private getBestModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/best';
 
   getBestModel() {
+    this.http.get(this.getBestModelUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
 
   }
 
-  getNewModel() {
+  private getNewModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/new';
 
+  getNewModel() {
+    this.http.get(this.getNewModelUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
   }
 
 

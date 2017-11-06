@@ -21,17 +21,24 @@ export class ExploreModelComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectHotModels();
   }
 
   selectHotModels() {
+    this.exploreService.getHotModel();
+    console.log("1");
 
   }
 
   selectBestModels() {
+    this.exploreService.getBestModel();
+    console.log("1");
 
   }
 
   selectNewModels() {
+    this.exploreService.getNewModel();
+    console.log("1");
 
   }
 

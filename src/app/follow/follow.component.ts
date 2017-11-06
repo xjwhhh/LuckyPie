@@ -29,7 +29,7 @@ export class FollowComponent implements OnInit {
   }
 
   getShares(): void {
-    this.followService.getFollowShares().then(shares => this.shares = shares);
+    this.followService.getFollowShares();
   }
 
   ngOnInit(): void {
