@@ -160,6 +160,7 @@ export class PostShareComponent implements OnInit {
       this.share.postTime = '1';
       this.share.postAddress = '1';
       this.share.tags = this.selectedTags;
+      this.share.forwardShareId = '-1';
       this.postService.uploadShare(JSON.stringify(this.share));
     }
   }

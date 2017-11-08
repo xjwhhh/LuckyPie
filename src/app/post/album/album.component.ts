@@ -27,6 +27,10 @@ export class PostAlbumComponent implements OnInit {
 
   album: Album;
 
+  tagStyle = {
+    'background-color': 'white'
+  };
+
 
   constructor(private fb: FormBuilder, private postService: PostService) {
   }
@@ -134,8 +138,15 @@ export class PostAlbumComponent implements OnInit {
     });
     if (isExist) {
       this.selectedTags.splice(index, 1);
+      //       this.tagStyle = {
+      //   'background-color':  'black'
+      // };
+
     } else {
       this.selectedTags.push(tagValue);
+      //       this.tagStyle = {
+      //   'background-color':  'red'
+      // };
     }
   }
 

@@ -32,6 +32,7 @@ export class Share {
   // comments:Comment[];
   postTime: string;
   postAddress: string;
+  forwardShareId: string;
 }
 
 //约拍
