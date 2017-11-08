@@ -31,6 +31,10 @@ export class RegisterComponent {
     }
     else {
       this.identifyService.register(account, password).then(user => this.user = user);
+      // this.gotoUserInfo();
+      // console.log("34");
+      console.log(this.user);
+
     }
 
   }

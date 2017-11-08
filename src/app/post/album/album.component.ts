@@ -18,7 +18,7 @@ import {PostService} from 'app/post/post.service';
 })
 export class PostAlbumComponent implements OnInit {
   albumForm: FormGroup;
-  Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童摄影", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "宝丽来", "清新", "婚礼", "cosplay", "胶片", "黑白", "纪实", "日系"];
+  Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
   selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
@@ -38,6 +38,7 @@ export class PostAlbumComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
   }
+
 
   ngAfterViewInit(): void {
 
@@ -174,8 +175,11 @@ export class PostAlbumComponent implements OnInit {
       this.album.name = name;
       this.album.desc = desc;
       this.album.imageUrls = this.imageUrls;
-      this.album.createTime = '1';
-      this.album.updateTime = '1';
+      let now = new Date();
+      let createTime = this.postService.dateFormat("yyyy-MM-dd hh:mm:ss", now);
+      let updateTime = this.postService.dateFormat("yyyy-MM-dd hh:mm:ss", now);
+      this.album.createTime = createTime;
+      this.album.updateTime = updateTime;
       this.album.tags = this.selectedTags;
       this.postService.uploadAlbum(JSON.stringify(this.album));
     }
