@@ -15,10 +15,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    //      setInterval(() => {
-    //          this.cdr.markForCheck();
-    //          console.log(this.user);
-    //      }, 100);
   }
 
 
@@ -30,20 +26,24 @@ export class LoginComponent implements OnInit {
       alert("未输入密码");
     }
     else {
-      this.identifyService.login(account, password).then(user => this.user = user);
+      this.identifyService.login(account, password).then(user => this.check(user));
     }
   }
 
-  check() {
-
+  check(user:User) {
+    if(user.id==null){
+      alert("用户名或密码错误");
+    }
+    else{
+      this.gotoUserInfo(user);
+    }
   }
 
   gotoRegister() {
     this.router.navigate(['/identify/register']);
   }
 
-  gotoUserInfo() {
-    this.router.navigate(['/identify/info', this.user.account]);
-    // this.identifyService.gotoUserInfo()
+  gotoUserInfo(user:User) {
+    this.router.navigate(['/identify/info', user.id]);
   }
 }

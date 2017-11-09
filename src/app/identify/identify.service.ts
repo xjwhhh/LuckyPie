@@ -62,9 +62,14 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  // gotoUserInfo(){
-  //   this.router.navigate(['/identify/info',this.user.account]);
-  // }
-
+  private userBasciInfoUrl='http://localhost/LuckyPie-Server/api/get/user/info/';
+    getUserBasicInfo(userId:number) :Promise<User>{
+    // let data = new URLSearchParams();
+    // data.append("userId", userId+"");
+    return this.http.get(this.userBasciInfoUrl+userId)
+      .toPromise()
+      .then(response =>response.json as User())
+      .catch(this.handleError);
+  }
 
 }

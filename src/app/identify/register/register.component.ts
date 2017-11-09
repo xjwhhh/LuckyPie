@@ -30,27 +30,25 @@ export class RegisterComponent {
       alert("两次输入的密码不同");
     }
     else {
-      this.identifyService.register(account, password).then(user => this.user = user);
-      // this.gotoUserInfo();
-      // console.log("34");
-      console.log(this.user);
-
+      this.identifyService.register(account, password).then(user => this.check(user));
     }
-
   }
 
 //看是否创建成功
-  check() {
-
+  check(user:User) {
+    if(user.id==null){
+      alert("账号名已存在");
+    }
+    else{
+      this.gotoUserInfo(user);
+    }
   }
 
   gotoLogin(): void {
     this.router.navigate(['/identify/login']);
   }
 
-
-  gotoUserInfo() {
-    this.router.navigate(['/identify/info', this.user.account]);
-    // this.identifyService.gotoUserInfo()
+  gotoUserInfo(user:User) {
+    this.router.navigate(['/identify/info', user.id]);
   }
 }
