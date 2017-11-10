@@ -19,9 +19,9 @@ export class FollowService {
 
   private getFollowSharesUrl = 'http://localhost/LuckyPie-Server/api/post/follow/share'
 
-  getFollowShares() {
+  getFollowShares(userId:number) {
     let data = new URLSearchParams();
-    data.append("userId", "1");
+    data.append("userId", userId+"");
     this.http.post(this.getFollowSharesUrl, data, this.options)
       .toPromise()
       .then(response => console.log(response))
@@ -30,9 +30,9 @@ export class FollowService {
 
   private getFollowDatingUrl = 'http://localhost/LuckyPie-Server/api/post/follow/dating'
 
-  getFollowDating() {
+  getFollowDating(userId:number) {
     let data = new URLSearchParams();
-    data.append("userId", "1");
+    data.append("userId", userId+"");
     this.http.post(this.getFollowDatingUrl, data, this.options)
       .toPromise()
       .then(response => console.log(response))

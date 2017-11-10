@@ -7,6 +7,10 @@ import {NoticeCommentComponent} from './comment/comment.component';
 
 import {NoticeRoutingModule} from './notice-routing.module';
 
+import {
+  NoticeService
+} from './notice.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +21,8 @@ import {NoticeRoutingModule} from './notice-routing.module';
     NoticeCommentComponent,
     NoticeThumbComponent,
   ],
-  bootstrap: [NoticeComponent]
+  bootstrap: [NoticeComponent],
+  providers: [NoticeService]
 })
 export class NoticeModule {
 }

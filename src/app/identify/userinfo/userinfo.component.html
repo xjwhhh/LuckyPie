@@ -17,7 +17,7 @@
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-5">
-            xjw
+            {{user.name}}
           </div>
         </div>
         <div class="row">
@@ -25,20 +25,20 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            0帖子
+            {{user.shares.length}}分享
           </div>
           <div class="col-md-4">
-            0关注者
+            {{user.follows.length}}正在关注
           </div>
           <div class="col-md-4">
-            0正在关注
+            {{user.followers.length}}关注者
           </div>
         </div>
         <div class="row">
           <P style="height: 5px"></P>
         </div>
         <div class="row">
-          个人简介
+          {{user.introduction}}
         </div>
       </div>
     </div>

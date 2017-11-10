@@ -30,11 +30,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  check(user:User) {
-    if(user.id==null){
+  check(user: User) {
+    console.log(user);
+    if (user.id == null) {
       alert("用户名或密码错误");
     }
-    else{
+    else {
       this.gotoUserInfo(user);
     }
   }
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/identify/register']);
   }
 
-  gotoUserInfo(user:User) {
+  gotoUserInfo(user: User) {
+    this.identifyService.setUserId(user.id);
     this.router.navigate(['/identify/info', user.id]);
   }
 }

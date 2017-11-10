@@ -36,10 +36,14 @@ export class UserEditInfoComponent implements OnInit {
     this.editInfoForm = new FormGroup({
       name: new FormControl('Nancy', Validators.required),
       gender: new FormControl(Validators.required),
-      identify: new FormControl(Validators.required),
+      identity: new FormControl(Validators.required),
       tel: new FormControl('Nancy', Validators.required),
       email: new FormControl('Nancy', Validators.required),
     });
+  }
+
+  updateUserBasicInfo(name: string, gender: string, identity: string, tel: string, email: string) {
+
   }
 
 

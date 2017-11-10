@@ -1,35 +1,3 @@
-<!-- <form [formGroup]="basicInfoForm" (ngSubmit)="onSubmit()" novalidate>
-  <div class="form-group">
-    <label>姓名</label>
-    <input  class="form-control" formControlName="name">
-  </div>
-  <div class="form-group">
-    <label>性别</label>
-        <select class="form-control" fromControName="gender" disabled="disabled">
-        </select>
-  </div>
-  <div class="form-group">
-    <label>身份</label>
-        <select class="form-control" fromControName="identify" disabled="disabled">
-          <option>234561</option>
-          <option>234562</option>
-          <option>234563</option>
-        </select>
-  </div>
-    <div class="form-group">
-    <label>电话</label>
-    <input type="tel" class="form-control" formControlName="tel" >
-  </div>
-    <div class="form-group">
-    <label>邮件地址</label>
-    <input type="email" class="form-control" formControlName="email" >
-  </div>
-</form>
-
-<div class="row">
-  <button type="button" (click)="w()">23</button>
-</div> -->
-
 <div class="col-md-3"></div>
 <div class="col-md-6">
 
@@ -38,7 +6,7 @@
       <label>姓名</label>
     </div>
     <div class="col-md-9">
-      <label>姓名</label>
+      <label>{{user.name}}</label>
     </div>
   </div>
 
@@ -47,7 +15,7 @@
       <label>性别</label>
     </div>
     <div class="col-md-9">
-      <label>性别</label>
+      <label>{{user.gender}}</label>
     </div>
   </div>
 
@@ -56,7 +24,7 @@
       <label>身份</label>
     </div>
     <div class="col-md-9">
-      <label>身份</label>
+      <label>{{user.identity}}</label>
     </div>
   </div>
 
@@ -65,7 +33,7 @@
       <label>电话号码</label>
     </div>
     <div class="col-md-9">
-      <label>15895873758</label>
+      <label>{{user.telephone}}</label>
     </div>
   </div>
 
@@ -74,7 +42,7 @@
       <label>邮箱地址</label>
     </div>
     <div class="col-md-9">
-      <label>920054996@qq.com</label>
+      <label>{{user.email}}</label>
     </div>
   </div>
 </div>

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {IdentifyService} from 'app/identify/identify.service';
+import {User} from 'app/entity/entity';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'user-basicinfo',
@@ -8,9 +11,12 @@ import {FormControl, FormArray, FormBuilder, FormGroup, Validators} from '@angul
 })
 export class UserBasicInfoComponent implements OnInit {
 
+  user: User = new User();
+  userId: number;
+
   basicInfoForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private identifyService: IdentifyService) {
   }
 
   createForm() {
@@ -30,6 +36,11 @@ export class UserBasicInfoComponent implements OnInit {
   //    get basicInfo(): FormGroup {
   //    return this.basicInfoForm as FormGroup;
   // }
+
+  getUserBasicInfo() {
+    this.identifyService.getUserBasicInfo(this.userId).then(user => console.log(user));
+
+  }
 
   w(): void {
     console.log("234");

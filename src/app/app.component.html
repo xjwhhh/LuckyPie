@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-2" align="center">
-        <img routerLink="follow" routerLinkActive="active" src="assets/image/logo.png">
+        <img (click)="gotoFollow()" src="assets/image/logo.png">
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-3">
@@ -20,11 +20,11 @@
       <div class="col-md-1"></div>
       <div class="col-md-4">
         <div class="col-md-2">
-          <img routerLink="post" routerLinkActive="active" src="assets/image/edit.png">
+          <img (click)="gotoPost()" src="assets/image/edit.png">
         </div>
         <div class="col-md-2">
           <div class="btn-group" dropdown>
-            <img dropdownToggle class="btn dropdown-toggle" routerLink="follw" routerLinkActive="active"
+            <img dropdownToggle class="btn dropdown-toggle" (click)="gotoFollow()"
                  src="assets/image/follow.png">
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li role="menuitem"><a class="dropdown-item" href="#">分组1</a></li>
@@ -34,16 +34,16 @@
           </div>
         </div>
         <div class="col-md-2">
-          <img routerLink="explore" routerLinkActive="active" src="assets/image/explore.png">
+          <img (click)="gotoExplore()" src="assets/image/explore.png">
         </div>
         <div class="col-md-2">
-          <img routerLink="hot" routerLinkActive="active" src="assets/image/hot.png">
+          <img (click)="gotoHot()" src="assets/image/hot.png">
         </div>
         <div class="col-md-2">
-          <img routerLink="notice" routerLinkActive="active" src="assets/image/notice.png">
+          <img (click)="gotoNotice()" src="assets/image/notice.png">
         </div>
         <div class="col-md-2">
-          <img routerLink="identify" routerLinkActive="active" src="assets/image/user.png">
+          <img (click)="gotoUserInfo()" src="assets/image/user.png">
         </div>
       </div>
     </div>

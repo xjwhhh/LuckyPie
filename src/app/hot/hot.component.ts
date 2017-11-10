@@ -8,6 +8,7 @@ import {
 import {
   Share
 } from 'app/entity/entity';
+import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 
 
 @Component({
@@ -20,23 +21,28 @@ export class HotComponent implements OnInit {
 
   thumbUrl = "assets/image/thumb2.png";
   thumb = false;
+ userId: number;
 
-
-  constructor(private hotService: HotService) {
+  constructor(private route: ActivatedRoute,private hotService: HotService) {
 
   }
 
-  getShares(): void {
-    this.hotService.getHotShares();
-  }
+  
 
   ngOnInit(): void {
-    this.getShares();
+    this.route.params.subscribe((params: Params) => {
+      this.userId = +params['id'];
+    });
+    // this.getShares();
   }
 
   ngAfterViewInit(): void {
     // console.log(this.posts[0].id);
 
+  }
+
+  getHotShares(userId:number): void {
+    this.hotService.getHotShares(userId);
   }
 
   doThumb(): void {

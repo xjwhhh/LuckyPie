@@ -20,7 +20,7 @@ import {
 
 const routes: Routes = [{
   path: '',
-  redirectTo: '/follow',
+  redirectTo: '/identify',
   pathMatch: 'full'
 },
   {
@@ -31,22 +31,22 @@ const routes: Routes = [{
     }
   },
   {
-    path: 'follow',
+    path: 'follow/:id',
     component: FollowComponent
   },
   {
-    path: 'explore',
+    path: 'explore/:id',
     loadChildren: 'app/explore/explore.module#ExploreModule',
     data: {
       preload: true
     }
   },
   {
-    path: 'hot',
+    path: 'hot/"id',
     component: HotComponent,
   },
   {
-    path: 'notice',
+    path: 'notice/:id',
     // loadChildren: 'app/notice/notice.module#NoticeModule',
     // data: { preload: true },
     component: NoticeComponent

@@ -35,11 +35,11 @@ export class RegisterComponent {
   }
 
 //看是否创建成功
-  check(user:User) {
-    if(user.id==null){
+  check(user: User) {
+    if (user.id == null) {
       alert("账号名已存在");
     }
-    else{
+    else {
       this.gotoUserInfo(user);
     }
   }
@@ -48,7 +48,8 @@ export class RegisterComponent {
     this.router.navigate(['/identify/login']);
   }
 
-  gotoUserInfo(user:User) {
+  gotoUserInfo(user: User) {
+    this.identifyService.setUserId(user.id);
     this.router.navigate(['/identify/info', user.id]);
   }
 }

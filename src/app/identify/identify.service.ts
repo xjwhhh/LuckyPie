@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class IdentifyService {
   user: User = new User();
+  userId: number = -1;
 
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});
@@ -14,13 +15,12 @@ export class IdentifyService {
   constructor(private http: Http, private router: Router) {
   }
 
-  private userAlbumsUrl = 'http://localhost:3000/albums';
+  setUserId(userId: number) {
+    this.userId = userId;
+  }
 
-  getUserAlbums(): Promise<Album[]> {
-    return this.http.get(this.userAlbumsUrl)
-      .toPromise()
-      .then(response => response.json() as Album[])
-      .catch(this.handleError);
+  getUserId(): number {
+    return this.userId;
   }
 
   private handleError(error: any): Promise<any> {
@@ -36,7 +36,6 @@ export class IdentifyService {
   getGenders(): Promise<string[]> {
     return Promise.resolve(Genders);
   }
-
 
   private loginUrl = 'http://localhost/LuckyPie-Server/api/post/user/login';
 
@@ -62,14 +61,50 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  private userBasciInfoUrl='http://localhost/LuckyPie-Server/api/get/user/info/';
-    getUserBasicInfo(userId:number) :Promise<User>{
-    // let data = new URLSearchParams();
-    // data.append("userId", userId+"");
-    return this.http.get(this.userBasciInfoUrl+userId)
+  private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/';
+
+  getUserBasicInfo(userId: number): Promise<User> {
+    return this.http.get(this.userBasciInfoUrl + userId)
       .toPromise()
-      .then(response =>response.json as User())
+      .then(response => response.json() as User)
       .catch(this.handleError);
   }
+
+  private userAlbumsUrl = 'http://localhost:3000/albums';
+
+  getUserAlbums(): Promise<Album[]> {
+    return this.http.get(this.userAlbumsUrl)
+      .toPromise()
+      .then(response => response.json() as Album[])
+      .catch(this.handleError);
+  }
+
+  getUserShares() {
+
+  }
+
+  getUserDating() {
+
+  }
+
+  getUserLikes() {
+
+  }
+
+  private updateUserBasicInfoUrl = 'http://localhost/LuckyPie-Server/api/post/user/info/'
+
+  updateUserBasicInfo(userId: string, name: string, gender: string, identity: string, telephone: string, email: string) {
+    let data = new URLSearchParams();
+    data.append("name", name);
+    data.append("gender", gender);
+    data.append("identity", identity);
+    data.append("telephone", telephone);
+    data.append("email", email);
+    return this.http.post(this.updateUserBasicInfoUrl + userId, data, this.options)
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
+
 
 }
