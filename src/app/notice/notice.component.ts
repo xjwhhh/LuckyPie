@@ -5,7 +5,7 @@ import {
 import {
   NoticeService
 } from './notice.service';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 
 
 @Component({
@@ -22,7 +22,6 @@ export class NoticeComponent {
   }
 
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
@@ -33,7 +32,6 @@ export class NoticeComponent {
   getNotice(userId: number) {
     this.noticeService.getNotice(userId);
   }
-
 
 
 }

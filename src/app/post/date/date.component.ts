@@ -31,10 +31,27 @@ export class PostDateComponent implements OnInit {
 
   dating: Dating;
 
+  userId: number;
+
 
   constructor(private fb: FormBuilder, private postService: PostService) {
   }
 
+
+  ngOnInit(): void {
+    this.getAddresses();
+    this.getCostTypes();
+    this.createForm();
+    this.settags();
+    this.userId = this.postService.getUserId();
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  ngOnChanges() {
+
+  }
 
   getAddresses(): void {
     this.postService.getAddresses().then(addresses => this.addresses = addresses);
@@ -62,19 +79,6 @@ export class PostDateComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getAddresses();
-    this.getCostTypes();
-    this.createForm();
-    this.settags();
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  ngOnChanges() {
-
-  }
 
   settags(): void {
     for (let i = 0; i < this.Tags.length; i++) {
@@ -203,7 +207,7 @@ export class PostDateComponent implements OnInit {
       alert("未填写约拍描述");
     } else {
       this.dating = new Dating();
-      this.dating.userId = 1;
+      this.dating.userId = this.userId;
       this.dating.photoAddress = photoAddress;
       this.dating.photoTime = photoTime;
       this.dating.cost = cost;

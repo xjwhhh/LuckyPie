@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Location} from '@angular/common';
 import {IdentifyService} from 'app/identify/identify.service';
 
 @Component({
@@ -10,17 +9,19 @@ import {IdentifyService} from 'app/identify/identify.service';
 })
 export class UserPhotoComponent implements OnInit {
 
+  userId: number;
+
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute,
-              private location: Location) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    // this.route.paramMap
-    //     .switchMap((params: ParamMap) =>console.log(+params.get('id')));
-    console.log("56");
-    console.log(this.location.path());
+    this.userId = this.identifyService.getUserId();
+    console.log(this.userId);
+  }
 
+  getUserShares(userId: number) {
+    this.identifyService.getUserShares(userId);
   }
 
 

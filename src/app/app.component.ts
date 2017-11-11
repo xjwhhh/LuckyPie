@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   gotoFollow() {
+    console.log("gotofollow");
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
 
   gotoPost() {
     this.userId = this.identifyService.getUserId();
+    console.log("gotopost");
     if (this.userId == -1) {
       alert("请先登录或注册");
     }

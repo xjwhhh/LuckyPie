@@ -26,11 +26,11 @@ const IdentifyRoutes: Routes = [
         component: UserInfoComponent,
         children: [
           {
-            path: 'activity',
+            path: 'dating',
             component: UserActivityComponent,
           },
           {
-            path: 'photo',
+            path: 'share',
             component: UserPhotoComponent,
           },
           {

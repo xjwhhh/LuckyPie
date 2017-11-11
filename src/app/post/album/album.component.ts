@@ -27,6 +27,8 @@ export class PostAlbumComponent implements OnInit {
 
   album: Album;
 
+  userId: number;
+
   tagStyle = {
     'background-color': 'white'
   };
@@ -37,6 +39,7 @@ export class PostAlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.userId = this.postService.getUserId();
   }
 
 
@@ -171,7 +174,7 @@ export class PostAlbumComponent implements OnInit {
       alert("未填写相册描述");
     } else {
       this.album = new Album();
-      this.album.userId = 1;
+      this.album.userId = this.userId;
       this.album.name = name;
       this.album.desc = desc;
       this.album.imageUrls = this.imageUrls;

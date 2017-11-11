@@ -13,7 +13,7 @@ export class UserInfoComponent implements OnInit {
 
   userId: number;
 
-  user: User;
+  user: User = new User();
 
   constructor(private identifyService: IdentifyService,
               private route: ActivatedRoute,
@@ -24,14 +24,19 @@ export class UserInfoComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
     });
+    console.log(this.userId);
     this.getUserBasicInfo(this.userId);
   }
 
   getUserBasicInfo(userId: number) {
-    console.log(userId);
-    this.identifyService.getUserBasicInfo(userId).then(user => this.user=user);
-
+    // console.log(userId);
+    this.identifyService.getUserBasicInfo(userId).then(user => {
+      console.log(user)
+    });
+    // console.log(userId);
   }
+
+  //todo null undefinded的问题
 
 
 }

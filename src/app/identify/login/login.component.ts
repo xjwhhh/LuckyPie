@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   check(user: User) {
-    console.log(user);
     if (user.id == null) {
       alert("用户名或密码错误");
     }

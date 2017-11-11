@@ -24,7 +24,7 @@ const routes: Routes = [{
   pathMatch: 'full'
 },
   {
-    path: 'post',
+    path: 'post/:id',
     loadChildren: 'app/post/post.module#PostModule',
     data: {
       preload: true

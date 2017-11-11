@@ -9,6 +9,7 @@ import {
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Photo, Share} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 
 
 @Component({
@@ -27,11 +28,14 @@ export class PostShareComponent implements OnInit {
 
   share: Share;
 
-  constructor(private fb: FormBuilder, private postService: PostService) {
+  userId: number;
+
+  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.userId = this.postService.getUserId();
   }
 
   ngAfterViewInit(): void {
@@ -154,7 +158,7 @@ export class PostShareComponent implements OnInit {
       alert("未填写分享內容");
     } else {
       this.share = new Share();
-      this.share.userId = 1;
+      this.share.userId = this.userId;
       this.share.desc = desc;
       this.share.imageUrls = this.imageUrls;
       let now = new Date();

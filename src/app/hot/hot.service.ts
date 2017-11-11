@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Share } from 'app/entity/entity';
-import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Share} from 'app/entity/entity';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HotService {
 
-  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  options = new RequestOptions({ headers: this.headers });
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   private getHotSharesUrl = 'http://localhost/LuckyPie-Server/api/get/hotshare';
 
@@ -23,7 +24,7 @@ export class HotService {
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise < any > {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }

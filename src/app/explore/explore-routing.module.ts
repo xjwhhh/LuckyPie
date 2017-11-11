@@ -12,7 +12,7 @@ import {ExploreShowAllTagsComponent} from './alltags/all_tags.component';
 
 const ExploreRoutes: Routes = [
   {
-    path: 'explore',
+    path: 'explore/:id',
     component: ExploreComponent,
     children: [
       {

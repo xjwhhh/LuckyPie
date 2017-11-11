@@ -8,7 +8,7 @@ import {PostAlbumComponent} from './album/album.component';
 
 const PostRoutes: Routes = [
   {
-    path: 'post',
+    path: 'post/:id',
     component: PostComponent,
     children: [
       {

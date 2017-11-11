@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class IdentifyService {
   user: User = new User();
-  userId: number = -1;
+  userId: number = 19;
 
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});
@@ -70,25 +70,41 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  private userAlbumsUrl = 'http://localhost:3000/albums';
+  private getUserAlbumsUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/album/';
 
-  getUserAlbums(): Promise<Album[]> {
-    return this.http.get(this.userAlbumsUrl)
+  getUserAlbums(userId: number) {
+    return this.http.get(this.getUserAlbumsUrl + userId)
       .toPromise()
-      .then(response => response.json() as Album[])
+      .then(response => console.log(response))
       .catch(this.handleError);
   }
 
-  getUserShares() {
 
+  private getUserSharesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/share/';
+
+  getUserShares(userId: number) {
+    return this.http.get(this.getUserSharesUrl + userId)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
   }
 
-  getUserDating() {
+  private getUserDatingUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/dating/';
 
+  getUserDating(userId: number) {
+    return this.http.get(this.getUserDatingUrl + userId)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
   }
 
-  getUserLikes() {
+  private getUserLikesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/like/';
 
+  getUserLikes(userId: number) {
+    return this.http.get(this.getUserLikesUrl + userId)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
   }
 
   private updateUserBasicInfoUrl = 'http://localhost/LuckyPie-Server/api/post/user/info/'

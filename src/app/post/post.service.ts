@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class PostService {
+  userId: number = -1;
+
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});
 
@@ -45,6 +47,14 @@ export class PostService {
 
   getTags(): Promise<string[]> {
     return Promise.resolve(Tags);
+  }
+
+  setUserId(userId: number) {
+    this.userId = userId;
+  }
+
+  getUserId(): number {
+    return this.userId;
   }
 
   private uploadDateUrl = 'http://localhost/LuckyPie-Server/api/post/post/dating/upload';

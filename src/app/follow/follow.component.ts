@@ -8,7 +8,7 @@ import {
 import {
   Share
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 
 @Component({
   selector: 'follow',
@@ -31,7 +31,6 @@ export class FollowComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
@@ -46,7 +45,7 @@ export class FollowComponent implements OnInit {
 
   }
 
-  getShares(userId:number): void {
+  getShares(userId: number): void {
     this.followService.getFollowShares(userId);
   }
 

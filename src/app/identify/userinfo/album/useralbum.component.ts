@@ -14,18 +14,18 @@ export class UserAlbumComponent implements OnInit {
   albums: Album[] = [];
   selectedAlbum: Album = new Album();
 
+  userId: number;
 
   constructor(private identifyService: IdentifyService) {
 
   }
 
-  getUserAlbums(): void {
-    this.identifyService.getUserAlbums().then(albums => this.albums = albums);
+  ngOnInit(): void {
+    this.userId = this.identifyService.getUserId();
   }
 
-  ngOnInit(): void {
-    this.getUserAlbums();
-    console.log(this.fixheight);
+  getUserAlbums(userId: number): void {
+    this.identifyService.getUserAlbums(userId);
   }
 
   onClickAlbum(albumid: number) {
