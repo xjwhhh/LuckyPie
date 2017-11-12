@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Identities, Genders, Album, User} from 'app/entity/entity';
+import {Identities, Genders, Album, User, Share, Dating} from 'app/entity/entity';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -61,7 +61,7 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/';
+  private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/basicinfo/';
 
   getUserBasicInfo(userId: number): Promise<User> {
     return this.http.get(this.userBasciInfoUrl + userId)
@@ -72,20 +72,20 @@ export class IdentifyService {
 
   private getUserAlbumsUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/album/';
 
-  getUserAlbums(userId: number) {
+  getUserAlbums(userId: number): Promise<Album[]> {
     return this.http.get(this.getUserAlbumsUrl + userId)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Album[])
       .catch(this.handleError);
   }
 
 
   private getUserSharesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/share/';
 
-  getUserShares(userId: number) {
+  getUserShares(userId: number): Promise<Share[]> {
     return this.http.get(this.getUserSharesUrl + userId)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Share[])
       .catch(this.handleError);
   }
 
@@ -107,16 +107,18 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  private updateUserBasicInfoUrl = 'http://localhost/LuckyPie-Server/api/post/user/info/'
+  private updateUserBasicInfoUrl = 'http://localhost/LuckyPie-Server/api/post/user/info';
 
-  updateUserBasicInfo(userId: string, name: string, gender: string, identity: string, telephone: string, email: string) {
+  updateUserBasicInfo(userId: number, name: string, introduction: string, gender: string, identity: string, telephone: string, email: string): Promise<User> {
     let data = new URLSearchParams();
+    data.append("userId", userId + "");
     data.append("name", name);
+    data.append("introduction", introduction);
     data.append("gender", gender);
     data.append("identity", identity);
     data.append("telephone", telephone);
     data.append("email", email);
-    return this.http.post(this.updateUserBasicInfoUrl + userId, data, this.options)
+    return this.http.post(this.updateUserBasicInfoUrl, data, this.options)
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);

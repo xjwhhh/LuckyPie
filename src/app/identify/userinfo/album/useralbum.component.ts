@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IdentifyService} from 'app/identify/identify.service';
 import {Album} from 'app/entity/entity';
 import {CarouselConfig} from 'ngx-bootstrap/carousel';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'user-album',
@@ -16,16 +17,28 @@ export class UserAlbumComponent implements OnInit {
 
   userId: number;
 
-  constructor(private identifyService: IdentifyService) {
+  constructor(private identifyService: IdentifyService, private sanitizer: DomSanitizer) {
 
   }
 
   ngOnInit(): void {
     this.userId = this.identifyService.getUserId();
+    this.getUserAlbums(this.userId);
   }
 
   getUserAlbums(userId: number): void {
-    this.identifyService.getUserAlbums(userId);
+    this.identifyService.getUserAlbums(userId).then(albums => this.setAlbums(albums));
+  }
+
+  setAlbums(albums: Album[]) {
+    for (let i = 0; i < albums.length; i++) {
+      let album = albums[i];
+      for (let j = 0; j < album.imageUrls.length; j++) {
+        album.imageUrls[j] = this.sanitizer.bypassSecurityTrustResourceUrl(album.imageUrls[j]);
+      }
+      albums[i] = album;
+    }
+    this.albums = albums;
   }
 
   onClickAlbum(albumid: number) {

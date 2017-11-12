@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IdentifyService} from 'app/identify/identify.service';
 import {User} from 'app/entity/entity';
 import {Router} from '@angular/router';
@@ -14,36 +13,26 @@ export class UserBasicInfoComponent implements OnInit {
   user: User = new User();
   userId: number;
 
-  basicInfoForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private identifyService: IdentifyService) {
+  constructor(private router: Router, private identifyService: IdentifyService) {
   }
 
-  createForm() {
-    this.basicInfoForm = new FormGroup({
-      name: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-      gender: new FormControl(Validators.required),
-      identify: new FormControl(Validators.required),
-      tel: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-      email: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-    });
-  }
-
-  ngOnInit(): void {
-    this.createForm();
-  }
-
-  //    get basicInfo(): FormGroup {
-  //    return this.basicInfoForm as FormGroup;
+  // createForm() {
+  //   this.basicInfoForm = new FormGroup({
+  //     name: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+  //     gender: new FormControl(Validators.required),
+  //     identify: new FormControl(Validators.required),
+  //     tel: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+  //     email: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+  //   });
   // }
 
-  getUserBasicInfo() {
-    this.identifyService.getUserBasicInfo(this.userId).then(user => console.log(user));
-
+  ngOnInit(): void {
+    this.userId = this.identifyService.getUserId();
+    this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
   }
 
-  w(): void {
-    console.log("234");
-    window.open("http://localhost:4200/identify/editinfo");
+  gotoEditInfo() {
+    this.router.navigate(['/identify/info/' + this.userId + '/editinfo']);
   }
 }

@@ -4,6 +4,10 @@
     <input class="form-control" formControlName="name" #name>
   </div>
   <div class="form-group">
+    <label>个人简介</label>
+    <input class="form-control" formControlName="introduction" #introduction>
+  </div>
+  <div class="form-group">
     <label>性别</label>
     <select class="form-control" fromControName="gender" #gender>
       <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
@@ -25,5 +29,6 @@
   </div>
 </form>
 <div class="row">
-  <label (click)="updateUserBasicInfo(name.value,gender.value,identity.value,telephone.value,email.value)">保存</label>
+  <label
+    (click)="updateUserBasicInfo(name.value,introduction.value,gender.value,identity.value,telephone.value,email.value)">保存</label>
 </div>

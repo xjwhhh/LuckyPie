@@ -17,9 +17,10 @@ export class UserActivityComponent implements OnInit {
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
     console.log(this.userId);
+    this.getUserDating(this.userId);
   }
 
-  getUserShares(userId: number) {
+  getUserDating(userId: number) {
     this.identifyService.getUserDating(userId);
   }
 

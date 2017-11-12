@@ -77,7 +77,7 @@ export class Album {
   name: string;
   desc: string;
   time: string;
-  imageUrls: string[];
+  imageUrls: any[];
   tags: string[];
   createTime: string;
   updateTime: string;
@@ -97,8 +97,8 @@ export const Addresses: string[] = ["全部", "北京", "天津", "上海", "重
 
 export const CostTypes: string[] = ["全部", "互免", "收費", "付費", "協商"];
 
-export const Identities: string[] = ["全部", "模特", "攝影師"];
+export const Identities: string[] = ["无", "模特", "攝影師"];
 
-export const Genders: string[] = ["全部", "男", "女"];
+export const Genders: string[] = ["无", "男", "女"];
 
 export const Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
