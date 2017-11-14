@@ -24,7 +24,7 @@ export class Share {
   id: number;
   userId: number;
   desc: string;
-  imageUrls: string[];
+  imageUrls: any[];
   tags: string[];
   // numOfLikes: number;
   // numOfForwards: number;
@@ -40,7 +40,7 @@ export class Dating {
   id: number;
   userId: number;
   desc: string;
-  imageUrls: string[];
+  imageUrls: any[];
   // numOfLikes: number;
   // numOfForwards: number;
   // numOfComments: number;
@@ -97,7 +97,7 @@ export const Addresses: string[] = ["全部", "北京", "天津", "上海", "重
 
 export const CostTypes: string[] = ["全部", "互免", "收費", "付費", "協商"];
 
-export const Identities: string[] = ["无", "模特", "攝影師"];
+export const Identities: string[] = ["无", "模特", "摄影师"];
 
 export const Genders: string[] = ["无", "男", "女"];
 

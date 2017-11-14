@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Share} from 'app/entity/entity';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Addresses, CostTypes, Identities, Genders} from 'app/entity/entity';
+import {Addresses, CostTypes, Identities, Genders,User,Dating,Album} from 'app/entity/entity';
 
 @Injectable()
 export class ExploreService {
@@ -10,6 +10,8 @@ export class ExploreService {
   options = new RequestOptions({headers: this.headers});
 
   private selectedTag: String;
+
+  userId:number;
 
   constructor(private http: Http) {
   }
@@ -35,8 +37,15 @@ export class ExploreService {
     return Promise.resolve(Genders);
   }
 
-  private sharesUrl = 'http://localhost/LuckyPie-Server/api/post/explore/share';
+  setUserId(userId:number){
+    this.userId=userId;
+  }
 
+  getUserId(){
+    return this.userId;
+  }
+
+  private sharesUrl = 'http://localhost/LuckyPie-Server/api/post/explore/share';
   getShares() {
     return this.http.get(this.sharesUrl)
       .toPromise()
@@ -60,7 +69,6 @@ export class ExploreService {
 
   setSelectedTag(selectedTag: string) {
     this.selectedTag = selectedTag;
-    // console.log(this.selectedTag);
   }
 
   getSelectedTag(): String {
@@ -68,7 +76,6 @@ export class ExploreService {
   }
 
   private getDatingUrl = 'http://localhost/LuckyPie-Server/api/post/explore/dating';
-
   getDating(data: URLSearchParams) {
     this.http.post(this.getDatingUrl, data, this.options)
       .toPromise()
@@ -77,17 +84,14 @@ export class ExploreService {
   }
 
   private getHotPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/hot';
-
-  getHotPhotographer() {
-    this.http.get(this.getHotPhotographerUrl)
+  getHotPhotographer():Promise<User[]> {
+    return this.http.get(this.getHotPhotographerUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
-
   }
 
   private getBestPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/best';
-
   getBestPhotographer() {
     this.http.get(this.getBestPhotographerUrl)
       .toPromise()
@@ -97,7 +101,6 @@ export class ExploreService {
   }
 
   private getNewPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/new';
-
   getNewPhotographer() {
     this.http.get(this.getNewPhotographerUrl)
       .toPromise()
@@ -107,7 +110,6 @@ export class ExploreService {
   }
 
   private getHotModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/hot';
-
   getHotModel() {
     this.http.get(this.getHotModelUrl)
       .toPromise()
@@ -117,7 +119,6 @@ export class ExploreService {
   }
 
   private getBestModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/best';
-
   getBestModel() {
     this.http.get(this.getBestModelUrl)
       .toPromise()
@@ -127,9 +128,19 @@ export class ExploreService {
   }
 
   private getNewModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/new';
-
   getNewModel() {
     this.http.get(this.getNewModelUrl)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
+  }
+
+private followUrl='http://localhost/LuckyPie-Server/api/post/follow';
+  follow(followUserId:number){
+    let data=new URLSearchParams();
+    data.append("followId",followUserId+"");
+    data.append("followerId",this.userId+"");
+    this.http.post(this.followUrl, data, this.options)
       .toPromise()
       .then(response => console.log(response))
       .catch(this.handleError);

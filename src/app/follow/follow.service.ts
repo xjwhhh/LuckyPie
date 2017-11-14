@@ -19,18 +19,16 @@ export class FollowService {
   }
 
   private getFollowSharesUrl = 'http://localhost/LuckyPie-Server/api/post/follow/share'
-
-  getFollowShares(userId: number) {
+  getFollowShares(userId: number):Promise<Share[]> {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
-    this.http.post(this.getFollowSharesUrl, data, this.options)
+    return this.http.post(this.getFollowSharesUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Share[])
       .catch(this.handleError);
   }
 
   private getFollowDatingUrl = 'http://localhost/LuckyPie-Server/api/post/follow/dating'
-
   getFollowDating(userId: number) {
     let data = new URLSearchParams();
     data.append("userId", userId + "");

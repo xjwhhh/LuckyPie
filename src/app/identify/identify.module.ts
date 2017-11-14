@@ -8,6 +8,7 @@ import {LoginComponent} from './login/login.component';
 import {IdentifyComponent} from './identify.component';
 import {IdentifyRoutingModule} from './identify-routing.module';
 import {UserInfoComponent} from './userinfo/userinfo.component';
+import {UserHomePageComponent} from './userinfo/userhomepage.component';
 import {UserPhotoComponent} from './userinfo/share/usershare.component';
 import {UserActivityComponent} from './userinfo/date/userdate.component';
 import {UserAlbumComponent} from './userinfo/album/useralbum.component';
@@ -28,6 +29,7 @@ import {CarouselModule} from 'ngx-bootstrap';
     LoginComponent,
     IdentifyComponent,
     UserInfoComponent,
+    UserHomePageComponent,
     UserAlbumComponent,
     UserActivityComponent,
     UserPhotoComponent,

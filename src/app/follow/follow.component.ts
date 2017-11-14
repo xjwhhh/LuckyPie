@@ -8,7 +8,8 @@ import {
 import {
   Share
 } from 'app/entity/entity';
-import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'follow',
@@ -26,19 +27,19 @@ export class FollowComponent implements OnInit {
   userId: number = -1;
 
 
-  constructor(private route: ActivatedRoute, private followService: FollowService, private router: Router) {
+  constructor(private route: ActivatedRoute, private followService: FollowService, private router: Router, private sanitizer: DomSanitizer) {
 
   }
 
 
   ngOnInit(): void {
-    // console.log(this.userId);
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
       console.log(params);
     });
     console.log(this.userId);
-    this.test();
+    // this.test();
+    this.getFollowShares(this.userId);
   }
 
 
@@ -46,8 +47,21 @@ export class FollowComponent implements OnInit {
 
   }
 
-  getShares(userId: number): void {
-    this.followService.getFollowShares(userId);
+  getFollowShares(userId: number): void {
+    this.followService.getFollowShares(userId).then(shares => this.setShares(shares));
+  }
+
+  setShares(shares: Share[]) {
+    // for (let i = 0; i < shares.length; i++) {
+    //   let share = shares[i];
+    //   for (let j = 0; j < share.imageUrls.length; j++) {
+    //     // let temp="http://localhost/LuckyPie-Server/photo/20171114/15106508520.jpeg";
+    //     let temp=share.imageUrls[j];
+    //     share.imageUrls[j] = this.sanitizer.bypassSecurityTrustResourceUrl(temp);
+    //   }
+    //   shares[i] = share;
+    // }
+    this.shares = shares;
   }
 
   doThumb(): void {

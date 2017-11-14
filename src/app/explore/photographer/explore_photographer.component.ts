@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -6,6 +6,7 @@ import {
   User,
   Share
 } from 'app/entity/entity';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'explore-photographer',
@@ -18,15 +19,20 @@ export class ExplorePhotographerComponent implements OnInit {
   shares: Share[]; //应该每个user都有对应的shares
   selectedShare: Share = new Share();
 
-  constructor(private exploreService: ExploreService) {
-  }
+  userId: number;
+
+  photographerArray: User[];
+
+  constructor(private exploreService: ExploreService) {}
 
   ngOnInit(): void {
+    this.userId = this.exploreService.getUserId();
+    console.log(this.userId);
     this.selectHotPhotographers();
   }
 
   selectHotPhotographers() {
-    this.exploreService.getHotPhotographer();
+    this.exploreService.getHotPhotographer().then(users => this.setPhotographers(users));
     console.log("1");
 
   }
@@ -43,7 +49,18 @@ export class ExplorePhotographerComponent implements OnInit {
 
   }
 
-  follow() {
+  setPhotographers(users: User[]) {
+    this.photographerArray = users;
+    console.log(users);
+  }
+
+  gotoPhotographerInfo(followUserId: number) {
+    console.log(followUserId);
+  }
+
+  follow(followUserId: number) {
+    console.log(followUserId);
+    this.exploreService.follow(followUserId);
 
   }
 
@@ -82,7 +99,6 @@ export class ExplorePhotographerComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {
