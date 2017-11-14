@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FollowService {
+
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});
 

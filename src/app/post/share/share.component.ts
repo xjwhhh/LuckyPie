@@ -9,7 +9,7 @@ import {
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Photo, Share} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class PostShareComponent implements OnInit {
 
   userId: number;
 
-  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -167,7 +167,17 @@ export class PostShareComponent implements OnInit {
       this.share.postAddress = '中国';
       this.share.tags = this.selectedTags;
       this.share.forwardShareId = '-1';
-      this.postService.uploadShare(JSON.stringify(this.share));
+      this.postService.uploadShare(JSON.stringify(this.share)).then(share => this.check(share));
+    }
+  }
+
+  check(share: Share) {
+    console.log(share);
+    if (share.id != null) {
+      alert("发布分享成功");
+      this.router.navigate(['/follow', share.userId]);
+    } else {
+      alert("发布分享失败");
     }
   }
 

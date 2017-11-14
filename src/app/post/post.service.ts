@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {Addresses, CostTypes, Tags} from 'app/entity/entity';
+import {Addresses, CostTypes, Tags, Share, Album, Dating} from 'app/entity/entity';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import {Router} from '@angular/router';
 
@@ -59,34 +59,34 @@ export class PostService {
 
   private uploadDateUrl = 'http://localhost/LuckyPie-Server/api/post/post/dating/upload';
 
-  uploadDating(datingInfo: string) {
+  uploadDating(datingInfo: string): Promise<Dating> {
     let data = new URLSearchParams();
     data.append("datingInfo", datingInfo);
     return this.http.post(this.uploadDateUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Dating)
       .catch(this.handleError);
   }
 
   private uploadAlbumUrl = 'http://localhost/LuckyPie-Server/api/post/post/album/upload';
 
-  uploadAlbum(albumInfo: string) {
+  uploadAlbum(albumInfo: string): Promise<Album> {
     let data = new URLSearchParams();
     data.append("albumInfo", albumInfo);
     return this.http.post(this.uploadAlbumUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Album)
       .catch(this.handleError);
   }
 
   private uploadShareUrl = 'http://localhost/LuckyPie-Server/api/post/post/share/upload';
 
-  uploadShare(shareInfo: string) {
+  uploadShare(shareInfo: string): Promise<Share> {
     let data = new URLSearchParams();
     data.append("shareInfo", shareInfo);
     return this.http.post(this.uploadShareUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Share)
       .catch(this.handleError);
   }
 

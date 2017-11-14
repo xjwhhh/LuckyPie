@@ -9,6 +9,7 @@ import {
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Photo, Album} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class PostAlbumComponent implements OnInit {
   };
 
 
-  constructor(private fb: FormBuilder, private postService: PostService) {
+  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -184,9 +185,18 @@ export class PostAlbumComponent implements OnInit {
       this.album.createTime = createTime;
       this.album.updateTime = updateTime;
       this.album.tags = this.selectedTags;
-      this.postService.uploadAlbum(JSON.stringify(this.album));
+      this.postService.uploadAlbum(JSON.stringify(this.album)).then(album => this.check(album));
     }
   }
 
+  check(album: Album) {
+    console.log(album);
+    if (album.id != null) {
+      alert("发布分享成功");
+      this.router.navigate(['/follow', album.userId]);
+    } else {
+      alert("发布分享失败");
+    }
+  }
 
 }

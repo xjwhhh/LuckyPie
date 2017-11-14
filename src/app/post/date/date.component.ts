@@ -10,6 +10,7 @@ import {
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Photo, Dating} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class PostDateComponent implements OnInit {
   userId: number;
 
 
-  constructor(private fb: FormBuilder, private postService: PostService) {
+  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {
   }
 
 
@@ -218,7 +219,18 @@ export class PostDateComponent implements OnInit {
       this.dating.postTime = postTime;
       this.dating.postAddress = '中国';
       this.dating.tags = this.selectedTags;
-      this.postService.uploadDating(JSON.stringify(this.dating));
+      this.postService.uploadDating(JSON.stringify(this.dating)).then(dating => this.check(dating));
+    }
+  }
+
+
+  check(dating: Dating) {
+    console.log(dating);
+    if (dating.id != null) {
+      alert("发布约拍信息成功");
+      this.router.navigate(['/follow', dating.userId]);
+    } else {
+      alert("发布约拍信息失败");
     }
   }
 }

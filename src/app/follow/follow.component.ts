@@ -8,7 +8,7 @@ import {
 import {
   Share
 } from 'app/entity/entity';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'follow',
@@ -23,20 +23,21 @@ export class FollowComponent implements OnInit {
 
   thumbUrl = "assets/image/thumb2.png";
   thumb = false;
-  userId: number;
+  userId: number = -1;
 
 
-  constructor(private route: ActivatedRoute, private followService: FollowService) {
+  constructor(private route: ActivatedRoute, private followService: FollowService, private router: Router) {
 
   }
 
 
   ngOnInit(): void {
+    // console.log(this.userId);
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
+      console.log(params);
     });
     console.log(this.userId);
-    // this.getShares();
     this.test();
   }
 

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
+
   }
 
   gotoFollow() {
@@ -25,8 +26,7 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/follow', this.userId]);
     }
 
@@ -37,8 +37,7 @@ export class AppComponent implements OnInit {
     console.log("gotopost");
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/post', this.userId]);
     }
 
@@ -48,8 +47,7 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/explore', this.userId]);
     }
 
@@ -59,8 +57,7 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/hot', this.userId]);
     }
 
@@ -70,8 +67,7 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/notice', this.userId]);
     }
 
@@ -81,11 +77,9 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
-    }
-    else {
+    } else {
       this.router.navigate(['/identify/info', this.userId]);
     }
-
   }
 
 
