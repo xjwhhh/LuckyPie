@@ -6,7 +6,7 @@
   <div class="row">
     <P style="height: 20px"></P>
   </div>
-  <div *ngFor="let share of shares">
+  <div *ngFor="let share of shares;let i=index">
     <div class="photo">
       <div class="row">
         <P style="height: 5px"></P>
@@ -42,7 +42,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-2">
           <div class="col-md-3">
-            <img src="{{thumbUrl}}" (click)="doThumb()">
+            <img src="{{thumbUrl[i]}}" (click)="doThumb(i,share.id)">
           </div>
           <div class="col-md-3">
             <img src="assets/image/comment.png">

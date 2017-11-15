@@ -8,8 +8,8 @@ import {
 import {
   Share
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'follow',
@@ -22,8 +22,8 @@ export class FollowComponent implements OnInit {
 
   shares: Share[];
 
-  thumbUrl = "assets/image/thumb2.png";
-  thumb = false;
+  thumbUrl = [];
+  thumb = [];
   userId: number = -1;
 
 
@@ -62,15 +62,23 @@ export class FollowComponent implements OnInit {
     //   shares[i] = share;
     // }
     this.shares = shares;
+    for (let i = 0; i < shares.length; i++) {
+      this.thumbUrl.push("assets/image/thumb2.png");
+      this.thumb.push(false);
+    }
   }
 
-  doThumb(): void {
-    if (this.thumb) {
-      this.thumbUrl = "assets/image/thumb2.png";
+  doThumb(i: number, shareId: number): void {
+    if (this.thumb[i]) {
+      this.thumbUrl[i] = "assets/image/thumb2.png";
+      this.followService.cancelThumb(this.userId, shareId);
     } else {
-      this.thumbUrl = "assets/image/thumb1.png";
+      this.thumbUrl[i] = "assets/image/thumb1.png";
+      this.followService.doThumb(this.userId, shareId);
     }
-    this.thumb = !this.thumb;
+    this.thumb[i] = !this.thumb[i];
+    console.log(i);
+    console.log(shareId);
 
   }
 

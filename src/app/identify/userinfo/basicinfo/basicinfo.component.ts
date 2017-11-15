@@ -35,4 +35,9 @@ export class UserBasicInfoComponent implements OnInit {
   gotoEditInfo() {
     this.router.navigate(['/identify/info/' + this.userId + '/editinfo']);
   }
+
+  exit() {
+    this.identifyService.setUserId(-1);
+    this.router.navigate(['/identify/login']);
+  }
 }

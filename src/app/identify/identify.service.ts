@@ -91,19 +91,19 @@ export class IdentifyService {
 
   private getUserDatingUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/dating/';
 
-  getUserDating(userId: number) {
+  getUserDating(userId: number): Promise<Dating[]> {
     return this.http.get(this.getUserDatingUrl + userId)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Dating[])
       .catch(this.handleError);
   }
 
   private getUserLikesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/like/';
 
-  getUserLikes(userId: number) {
+  getUserLikes(userId: number): Promise<Share[]> {
     return this.http.get(this.getUserLikesUrl + userId)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Share[])
       .catch(this.handleError);
   }
 

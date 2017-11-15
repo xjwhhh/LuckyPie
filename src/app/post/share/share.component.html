@@ -17,9 +17,9 @@
           <label>添加标签</label>
         </div>
         <div class="row">
-          <div *ngFor="let tag of Tags">
+          <div *ngFor="let tag of Tags;let i= index">
             <div class="col-md-1">
-              <button type="button" (click)="onClickTag(tag)">{{tag}}</button>
+              <button [ngStyle]="tagStyles[i]" type="button" (click)="onClickTag(tag,i)">{{tag}}</button>
             </div>
           </div>
         </div>

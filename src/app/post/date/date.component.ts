@@ -34,6 +34,8 @@ export class PostDateComponent implements OnInit {
 
   userId: number;
 
+  tagStyles = [];
+
 
   constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {
   }
@@ -45,6 +47,11 @@ export class PostDateComponent implements OnInit {
     this.createForm();
     this.settags();
     this.userId = this.postService.getUserId();
+    for (let i = 0; i < this.Tags.length; i++) {
+      this.tagStyles.push({
+        'background-color': 'white'
+      });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -166,19 +173,26 @@ export class PostDateComponent implements OnInit {
     //  }
   }
 
-  onClickTag(tagValue: string) {
+  onClickTag(tagValue: string, i: number) {
     let isExist = false;
     let index = -1;
-    this.selectedTags.forEach((tag, i) => {
+    this.selectedTags.forEach((tag, j) => {
       if (tagValue == tag) {
         isExist = true;
-        index = i;
+        index = j;
       }
     });
     if (isExist) {
       this.selectedTags.splice(index, 1);
+      this.tagStyles[i] = {
+        'background-color': 'white'
+      };
+
     } else {
       this.selectedTags.push(tagValue);
+      this.tagStyles[i] = {
+        'background-color': 'red'
+      };
     }
   }
 

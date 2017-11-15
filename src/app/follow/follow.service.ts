@@ -19,7 +19,8 @@ export class FollowService {
   }
 
   private getFollowSharesUrl = 'http://localhost/LuckyPie-Server/api/post/follow/share'
-  getFollowShares(userId: number):Promise<Share[]> {
+
+  getFollowShares(userId: number): Promise<Share[]> {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
     return this.http.post(this.getFollowSharesUrl, data, this.options)
@@ -29,12 +30,37 @@ export class FollowService {
   }
 
   private getFollowDatingUrl = 'http://localhost/LuckyPie-Server/api/post/follow/dating'
+
   getFollowDating(userId: number) {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
     this.http.post(this.getFollowDatingUrl, data, this.options)
       .toPromise()
       .then(response => console.log(response))
+      .catch(this.handleError);
+  }
+
+  private doThumbUrl = 'http://localhost/LuckyPie-Server/api/post/share/doThumb';
+
+  doThumb(userId: number, shareId: number) {
+    let data = new URLSearchParams();
+    data.append("userId", userId + "");
+    data.append("shareId", shareId + "");
+    this.http.post(this.doThumbUrl, data, this.options)
+      .toPromise()
+      .then(response => console.log(""))
+      .catch(this.handleError);
+  }
+
+  private cancelThumbUrl = 'http://localhost/LuckyPie-Server/api/post/share/cancelThumb';
+
+  cancelThumb(userId: number, shareId: number) {
+    let data = new URLSearchParams();
+    data.append("userId", userId + "");
+    data.append("shareId", shareId + "");
+    this.http.post(this.cancelThumbUrl, data, this.options)
+      .toPromise()
+      .then(response => console.log(""))
       .catch(this.handleError);
   }
 

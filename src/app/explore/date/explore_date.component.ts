@@ -3,7 +3,8 @@ import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
-  Share, Dating
+  Share,
+  Dating
 } from 'app/entity/entity';
 import {URLSearchParams} from '@angular/http';
 
@@ -20,10 +21,10 @@ export class ExploreDateComponent implements OnInit {
   genders: string[];
   shares: Share[];
 
-  selectedAddress: string = '';
-  selectedCostType: string = '';
-  selectedIdentity: string = '';
-  selectedGender: string = '';
+  selectedAddress: string = '全部';
+  selectedCostType: string = '全部';
+  selectedIdentity: string = '无';
+  selectedGender: string = '无';
 
   datings: Dating[];
 
@@ -37,7 +38,8 @@ export class ExploreDateComponent implements OnInit {
     this.getCostTypes();
     this.getIdentities();
     this.getGenders();
-    this.getShares();
+    let data = this.createData();
+    this.exploreService.getDating(data);
   }
 
   getAddresses(): void {
@@ -55,11 +57,6 @@ export class ExploreDateComponent implements OnInit {
   getGenders(): void {
     this.exploreService.getGenders().then(genders => this.genders = genders);
   }
-
-  getShares(): void {
-    this.exploreService.getShares().then(shares => this.shares = shares);
-  }
-
 
   selectAddress(selectedAddress: string): void {
     console.log(selectedAddress);

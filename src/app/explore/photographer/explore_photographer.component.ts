@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -6,7 +6,7 @@ import {
   User,
   Share
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'explore-photographer',
@@ -23,7 +23,8 @@ export class ExplorePhotographerComponent implements OnInit {
 
   photographerArray: User[];
 
-  constructor(private exploreService: ExploreService) {}
+  constructor(private exploreService: ExploreService) {
+  }
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();

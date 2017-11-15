@@ -26,6 +26,9 @@ export class PostAlbumComponent implements OnInit {
 
   imageUrls: string[] = [];
 
+  // ifSelected = [];
+  tagStyles = [];
+
   album: Album;
 
   userId: number;
@@ -41,12 +44,20 @@ export class PostAlbumComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.userId = this.postService.getUserId();
+
+    for (let i = 0; i < this.Tags.length; i++) {
+      // this.ifSelected.push(false);
+      this.tagStyles.push({
+        'background-color': 'white'
+      });
+    }
   }
 
 
   ngAfterViewInit(): void {
 
   }
+
 
   createForm() {
     this.albumForm = this.fb.group({
@@ -132,26 +143,26 @@ export class PostAlbumComponent implements OnInit {
     //  }
   }
 
-  onClickTag(tagValue: string) {
+  onClickTag(tagValue: string, i: number) {
     let isExist = false;
     let index = -1;
-    this.selectedTags.forEach((tag, i) => {
+    this.selectedTags.forEach((tag, j) => {
       if (tagValue == tag) {
         isExist = true;
-        index = i;
+        index = j;
       }
     });
     if (isExist) {
       this.selectedTags.splice(index, 1);
-      //       this.tagStyle = {
-      //   'background-color':  'black'
-      // };
+      this.tagStyles[i] = {
+        'background-color': 'white'
+      };
 
     } else {
       this.selectedTags.push(tagValue);
-      //       this.tagStyle = {
-      //   'background-color':  'red'
-      // };
+      this.tagStyles[i] = {
+        'background-color': 'red'
+      };
     }
   }
 
