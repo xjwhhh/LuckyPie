@@ -64,7 +64,7 @@ export class ExploreService {
   getAllTags(selectedTag: string): Promise<Share[]> {
     return this.http.get(this.sharesUrl)
       .toPromise()
-      .then(response => response.json() as Share[])
+      .then(response =>{ console.log(response);response.json() as Share[]})
       .catch(this.handleError);
   }
 
@@ -78,10 +78,10 @@ export class ExploreService {
 
   private getDatingUrl = 'http://localhost/LuckyPie-Server/api/post/explore/dating';
 
-  getDating(data: URLSearchParams) {
-    this.http.post(this.getDatingUrl, data, this.options)
+  getDating(data: URLSearchParams):Promise<Dating[]> {
+    return this.http.post(this.getDatingUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response =>response.json() as Dating[])
       .catch(this.handleError);
   }
 

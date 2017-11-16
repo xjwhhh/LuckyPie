@@ -5,7 +5,7 @@ import {
 import {
   Share
 } from 'app/entity/entity';
-import {Router} from '@angular/router';
+import {Router,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'explore-tag',
@@ -20,15 +20,19 @@ export class ExploreTagComponent implements OnInit {
   selectedTag: string;
   selectedArea: string;
 
-  getShares(): void {
-    this.exploreService.getShares().then(shares => this.shares = shares);
-  }
+  userId:number;
 
-  constructor(private exploreService: ExploreService, private router: Router,) {
+  constructor(private exploreService: ExploreService, private router: Router,private route:ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.userId=this.exploreService.getUserId();
     this.getShares();
+  }
+
+
+  getShares(): void {
+    this.exploreService.getShares().then(shares => this.shares = shares);
   }
 
   selectTag(): void {
@@ -39,11 +43,11 @@ export class ExploreTagComponent implements OnInit {
   }
 
   gotoTagDetail(): void {
-    this.router.navigate(['/explore/tagdetail', this.selectedTag]);
+    this.router.navigate(['/explore/'+this.userId+'/tagdetail', this.selectedTag]);
   }
 
   showAllTags(): void {
     this.selectedArea = "Style";
-    this.router.navigate(['/explore/showalltags', this.selectedArea]);
+    this.router.navigate(['/explore/'+this.userId+'/showalltags', this.selectedArea]);
   }
 }

@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class IdentifyService {
   user: User = new User();
-  userId: number = 19;
+  userId: number = 9;
 
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});

@@ -24,6 +24,7 @@ export class ExploreShowAllTagsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log("4567867890-");
     this.getAllTags();
 
   }
