@@ -13,13 +13,15 @@
     <P style="height: 5px"></P>
   </div>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-      <div *ngFor="let share of shares ">
-        <div class="col-md-2">
-          <img src="{{share.imageUrls[0]}}" width="100%" height="100%" (click)="selectTag()">
-        </div>
-      </div>
+    <div class="col-md-2">
+      <carousel>
+        <slide>
+          <img src="assets/image/saber.jpg" width="100%" height="100%">
+          <div class="carousel-caption">
+            <h3>风光</h3>
+          </div>
+        </slide>
+      </carousel>
     </div>
   </div>
 </div>

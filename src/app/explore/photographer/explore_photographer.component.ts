@@ -4,7 +4,8 @@ import {
 } from 'app/explore/explore.service';
 import {
   User,
-  Share
+  Share,
+  ResultMessage
 } from 'app/entity/entity';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
@@ -35,24 +36,25 @@ export class ExplorePhotographerComponent implements OnInit {
   selectHotPhotographers() {
     this.exploreService.getHotPhotographer().then(users => this.setPhotographers(users));
     console.log("1");
-
   }
+
 
   selectBestPhotographers() {
     this.exploreService.getBestPhotographer();
     console.log("1");
-
   }
 
   selectNewPhotographers() {
     this.exploreService.getNewPhotographer();
     console.log("1");
-
   }
 
   setPhotographers(users: User[]) {
     this.photographerArray = users;
-    console.log(users);
+    for (let i = 0; i < this.photographerArray.length; i++) {
+      console.log(this.photographerArray[i].id);
+      this.exploreService.getUserShares(this.photographerArray[i].id).then(shares => this.photographerArray[i].shares = shares);
+    }
   }
 
   gotoPhotographerInfo(followUserId: number) {
@@ -61,18 +63,21 @@ export class ExplorePhotographerComponent implements OnInit {
 
   follow(followUserId: number) {
     console.log(followUserId);
-    this.exploreService.follow(followUserId);
+    this.exploreService.follow(followUserId).then(resultMessage => this.check(resultMessage));
 
   }
 
+  check(resultMessage: ResultMessage) {
+    if (resultMessage.result != "success") {
+      alert("关注失败");
+    } else {
+      alert("关注成功");
+    }
+  }
 
-  onClickShare() {
-    // this.albums.forEach((album, i) => {
-    //   if (album.id == albumid) {
-    //     this.selectedAlbum = album;
-    //   }
-    // });
-    // console.log(this.selectedAlbum.imageUrls);
+
+  onClickShare(userIndex: number, shareIndex: number) {
+    this.selectedShare = this.photographerArray[userIndex].shares[shareIndex];
     this.setCurrentStyles();
   }
 

@@ -15,10 +15,11 @@
         <div class="col-md-1"></div>
         <div class="col-md-2">
           <div class="col-md-5">
-            <img id="head_portrait" src="assets/image/saber.jpg" height="100%" width="100%">
+            <img (click)="gotoHomePage(users[i].id)" id="head_portrait" [src]="users[i].head" height="100%"
+                 width="100%">
           </div>
           <div class="col-md-4">
-            xjw
+            {{users[i].name}}
           </div>
         </div>
       </div>

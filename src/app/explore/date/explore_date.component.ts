@@ -28,7 +28,7 @@ export class ExploreDateComponent implements OnInit {
 
   datings: Dating[];
 
-  userId:number;
+  userId: number;
 
 
   constructor(private exploreService: ExploreService) {
@@ -36,13 +36,13 @@ export class ExploreDateComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userId=this.exploreService.getUserId();
+    this.userId = this.exploreService.getUserId();
     this.getAddresses();
     this.getCostTypes();
     this.getIdentities();
     this.getGenders();
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings=>this.datings=datings);
+    this.exploreService.getDating(data).then(datings => this.datings = datings);
   }
 
   getAddresses(): void {
@@ -65,28 +65,28 @@ export class ExploreDateComponent implements OnInit {
     console.log(selectedAddress);
     this.selectedAddress = selectedAddress;
     let data = this.createData();
-    // this.exploreService.getDating(data).then(datings=>this.datings=datings);
+    this.exploreService.getDating(data).then(datings => this.datings = datings);
   }
 
   selectCost(selectedCostType: string): void {
     console.log(selectedCostType);
     this.selectedCostType = selectedCostType;
     let data = this.createData();
-    // this.exploreService.getDating(data).then(datings=>this.datings=datings);
+    this.exploreService.getDating(data).then(datings => this.datings = datings);
   }
 
   selectIdentity(selectedIdentity: string): void {
     console.log(selectedIdentity);
     this.selectedIdentity = selectedIdentity;
     let data = this.createData();
-    // this.exploreService.getDating(data).then(datings=>this.datings=datings);
+    this.exploreService.getDating(data).then(datings => this.datings = datings);
   }
 
   selectGender(selectedGender: string): void {
     console.log(selectedGender);
     this.selectedGender = selectedGender;
     let data = this.createData();
-    // this.exploreService.getDating(data).then(datings=>this.datings=datings);
+    this.exploreService.getDating(data).then(datings => this.datings = datings);
   }
 
   createData() {

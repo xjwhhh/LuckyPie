@@ -6,26 +6,26 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <h2>题材</h2>
+      <h2>{{selectedTag}}</h2>
     </div>
   </div>
   <div class="row">
     <P style="height: 5px"></P>
   </div>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-3">
-      <label (click)="selectHotShares()">热门</label>
-    </div>
-    <div class="col-md-3">
-      <label (click)="selectNewShares()">最新</label>
-    </div>
-  </div>
+  <!--   <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <label (click)="selectHotShares()">热门</label>
+      </div>
+      <div class="col-md-3">
+        <label (click)="selectNewShares()">最新</label>
+      </div>
+    </div> -->
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
       <div *ngFor="let share of shares ">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <img src="{{share.imageUrls[0]}}" width="100%" height="100%">
         </div>
       </div>

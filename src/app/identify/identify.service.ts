@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Identities, Genders, Album, User, Share, Dating} from 'app/entity/entity';
+import {Identities, Genders, Album, User, Share, Dating, ResultMessage, Comment} from 'app/entity/entity';
 import {Router} from '@angular/router';
 
 @Injectable()
 export class IdentifyService {
   user: User = new User();
-  userId: number = 9;
+  userId: number = 3;
+
+  ownerId: number;
 
   headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
   options = new RequestOptions({headers: this.headers});
@@ -21,6 +23,14 @@ export class IdentifyService {
 
   getUserId(): number {
     return this.userId;
+  }
+
+  setOwnerId(ownerId: number) {
+    this.ownerId = ownerId;
+  }
+
+  getOwnerId(): number {
+    return this.ownerId;
   }
 
   private handleError(error: any): Promise<any> {
@@ -94,7 +104,10 @@ export class IdentifyService {
   getUserDating(userId: number): Promise<Dating[]> {
     return this.http.get(this.getUserDatingUrl + userId)
       .toPromise()
-      .then(response => response.json() as Dating[])
+      .then(response => {
+        console.log(response);
+        response.json() as Dating[]
+      })
       .catch(this.handleError);
   }
 
@@ -121,6 +134,47 @@ export class IdentifyService {
     return this.http.post(this.updateUserBasicInfoUrl, data, this.options)
       .toPromise()
       .then(response => response.json() as User)
+      .catch(this.handleError);
+  }
+
+  private getShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/comment';
+
+  getShareComment(shareId: number): Promise<Comment[]> {
+    let data = new URLSearchParams();
+    data.append("shareId", shareId + "");
+    return this.http.post(this.getShareCommentUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as Comment[])
+      .catch(this.handleError);
+
+  }
+
+  private doShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/doComment';
+
+  doComment(userId: number, shareId: number, comment: string): Promise<ResultMessage> {
+    console.log(userId);
+    console.log(shareId);
+    console.log(comment);
+    let data = new URLSearchParams();
+    data.append("userId", userId + "");
+    data.append("replyShareId", shareId + "");
+    data.append("replyCommentId", "");
+    data.append("content", comment);
+    return this.http.post(this.doShareCommentUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
+  private updateHeadUrl = "http://localhost/LuckyPie-Server/api/post/user/info/head";
+
+  updateHead(userId: number, headInfo: string): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("userId", userId + "");
+    data.append("headInfo", headInfo);
+    return this.http.post(this.updateHeadUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
       .catch(this.handleError);
   }
 

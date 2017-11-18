@@ -8,7 +8,7 @@ import {
   FileUploader
 } from 'ng2-file-upload';
 import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Photo, Dating} from 'app/entity/entity';
+import {Photo, Dating, Tags} from 'app/entity/entity';
 import {PostService} from 'app/post/post.service';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
@@ -23,7 +23,8 @@ export class PostDateComponent implements OnInit {
 
   addresses: string[];
   costTypes: string[];
-  Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
+  Tags: string[];
+  // Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
   selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
@@ -42,6 +43,7 @@ export class PostDateComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.Tags = Tags;
     this.getAddresses();
     this.getCostTypes();
     this.createForm();

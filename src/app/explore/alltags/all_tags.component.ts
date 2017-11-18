@@ -25,18 +25,18 @@ export class ExploreShowAllTagsComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log("4567867890-");
-    this.getAllTags();
+    // this.getAllTags();
 
   }
 
-  getAllTags() {
-    this.route.params.forEach((params: Params) => {
-      if (params['selectedArea'] !== undefined) {
-        let selectedArea = params['selectedArea'];
-        this.exploreService.getAllTags(selectedArea).then(shares => this.shares = shares);
-      }
-    });
-  }
+  // getAllTags() {
+  //   this.route.params.forEach((params: Params) => {
+  //     if (params['selectedArea'] !== undefined) {
+  //       let selectedArea = params['selectedArea'];
+  //       this.exploreService.getAllTags(selectedArea);
+  //     }
+  //   });
+  // }
 
   selectTag(): void {
     //此处应有参数——选择的标签名

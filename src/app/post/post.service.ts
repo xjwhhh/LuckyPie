@@ -58,6 +58,7 @@ export class PostService {
   }
 
   private uploadDateUrl = 'http://localhost/LuckyPie-Server/api/post/post/dating/upload';
+
   uploadDating(datingInfo: string): Promise<Dating> {
     let data = new URLSearchParams();
     data.append("datingInfo", datingInfo);
@@ -68,6 +69,7 @@ export class PostService {
   }
 
   private uploadAlbumUrl = 'http://localhost/LuckyPie-Server/api/post/post/album/upload';
+
   uploadAlbum(albumInfo: string): Promise<Album> {
     let data = new URLSearchParams();
     data.append("albumInfo", albumInfo);
@@ -78,6 +80,7 @@ export class PostService {
   }
 
   private uploadShareUrl = 'http://localhost/LuckyPie-Server/api/post/post/share/upload';
+
   uploadShare(shareInfo: string): Promise<Share> {
     let data = new URLSearchParams();
     data.append("shareInfo", shareInfo);

@@ -35,7 +35,7 @@
       <div class="row">
         <carousel>
           <slide *ngFor="let image of selectedAlbum.imageUrls">
-            <img src="{{image}}" width="100%" height="100%">
+            <img [src]="image" width="100%" height="100%">
           </slide>
         </carousel>
       </div>

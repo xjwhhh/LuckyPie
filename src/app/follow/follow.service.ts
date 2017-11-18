@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Share} from 'app/entity/entity';
+import {Share, User} from 'app/entity/entity';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -61,6 +61,15 @@ export class FollowService {
     this.http.post(this.cancelThumbUrl, data, this.options)
       .toPromise()
       .then(response => console.log(""))
+      .catch(this.handleError);
+  }
+
+  private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/basicinfo/';
+
+  getUserBasicInfo(userId: number): Promise<User> {
+    return this.http.get(this.userBasciInfoUrl + userId)
+      .toPromise()
+      .then(response => response.json() as User)
       .catch(this.handleError);
   }
 

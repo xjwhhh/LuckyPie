@@ -12,11 +12,13 @@ import {ExploreModelComponent} from './model/explore_model.component';
 import {ExploreTagDetailComponent} from './tagdetail/tag_detail.component';
 import {ExploreRoutingModule} from './explore-routing.module';
 import {ExploreShowAllTagsComponent} from './alltags/all_tags.component';
+import {CarouselModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     ExploreRoutingModule,
+    CarouselModule.forRoot(),
   ],
   declarations: [
     ExploreComponent,

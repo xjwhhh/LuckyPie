@@ -6,7 +6,7 @@ import {
   FollowService
 } from './follow.service';
 import {
-  Share
+  Share, User
 } from 'app/entity/entity';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -22,6 +22,8 @@ export class FollowComponent implements OnInit {
 
   shares: Share[];
 
+  users: User[] = [];
+
   thumbUrl = [];
   thumb = [];
   userId: number = -1;
@@ -35,9 +37,9 @@ export class FollowComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
-      console.log(params);
+      // console.log(params);
     });
-    console.log(this.userId);
+    // console.log(this.userId);
     // this.test();
     this.getFollowShares(this.userId);
   }
@@ -52,19 +54,11 @@ export class FollowComponent implements OnInit {
   }
 
   setShares(shares: Share[]) {
-    // for (let i = 0; i < shares.length; i++) {
-    //   let share = shares[i];
-    //   for (let j = 0; j < share.imageUrls.length; j++) {
-    //     // let temp="http://localhost/LuckyPie-Server/photo/20171114/15106508520.jpeg";
-    //     let temp=share.imageUrls[j];
-    //     share.imageUrls[j] = this.sanitizer.bypassSecurityTrustResourceUrl(temp);
-    //   }
-    //   shares[i] = share;
-    // }
     this.shares = shares;
     for (let i = 0; i < shares.length; i++) {
       this.thumbUrl.push("assets/image/thumb2.png");
       this.thumb.push(false);
+      this.followService.getUserBasicInfo(this.shares[i].userId).then(user => this.users[i] = user);
     }
   }
 
@@ -84,6 +78,12 @@ export class FollowComponent implements OnInit {
 
   test(): void {
     this.shares = [new Share(), new Share()];
+  }
+
+  gotoHomePage(ownerId: number) {
+    console.log(ownerId);
+    this.router.navigate(['/identify/homePage', ownerId]);
+
   }
 
 

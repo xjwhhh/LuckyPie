@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {IdentifyService} from 'app/identify/identify.service';
-import {Share, User} from 'app/entity/entity';
+import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
 
 @Component({
   selector: 'user-photo',
@@ -18,8 +18,14 @@ export class UserPhotoComponent implements OnInit {
 
   user: User;
 
+  comments: Comment[];
+
+  commentUsers: User[] = [];
+
+  commentAreaStyle = [];
+
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -32,15 +38,68 @@ export class UserPhotoComponent implements OnInit {
     this.identifyService.getUserShares(userId).then(shares => this.shares = shares);
   }
 
-  onClickShare(shareid: number) {
+  onClickDating(shareId: number) {
     this.shares.forEach((share, i) => {
-      if (share.id == shareid) {
+      if (share.id == shareId) {
         this.selectedShare = share;
-        //todo 标签问题
-        console.log(this.selectedShare);
       }
     });
     this.setCurrentStyles();
+    this.getShareComment();
+  }
+
+  getShareComment() {
+    this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.comments = comments);
+  }
+
+  getCommentUser(comments: Comment[]) {
+    for (let i = 0; i < comments.length; i++) {
+      this.commentAreaStyle.push({
+        'display': 'none',
+        'width': '0',
+        'height': '0'
+      });
+    }
+    for (let i = 0; i < comments.length; i++) {
+      this.identifyService.getUserBasicInfo(comments[i].userId).then(user => this.commentUsers.push(user));
+    }
+    this.comments = comments;
+  }
+
+  replyShare(comment: string) {
+    this.identifyService.doComment(this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+  }
+
+  showCommentArea(i: number) {
+    // this.commentAreaStyle[i]={
+    //   'display':'block',
+    //   'width':'100%',
+    //   'height':'100px'
+    // };
+  }
+
+  replyComment() {
+
+  }
+
+  check(resultMessage: ResultMessage) {
+    if (resultMessage.result == "success") {
+      alert("评论成功");
+    } else {
+      alert("评论失败");
+    }
+  }
+
+  getoHomePage(ownerId) {
+    if (ownerId == this.userId) {
+      this.router.navigate(['/identify/info', ownerId]);
+    } else {
+      this.router.navigate(['/identify/homePage', ownerId]);
+    }
+  }
+
+  gotoTagDetail(tag: string): void {
+    this.router.navigate(['/explore/' + this.userId + '/tagdetail', tag]);
   }
 
   currentStyles = {

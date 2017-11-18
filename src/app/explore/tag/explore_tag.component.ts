@@ -3,9 +3,10 @@ import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
-  Share
+  Share,
+  Tags
 } from 'app/entity/entity';
-import {Router,ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'explore-tag',
@@ -20,34 +21,25 @@ export class ExploreTagComponent implements OnInit {
   selectedTag: string;
   selectedArea: string;
 
-  userId:number;
+  Tags: string[];
 
-  constructor(private exploreService: ExploreService, private router: Router,private route:ActivatedRoute) {
+  userId: number;
+
+  imageUrls: string[];
+
+  constructor(private exploreService: ExploreService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.userId=this.exploreService.getUserId();
-    this.getShares();
+    this.Tags = Tags;
+    this.userId = this.exploreService.getUserId();
+    this.exploreService.getAllTags().then(imageUrls => this.imageUrls = imageUrls);
   }
 
-
-  getShares(): void {
-    this.exploreService.getShares().then(shares => this.shares = shares);
+  gotoTagDetail(tag: string): void {
+    this.router.navigate(['/explore/' + this.userId + '/tagdetail', tag]);
+    console.log(tag);
+    console.log("4567uio");
   }
 
-  selectTag(): void {
-    //此处应有参数——选择的标签名
-    this.selectedTag = "生活";
-    this.exploreService.setSelectedTag(this.selectedTag);
-    this.gotoTagDetail();
-  }
-
-  gotoTagDetail(): void {
-    this.router.navigate(['/explore/'+this.userId+'/tagdetail', this.selectedTag]);
-  }
-
-  showAllTags(): void {
-    this.selectedArea = "Style";
-    this.router.navigate(['/explore/'+this.userId+'/showalltags', this.selectedArea]);
-  }
 }

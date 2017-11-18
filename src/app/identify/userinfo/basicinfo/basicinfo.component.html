@@ -1,42 +1,42 @@
 <div class="col-md-3"></div>
-<div class="col-md-6">
+<div class="col-md-4">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <label>姓名</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <label>{{user.name}}</label>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <label>个人介绍</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <label>{{user.introduction}}</label>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <label>性别</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <label>{{user.gender}}</label>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <label>身份</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <label>{{user.identity}}</label>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <label>电话号码</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <label>{{user.telephone}}</label>
     </div>
   </div>
@@ -51,10 +51,17 @@
 </div>
 <div class="col-md-1">
   <div class="row">
-    <label (click)="gotoEditInfo()">此处应有编辑按钮</label>
+    <!-- <label (click)="gotoEditInfo()">此处应有编辑按钮</label> -->
+    <!-- <button type="button"></button> -->
+    <img src="assets/image/editBasicInfo.png" width="30px" height="30px" (click)="gotoEditInfo()">
   </div>
 
   <div class="row">
-    <label (click)="exit()">退出按钮</label>
+    <P style="height: 20px"></P>
+  </div>
+
+  <div class="row">
+    <!-- <label (click)="exit()">退出按钮</label> -->
+    <img src="assets/image/exit.png" width="30px" height="30px" (click)="exit()">
   </div>
 </div>
