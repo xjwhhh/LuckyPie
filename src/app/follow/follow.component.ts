@@ -6,7 +6,8 @@ import {
   FollowService
 } from './follow.service';
 import {
-  Share, User
+  Share,
+  User
 } from 'app/entity/entity';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -55,9 +56,15 @@ export class FollowComponent implements OnInit {
 
   setShares(shares: Share[]) {
     this.shares = shares;
+    // console.log(shares);
     for (let i = 0; i < shares.length; i++) {
-      this.thumbUrl.push("assets/image/thumb2.png");
-      this.thumb.push(false);
+      if (shares[i].thumb == 1) {
+        this.thumbUrl.push("assets/image/thumb1.png");
+        this.thumb.push(true);
+      } else {
+        this.thumbUrl.push("assets/image/thumb2.png");
+        this.thumb.push(false);
+      }
       this.followService.getUserBasicInfo(this.shares[i].userId).then(user => this.users[i] = user);
     }
   }

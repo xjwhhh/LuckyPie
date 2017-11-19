@@ -38,7 +38,7 @@ export class UserPhotoComponent implements OnInit {
     this.identifyService.getUserShares(userId).then(shares => this.shares = shares);
   }
 
-  onClickDating(shareId: number) {
+  onClickShare(shareId: number) {
     this.shares.forEach((share, i) => {
       if (share.id == shareId) {
         this.selectedShare = share;
@@ -49,7 +49,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   getShareComment() {
-    this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.comments = comments);
+    this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
   }
 
   getCommentUser(comments: Comment[]) {
@@ -71,16 +71,26 @@ export class UserPhotoComponent implements OnInit {
   }
 
   showCommentArea(i: number) {
-    // this.commentAreaStyle[i]={
-    //   'display':'block',
-    //   'width':'100%',
-    //   'height':'100px'
-    // };
+    this.commentAreaStyle[i] = {
+      'display': 'block',
+      'width': '100%',
+      'height': '100%'
+    };
   }
 
-  replyComment() {
-
+  replyComment(commentId: number, content: number) {
+    console.log(commentId);
+    console.log(content);
   }
+
+  cancelComment(i: number) {
+    this.commentAreaStyle[i] = {
+      'display': 'none',
+      'width': '100%',
+      'height': '100%'
+    };
+  }
+
 
   check(resultMessage: ResultMessage) {
     if (resultMessage.result == "success") {

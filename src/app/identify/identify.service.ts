@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class IdentifyService {
   user: User = new User();
-  userId: number = 3;
+  userId: number = 2;
 
   ownerId: number;
 

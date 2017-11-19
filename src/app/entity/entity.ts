@@ -34,6 +34,7 @@ export class Share {
   postTime: string;
   postAddress: string;
   forwardShareId: string;
+  thumb: number;
 }
 
 //约拍
