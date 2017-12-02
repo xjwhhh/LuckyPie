@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class IdentifyService {
   user: User = new User();
-  userId: number = 2;
+  userId: number = 3;
 
   ownerId: number;
 
@@ -151,7 +151,7 @@ export class IdentifyService {
 
   private doShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/doComment';
 
-  doComment(userId: number, shareId: number, comment: string): Promise<ResultMessage> {
+  doShareComment(userId: number, shareId: number, comment: string): Promise<ResultMessage> {
     console.log(userId);
     console.log(shareId);
     console.log(comment);
@@ -160,6 +160,18 @@ export class IdentifyService {
     data.append("replyShareId", shareId + "");
     data.append("replyCommentId", "");
     data.append("content", comment);
+    return this.http.post(this.doShareCommentUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
+  replyComment(userId: number, shareId: number, commentId: number, content: string): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("userId", userId + "");
+    data.append("replyShareId", shareId + "");
+    data.append("replyCommentId", commentId + "");
+    data.append("content", content);
     return this.http.post(this.doShareCommentUrl, data, this.options)
       .toPromise()
       .then(response => response.json() as ResultMessage)

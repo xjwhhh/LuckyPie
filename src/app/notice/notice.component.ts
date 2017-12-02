@@ -26,6 +26,7 @@ export class NoticeComponent {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
     });
+    this.noticeService.setUserId(this.userId);
     console.log(this.userId);
   }
 

@@ -102,6 +102,15 @@ export class Comment {
 
 }
 
+export class Notice {
+  id: number;
+  startUserId: number;
+  userId: number;
+  type: string;
+  postId: number;
+  content: string;
+}
+
 export class ResultMessage {
   result: string;
 }

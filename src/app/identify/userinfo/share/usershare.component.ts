@@ -22,6 +22,8 @@ export class UserPhotoComponent implements OnInit {
 
   commentUsers: User[] = [];
 
+  replyedCommentUsers: User[] = [];
+
   commentAreaStyle = [];
 
   constructor(private identifyService: IdentifyService,
@@ -62,12 +64,21 @@ export class UserPhotoComponent implements OnInit {
     }
     for (let i = 0; i < comments.length; i++) {
       this.identifyService.getUserBasicInfo(comments[i].userId).then(user => this.commentUsers.push(user));
+      if (comments[i].replyCommentId != null) {
+        for (let j = 0; j < i; j++) {
+          if (comments[j].id == comments[i].replyCommentId) {
+            this.identifyService.getUserBasicInfo(comments[j].userId).then(user => this.replyedCommentUsers[i] = user);
+          }
+        }
+      } else {
+        this.replyedCommentUsers[i] = new User();
+      }
     }
     this.comments = comments;
   }
 
   replyShare(comment: string) {
-    this.identifyService.doComment(this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+    this.identifyService.doShareComment(this.userId, this.selectedShare.id, comment).then(result => this.check(result));
   }
 
   showCommentArea(i: number) {
@@ -78,9 +89,14 @@ export class UserPhotoComponent implements OnInit {
     };
   }
 
-  replyComment(commentId: number, content: number) {
-    console.log(commentId);
-    console.log(content);
+  replyComment(commentId: number, content: string, i: number) {
+    this.identifyService.replyComment(this.userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
+    this.commentAreaStyle[i] = {
+      'display': 'none',
+      'width': '100%',
+      'height': '100%'
+    };
   }
 
   cancelComment(i: number) {
@@ -95,6 +111,7 @@ export class UserPhotoComponent implements OnInit {
   check(resultMessage: ResultMessage) {
     if (resultMessage.result == "success") {
       alert("评论成功");
+      this.getShareComment();
     } else {
       alert("评论失败");
     }

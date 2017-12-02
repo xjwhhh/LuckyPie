@@ -8,7 +8,7 @@ import {NoticeCommentComponent} from './comment/comment.component';
 
 const NoticeRoutes: Routes = [
   {
-    path: 'notice',
+    path: 'notice/:id',
     component: NoticeComponent,
     children: [
       {

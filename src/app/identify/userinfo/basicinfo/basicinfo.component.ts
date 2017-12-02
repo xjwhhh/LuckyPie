@@ -17,16 +17,6 @@ export class UserBasicInfoComponent implements OnInit {
   constructor(private router: Router, private identifyService: IdentifyService) {
   }
 
-  // createForm() {
-  //   this.basicInfoForm = new FormGroup({
-  //     name: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-  //     gender: new FormControl(Validators.required),
-  //     identify: new FormControl(Validators.required),
-  //     tel: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-  //     email: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-  //   });
-  // }
-
   ngOnInit(): void {
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
@@ -38,6 +28,6 @@ export class UserBasicInfoComponent implements OnInit {
 
   exit() {
     this.identifyService.setUserId(-1);
-    this.router.navigate(['/identify/login']);
+    this.router.navigate(['/identify/login'], {queryParams: {id: 1}});
   }
 }

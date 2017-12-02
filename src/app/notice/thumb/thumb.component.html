@@ -24,6 +24,10 @@
           </div>
         </div>
       </div>
+      <div class="row" *ngFor="let notice of noticeArray;let i=index">
+        <div>{{notice.id}}</div>
+        <div *ngIf="startUserArray[i]">修改华润集团{{startUserArray[i].id}}</div>
+      </div>
     </div>
   </div>
 </div>

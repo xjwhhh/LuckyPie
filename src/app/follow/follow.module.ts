@@ -3,9 +3,13 @@ import {CommonModule} from '@angular/common';
 
 import {FollowComponent} from './follow.component';
 import {FollowService} from './follow.service';
+import {CarouselModule} from 'ngx-bootstrap';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    CarouselModule.forRoot(),
+  ],
   declarations: [FollowComponent],
   bootstrap: [FollowComponent],
   providers: [FollowService]

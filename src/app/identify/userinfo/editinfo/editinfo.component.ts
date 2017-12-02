@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IdentifyService} from 'app/identify/identify.service';
 import {User} from 'app/entity/entity';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
 
 @Component({
   selector: 'user-editinfo',
@@ -20,10 +20,16 @@ export class UserEditInfoComponent implements OnInit {
 
   editInfoForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private identifyService: IdentifyService) {
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private identifyService: IdentifyService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      console.log(params);
+    });
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.userBasicInfo = user);
     this.createForm();
