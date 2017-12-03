@@ -5,8 +5,8 @@ import {
 import {
   NoticeService
 } from 'app/notice/notice.service';
-import { Notice, User } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {Notice, User} from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -34,18 +34,16 @@ export class NoticeCommentComponent implements OnInit {
     console.log(this.userId);
     this.getNewNoticeArray();
     this.getOldNoticeArray();
-    // this.noticeService.getNewCommentNotice(this.userId).then(noticeArray => this.setNewNotice(noticeArray));
-    // this.noticeService.getOldCommentNotice(this.userId).then(noticeArray => this.setOldNotice(noticeArray));
   }
 
 
   getNewNoticeArray() {
-    this.noticeService.getNewThumbNotice(this.userId).then(noticeArray => this.setNewNotice(noticeArray));
+    this.noticeService.getNewCommentNotice(this.userId).then(noticeArray => this.setNewNotice(noticeArray));
 
   }
 
   getOldNoticeArray() {
-    this.noticeService.getOldThumbNotice(this.userId).then(noticeArray => this.setOldNotice(noticeArray));
+    this.noticeService.getOldCommentNotice(this.userId).then(noticeArray => this.setOldNotice(noticeArray));
 
   }
 
@@ -58,7 +56,9 @@ export class NoticeCommentComponent implements OnInit {
       let type = noticeArray[i].type;
       if (type == "分享评论") {
         this.noticeService.getShareByShareId(noticeArray[i].postId).then(share => this.newPostArray.push(share));
-      } else if (type == "相册评论") {}
+      } else if (type == "相册评论") {
+        this.noticeService.getAlbumByAlbumId(noticeArray[i].postId).then(album => this.newPostArray.push(album));
+      }
     }
   }
 
@@ -71,7 +71,8 @@ export class NoticeCommentComponent implements OnInit {
       let type = noticeArray[i].type;
       if (type == "分享点赞") {
         this.noticeService.getShareByShareId(noticeArray[i].postId).then(share => this.oldPostArray.push(share));
-      } else if (type == "相册点赞") {}
+      } else if (type == "相册点赞") {
+      }
     }
   }
 

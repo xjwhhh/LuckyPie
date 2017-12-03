@@ -1,4 +1,4 @@
-import {Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {IdentifyService} from 'app/identify/identify.service';
 import {User} from 'app/entity/entity';
 import {Router} from '@angular/router';

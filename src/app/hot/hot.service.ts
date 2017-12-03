@@ -15,12 +15,11 @@ export class HotService {
 
   private getHotSharesUrl = 'http://localhost/LuckyPie-Server/api/get/hotshare';
 
-  getHotShares(userId: number) {
+  getHotShares(): Promise<Share[]> {
     let data = new URLSearchParams();
-    data.append("userId", userId + "");
-    this.http.post(this.getHotSharesUrl, data, this.options)
+    return this.http.post(this.getHotSharesUrl, data, this.options)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as Share[])
       .catch(this.handleError);
   }
 

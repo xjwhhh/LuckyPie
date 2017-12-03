@@ -1,14 +1,8 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  HotService
-} from './hot.service';
-import {
-  Share
-} from 'app/entity/entity';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {HotService} from './hot.service';
+import {UtilService} from 'app/util.service';
+import {Share, User, Comment, ResultMessage} from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -19,11 +13,28 @@ import {ActivatedRoute, ParamMap, Params} from '@angular/router';
 export class HotComponent implements OnInit {
   shares: Share[];
 
-  thumbUrl = "assets/image/thumb2.png";
-  thumb = false;
-  userId: number;
+  users: User[] = [];
 
-  constructor(private route: ActivatedRoute, private hotService: HotService) {
+  thumbUrl = [];
+  thumb = [];
+  userId: number = -1;
+
+  selectedShare: Share = new Share();
+
+  selectedUser: User = new User();
+
+  user: User;
+
+  comments: Comment[];
+
+  commentUsers: User[] = [];
+
+  replyedCommentUsers: User[] = [];
+
+  commentAreaStyle = [];
+
+
+  constructor(private route: ActivatedRoute, private hotService: HotService, private router: Router, private utilService: UtilService) {
 
   }
 
@@ -32,25 +43,169 @@ export class HotComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
     });
-    // this.getShares();
+    this.getHotShares();
   }
+
 
   ngAfterViewInit(): void {
-    // console.log(this.posts[0].id);
 
   }
 
-  getHotShares(userId: number): void {
-    this.hotService.getHotShares(userId);
+  getHotShares(): void {
+    this.hotService.getHotShares().then(shares => this.setShares(shares));
   }
 
-  doThumb(): void {
-    if (this.thumb) {
-      this.thumbUrl = "assets/image/thumb2.png";
-    } else {
-      this.thumbUrl = "assets/image/thumb1.png";
+  setShares(shares: Share[]) {
+    this.shares = shares;
+    for (let i = 0; i < shares.length; i++) {
+      if (shares[i].thumb == 1) {
+        this.thumbUrl.push("assets/image/thumb1.png");
+        this.thumb.push(true);
+      } else {
+        this.thumbUrl.push("assets/image/thumb2.png");
+        this.thumb.push(false);
+      }
+      this.utilService.getUserBasicInfo(this.shares[i].userId).then(user => this.users[i] = user);
     }
-    this.thumb = !this.thumb;
+  }
+
+  doThumb(i: number, userId: number, shareId: number): void {
+    if (this.thumb[i]) {
+      this.thumbUrl[i] = "assets/image/thumb2.png";
+      this.utilService.cancelThumb(this.userId, userId, shareId);
+    } else {
+      this.thumbUrl[i] = "assets/image/thumb1.png";
+      this.utilService.doThumb(this.userId, userId, shareId);
+    }
+    this.thumb[i] = !this.thumb[i];
 
   }
+
+  onClickShare(shareId: number) {
+    this.shares.forEach((share, i) => {
+      if (share.id == shareId) {
+        this.selectedShare = share;
+      }
+    });
+    this.utilService.getUserBasicInfo(this.selectedShare.userId).then(user => this.selectedUser = user);
+    this.setCurrentStyles();
+    this.getShareComment();
+  }
+
+  getShareComment() {
+    this.utilService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
+  }
+
+  getCommentUser(comments: Comment[]) {
+    for (let i = 0; i < comments.length; i++) {
+      this.commentAreaStyle.push({
+        'display': 'none',
+        'width': '0',
+        'height': '0'
+      });
+    }
+    for (let i = 0; i < comments.length; i++) {
+      this.utilService.getUserBasicInfo(comments[i].userId).then(user => this.commentUsers.push(user));
+      if (comments[i].replyCommentId != null) {
+        for (let j = 0; j < i; j++) {
+          if (comments[j].id == comments[i].replyCommentId) {
+            this.utilService.getUserBasicInfo(comments[j].userId).then(user => this.replyedCommentUsers[i] = user);
+          }
+        }
+      } else {
+        this.replyedCommentUsers[i] = new User();
+      }
+    }
+    this.comments = comments;
+  }
+
+  replyShare(comment: string) {
+    this.utilService.doShareComment(this.userId, this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+  }
+
+  showCommentArea(i: number) {
+    this.commentAreaStyle[i] = {
+      'display': 'block',
+      'width': '100%',
+      'height': '100%'
+    };
+  }
+
+  replyComment(userId: number, commentId: number, content: string, i: number) {
+    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
+    this.commentAreaStyle[i] = {
+      'display': 'none',
+      'width': '100%',
+      'height': '100%'
+    };
+  }
+
+  cancelComment(i: number) {
+    this.commentAreaStyle[i] = {
+      'display': 'none',
+      'width': '100%',
+      'height': '100%'
+    };
+  }
+
+
+  check(resultMessage: ResultMessage) {
+    if (resultMessage.result == "success") {
+      alert("评论成功");
+      this.getShareComment();
+    } else {
+      alert("评论失败");
+    }
+  }
+
+  gotoHomePage(ownerId: number) {
+    console.log(ownerId);
+    this.router.navigate(['/identify/homePage', ownerId]);
+  }
+
+  currentStyles = {
+    'width': '0',
+    'height': '0',
+    'opacity': '1',
+    'background-color': '#000',
+    'position': 'fixed',
+    'top': '0',
+    'left': '0',
+    'z-index': '-1',
+    'display': 'none'
+  };
+
+  setCurrentStyles() {
+    this.currentStyles = {
+      'width': '100%',
+      'height': '100%',
+      'opacity': '1',
+      'background-color': '#000',
+      'position': 'fixed',
+      'top': '0',
+      'left': '0',
+      'z-index': '1000',
+      'display': 'block'
+    };
+    console.log("success");
+  }
+
+  closeBigPicture() {
+    this.currentStyles = {
+      'width': '0',
+      'height': '0',
+      'opacity': '1',
+      'background-color': '#000',
+      'position': 'fixed',
+      'top': '0',
+      'left': '0',
+      'z-index': '-1',
+      'display': 'none'
+    };
+  }
+
+  fixheight = window.outerHeight;
+
+
 }

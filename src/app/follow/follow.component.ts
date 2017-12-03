@@ -12,7 +12,7 @@ import {
   Comment
 } from 'app/entity/entity';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'follow',
@@ -33,6 +33,8 @@ export class FollowComponent implements OnInit {
 
   selectedShare: Share = new Share();
 
+  selectedUser: User = new User();
+
   user: User;
 
   comments: Comment[];
@@ -44,7 +46,10 @@ export class FollowComponent implements OnInit {
   commentAreaStyle = [];
 
 
-  constructor(private route: ActivatedRoute, private followService: FollowService, private router: Router, private sanitizer: DomSanitizer) {
+  constructor(private route: ActivatedRoute,
+              private followService: FollowService,
+              private router: Router,
+              private utilService: UtilService) {
 
   }
 
@@ -75,17 +80,17 @@ export class FollowComponent implements OnInit {
         this.thumbUrl.push("assets/image/thumb2.png");
         this.thumb.push(false);
       }
-      this.followService.getUserBasicInfo(this.shares[i].userId).then(user => this.users[i] = user);
+      this.utilService.getUserBasicInfo(this.shares[i].userId).then(user => this.users[i] = user);
     }
   }
 
   doThumb(i: number, userId: number, shareId: number): void {
     if (this.thumb[i]) {
       this.thumbUrl[i] = "assets/image/thumb2.png";
-      this.followService.cancelThumb(this.userId, userId, shareId);
+      this.utilService.cancelThumb(this.userId, userId, shareId);
     } else {
       this.thumbUrl[i] = "assets/image/thumb1.png";
-      this.followService.doThumb(this.userId, userId, shareId);
+      this.utilService.doThumb(this.userId, userId, shareId);
     }
     this.thumb[i] = !this.thumb[i];
 
@@ -97,12 +102,13 @@ export class FollowComponent implements OnInit {
         this.selectedShare = share;
       }
     });
+    this.utilService.getUserBasicInfo(this.selectedShare.userId).then(user => this.selectedUser = user);
     this.setCurrentStyles();
     this.getShareComment();
   }
 
   getShareComment() {
-    this.followService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
+    this.utilService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
   }
 
   getCommentUser(comments: Comment[]) {
@@ -114,11 +120,11 @@ export class FollowComponent implements OnInit {
       });
     }
     for (let i = 0; i < comments.length; i++) {
-      this.followService.getUserBasicInfo(comments[i].userId).then(user => this.commentUsers.push(user));
+      this.utilService.getUserBasicInfo(comments[i].userId).then(user => this.commentUsers.push(user));
       if (comments[i].replyCommentId != null) {
         for (let j = 0; j < i; j++) {
           if (comments[j].id == comments[i].replyCommentId) {
-            this.followService.getUserBasicInfo(comments[j].userId).then(user => this.replyedCommentUsers[i] = user);
+            this.utilService.getUserBasicInfo(comments[j].userId).then(user => this.replyedCommentUsers[i] = user);
           }
         }
       } else {
@@ -128,8 +134,8 @@ export class FollowComponent implements OnInit {
     this.comments = comments;
   }
 
-  replyShare(comment: string) {
-    this.followService.doShareComment(this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+  replyShare(userId: number, comment: string) {
+    this.utilService.doShareComment(this.userId, userId, this.selectedShare.id, comment).then(result => this.check(result));
   }
 
   showCommentArea(i: number) {
@@ -140,8 +146,8 @@ export class FollowComponent implements OnInit {
     };
   }
 
-  replyComment(commentId: number, content: string, i: number) {
-    this.followService.replyComment(this.userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+  replyComment(userId: number, commentId: number, content: string, i: number) {
+    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
     ;
     this.commentAreaStyle[i] = {
       'display': 'none',

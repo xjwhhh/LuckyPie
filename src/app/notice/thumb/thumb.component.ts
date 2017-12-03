@@ -5,8 +5,8 @@ import {
 import {
   NoticeService
 } from 'app/notice/notice.service';
-import { Notice, User, ResultMessage } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {Notice, User, ResultMessage} from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({
@@ -56,7 +56,8 @@ export class NoticeThumbComponent implements OnInit {
       let type = noticeArray[i].type;
       if (type == "分享点赞") {
         this.noticeService.getShareByShareId(noticeArray[i].postId).then(share => this.newPostArray.push(share));
-      } else if (type == "相册点赞") {}
+      } else if (type == "相册点赞") {
+      }
     }
   }
 
@@ -69,7 +70,8 @@ export class NoticeThumbComponent implements OnInit {
       let type = noticeArray[i].type;
       if (type == "分享点赞") {
         this.noticeService.getShareByShareId(noticeArray[i].postId).then(share => this.oldPostArray.push(share));
-      } else if (type == "相册点赞") {}
+      } else if (type == "相册点赞") {
+      }
     }
   }
 
@@ -84,11 +86,11 @@ export class NoticeThumbComponent implements OnInit {
 
   refresh(result: ResultMessage) {
     if (result.result == "success") {
+      console.log("34");
       this.getNewNoticeArray();
       this.getOldNoticeArray();
     }
   }
-
 
 
   gotoStartUser(userId: number) {

@@ -42,7 +42,7 @@ const routes: Routes = [{
     }
   },
   {
-    path: 'hot/"id',
+    path: 'hot/:id',
     component: HotComponent,
   },
   {

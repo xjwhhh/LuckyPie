@@ -17,7 +17,9 @@
       </div>
       <div class="row" *ngFor="let notice of newNoticeArray;let i=index">
         <div *ngIf="newPostArray[i]">
-          <div *ngIf="newStartUserArray[i]" (click)="gotoStartUser(newStartUserArray[i].id)">{{newStartUserArray[i].name}}评论了你:{{notice.content}}</div>
+          <div *ngIf="newStartUserArray[i]" (click)="gotoStartUser(newStartUserArray[i].id)">
+            {{newStartUserArray[i].name}}评论了你:{{notice.content}}
+          </div>
           <div class="col-md-2">
             <img [src]="newPostArray[i].imageUrls[0]" width="100%" height="100%">
           </div>
@@ -27,7 +29,9 @@
         </div>
         <div class="row" *ngFor="let notice of oldNoticeArray;let i=index">
           <div *ngIf="oldPostArray[i]">
-            <div *ngIf="oldStartUserArray[i]" (click)="gotoStartUser(oldStartUserArray[i].id)">{{oldStartUserArray[i].name}} 点赞了你</div>
+            <div *ngIf="oldStartUserArray[i]" (click)="gotoStartUser(oldStartUserArray[i].id)">
+              {{oldStartUserArray[i].name}} 点赞了你
+            </div>
             <div class="col-md-2">
               <img [src]="oldPostArray[i].imageUrls[0]" width="100%" height="100%">
             </div>

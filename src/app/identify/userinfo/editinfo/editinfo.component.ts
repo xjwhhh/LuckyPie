@@ -31,7 +31,7 @@ export class UserEditInfoComponent implements OnInit {
       console.log(params);
     });
     this.userId = this.identifyService.getUserId();
-    this.identifyService.getUserBasicInfo(this.userId).then(user =>this.createForm(user));
+    this.identifyService.getUserBasicInfo(this.userId).then(user => this.createForm(user));
     // this.createForm();
     this.getGenders();
     this.getIdentities();
@@ -45,8 +45,8 @@ export class UserEditInfoComponent implements OnInit {
     this.identifyService.getGenders().then(genders => this.genders = genders);
   }
 
-  createForm(user:User) {
-    this.user=user;
+  createForm(user: User) {
+    this.user = user;
     console.log(user);
     this.editInfoForm = new FormGroup({
       name: new FormControl(this.user.name, Validators.required),

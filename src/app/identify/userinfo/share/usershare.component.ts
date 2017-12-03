@@ -78,7 +78,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   replyShare(comment: string) {
-    this.identifyService.doShareComment(this.userId,this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+    this.identifyService.doShareComment(this.userId, this.userId, this.selectedShare.id, comment).then(result => this.check(result));
   }
 
   showCommentArea(i: number) {
@@ -89,8 +89,8 @@ export class UserPhotoComponent implements OnInit {
     };
   }
 
-  replyComment(userId:number,commentId: number, content: string, i: number) {
-    this.identifyService.replyComment(this.userId,userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+  replyComment(userId: number, commentId: number, content: string, i: number) {
+    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
     ;
     this.commentAreaStyle[i] = {
       'display': 'none',

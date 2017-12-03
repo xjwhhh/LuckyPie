@@ -196,6 +196,7 @@ export class PostDateComponent implements OnInit {
         'background-color': 'red'
       };
     }
+    // console.log(this.selectedTags);
   }
 
   deleteImage(imageUrl: string) {
@@ -232,6 +233,7 @@ export class PostDateComponent implements OnInit {
       this.dating.imageUrls = this.imageUrls;
       let now = new Date();
       let postTime = this.postService.dateFormat("yyyy-MM-dd hh:mm:ss", now);
+      console.log(photoTime);
       this.dating.postTime = postTime;
       this.dating.postAddress = '中国';
       this.dating.tags = this.selectedTags;

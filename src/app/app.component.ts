@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { IdentifyService } from 'app/identify/identify.service';
-import { NoticeService } from 'app/notice/notice.service';
-import { Router } from '@angular/router';
-import { Notice, User } from 'app/entity/entity';
+import {Component, OnInit} from '@angular/core';
+import {IdentifyService} from 'app/identify/identify.service';
+import {NoticeService} from 'app/notice/notice.service';
+import {Router} from '@angular/router';
+import {Notice, User} from 'app/entity/entity';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ import { Notice, User } from 'app/entity/entity';
 export class AppComponent implements OnInit {
   name = 'Angular';
 
-  userId: number = 1;
+  userId: number = -1;
 
   thumbNumber: number;
 
@@ -27,15 +27,13 @@ export class AppComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
 
 
-
   }
 
   getNotice(noticeArray: Notice[]) {
+    this.userId = this.identifyService.getUserId();
+    console.log(this.userId);
     this.noticeService.getNewThumbNotice(this.userId).then(noticeArray => this.thumbNumber = noticeArray.length);
     this.noticeService.getNewCommentNotice(this.userId).then(noticeArray => this.commentNumber = noticeArray.length);
-
-    // console.log(noticeArray);
-
   }
 
   gotoFollow() {
@@ -98,10 +96,4 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/identify/info', this.userId]);
     }
   }
-
-  // onLogin(w:boolean){
-  //     console.log(w);
-  // }
-
-
 }

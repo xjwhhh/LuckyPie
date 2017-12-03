@@ -6,10 +6,12 @@ import {Dating, User} from 'app/entity/entity';
 @Component({
   selector: 'user-activity',
   templateUrl: './userdate.component.html',
-  // styleUrls: ['./identify.component.css'],
+  styleUrls: ['./userdate.component.css'],
 })
 export class UserActivityComponent implements OnInit {
   userId: number;
+
+  user: User;
 
   datings: Dating[];
 
@@ -21,22 +23,24 @@ export class UserActivityComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
+    this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
     console.log(this.userId);
     this.getUserDating(this.userId);
+
   }
 
   getUserDating(userId: number) {
     this.identifyService.getUserDating(userId).then(datings => this.datings = datings);
   }
 
-  onClickShare(datingId: number) {
+  onClickDating(datingId: number) {
     this.datings.forEach((dating, i) => {
       if (dating.id == datingId) {
         this.selectedDating = dating;
       }
     });
+    console.log(this.selectedDating);
     this.setCurrentStyles();
-    // this.getShareComment();
   }
 
   gotoTagDetail(tag: string): void {
@@ -87,5 +91,6 @@ export class UserActivityComponent implements OnInit {
   }
 
   fixheight = window.outerHeight;
+
 
 }

@@ -205,10 +205,10 @@ export class PostAlbumComponent implements OnInit {
   check(album: Album) {
     console.log(album);
     if (album.id != null) {
-      alert("发布分享成功");
+      alert("发布相册成功");
       this.router.navigate(['/follow', album.userId]);
     } else {
-      alert("发布分享失败");
+      alert("发布相册失败");
     }
   }
 

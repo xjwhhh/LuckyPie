@@ -29,9 +29,14 @@ const IdentifyRoutes: Routes = [{
       path: 'info/:id',
       component: UserInfoComponent,
       children: [{
-        path: 'dating',
-        component: UserActivityComponent,
+        path: '',
+        redirectTo: 'dating',
+        pathMatch: 'full'
       },
+        {
+          path: 'dating',
+          component: UserActivityComponent,
+        },
         {
           path: 'share',
           component: UserPhotoComponent,
@@ -58,9 +63,14 @@ const IdentifyRoutes: Routes = [{
       path: 'homePage/:id',
       component: UserHomePageComponent,
       children: [{
-        path: 'dating',
-        component: ShowActivityComponent,
+        path: '',
+        redirectTo: 'dating',
+        pathMatch: 'full'
       },
+        {
+          path: 'dating',
+          component: ShowActivityComponent,
+        },
         {
           path: 'share',
           component: ShowPhotoComponent,
