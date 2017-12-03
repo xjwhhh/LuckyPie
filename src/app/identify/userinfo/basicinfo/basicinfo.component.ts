@@ -23,11 +23,11 @@ export class UserBasicInfoComponent implements OnInit {
   }
 
   gotoEditInfo() {
-    this.router.navigate(['/identify/info/' + this.userId + '/editinfo']);
+    this.router.navigate(['/identify/info/' + this.userId + '/editinfo'],{ queryParams: { name:this.user.name } });
   }
 
   exit() {
     this.identifyService.setUserId(-1);
-    this.router.navigate(['/identify/login'], {queryParams: {id: 1}});
+    this.router.navigate(['/identify/login']);
   }
 }

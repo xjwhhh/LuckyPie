@@ -24,8 +24,7 @@
         </div>
         <div class="col-md-2">
           <div class="btn-group" dropdown>
-            <img dropdownToggle class="btn dropdown-toggle" (click)="gotoFollow()"
-                 src="assets/image/follow.png">
+            <img dropdownToggle class="btn dropdown-toggle" (click)="gotoFollow()" src="assets/image/follow.png">
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li role="menuitem"><a class="dropdown-item" href="#">分组1</a></li>
               <li role="menuitem"><a class="dropdown-item" href="#">分组2</a></li>
@@ -39,8 +38,18 @@
         <div class="col-md-2">
           <img (click)="gotoHot()" src="assets/image/hot.png">
         </div>
-        <div class="col-md-2">
+        <!--         <div class="col-md-2">
           <img (click)="gotoNotice()" src="assets/image/notice.png">
+        </div> -->
+        <div class="col-md-2">
+          <div class="btn-group" dropdown>
+            <img dropdownToggle class="btn dropdown-toggle" src="assets/image/notice.png" (click)="getNotice()">
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}">{{thumbNumber}}个新点赞</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}/comment">{{commentNumber}}个新评论</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}/">分组3</a></li>
+            </ul>
+          </div>
         </div>
         <div class="col-md-2">
           <img (click)="gotoUserInfo()" src="assets/image/user.png">
@@ -49,7 +58,6 @@
     </div>
   </div>
 </div>
-
 <!-- <video width="300" height="300">
   <source src="C:\Users\xjwhh\Desktop\紫荆\War.for.the.Planet.of.the.Apes.2017.BluRay.iPad.720p.AAC.x264-DreamPAD\11.mp4" type="video/mp4">
 </video> -->

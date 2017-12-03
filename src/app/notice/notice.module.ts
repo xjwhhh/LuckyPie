@@ -10,11 +10,13 @@ import {NoticeRoutingModule} from './notice-routing.module';
 import {
   NoticeService
 } from './notice.service';
+import {BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
-    NoticeRoutingModule
+    NoticeRoutingModule,
+    BsDropdownModule.forRoot(),
   ],
   declarations: [
     NoticeComponent,

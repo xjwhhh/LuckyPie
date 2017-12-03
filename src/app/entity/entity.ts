@@ -6,7 +6,7 @@ export class User {
   name: string;
   head: string;
   authority: number;
-  intrduction: string;
+  introduction: string;
   identity: string;
   gender: string;
   telephone: string;

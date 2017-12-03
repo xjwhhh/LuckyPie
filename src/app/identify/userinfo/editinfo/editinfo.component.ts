@@ -16,7 +16,7 @@ export class UserEditInfoComponent implements OnInit {
 
   userId: number;
 
-  userBasicInfo: User;
+  user: User;
 
   editInfoForm: FormGroup;
 
@@ -31,8 +31,8 @@ export class UserEditInfoComponent implements OnInit {
       console.log(params);
     });
     this.userId = this.identifyService.getUserId();
-    this.identifyService.getUserBasicInfo(this.userId).then(user => this.userBasicInfo = user);
-    this.createForm();
+    this.identifyService.getUserBasicInfo(this.userId).then(user =>this.createForm(user));
+    // this.createForm();
     this.getGenders();
     this.getIdentities();
   }
@@ -45,14 +45,16 @@ export class UserEditInfoComponent implements OnInit {
     this.identifyService.getGenders().then(genders => this.genders = genders);
   }
 
-  createForm() {
+  createForm(user:User) {
+    this.user=user;
+    console.log(user);
     this.editInfoForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      introduction: new FormControl('', Validators.required),
+      name: new FormControl(this.user.name, Validators.required),
+      introduction: new FormControl(this.user.introduction, Validators.required),
       gender: new FormControl(Validators.required),
       identity: new FormControl(Validators.required),
-      tel: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      tel: new FormControl(this.user.telephone, Validators.required),
+      email: new FormControl(this.user.email, Validators.required),
     });
   }
 

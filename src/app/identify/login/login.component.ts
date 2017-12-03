@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef, OnInit} from '@angular/core';
+import {Component, OnInit,Input,Output,EventEmitter} from '@angular/core';
 import {IdentifyService} from 'app/identify/identify.service';
 import {User} from 'app/entity/entity';
 import {Router} from '@angular/router';
@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   // styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  // @Output() onLogin = new EventEmitter<boolean>();
   user: User = new User();
 
   constructor(private identifyService: IdentifyService, private router: Router) {
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.gotoUserInfo(user);
+      // this.onLogin.emit(true);
     }
   }
 

@@ -120,7 +120,7 @@
                 <div [ngStyle]="commentAreaStyle[i]">
                   <textarea class="commentArea" #childComment></textarea>
                   <p style="height: 2px"></p>
-                  <label (click)="replyComment(comment.id,childComment.value,i)">评论</label>
+                  <label (click)="replyComment(comment.userId,comment.id,childComment.value,i)">评论</label>
                   <label type="button" (click)="cancelComment(i)">取消</label>
                 </div>
               </div>
