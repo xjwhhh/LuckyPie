@@ -13,7 +13,7 @@ import {
 })
 export class ExploreModelComponent implements OnInit {
 
-  models: User[];
+  modelArray: User[];
   shares: Share[];//应该每个user都有对应的shares
   selectedShare: Share = new Share();
 
@@ -25,20 +25,34 @@ export class ExploreModelComponent implements OnInit {
   }
 
   selectHotModels() {
-    this.exploreService.getHotModel();
-    console.log("1");
+    this.exploreService.getHotModel().then(users=>this.setModels(users));
+    // console.log("1");
 
   }
 
   selectBestModels() {
     this.exploreService.getBestModel();
-    console.log("1");
+    // console.log("1");
 
   }
 
   selectNewModels() {
     this.exploreService.getNewModel();
-    console.log("1");
+    // console.log("1");
+
+  }
+
+  setModels(users:User[]){
+    this.modelArray = users;
+    for (let i = 0; i < this.modelArray.length; i++) {
+      console.log(this.modelArray[i].id);
+      this.exploreService.getUserShares(this.modelArray[i].id).then(shares => this.modelArray[i].shares = shares);
+    }
+
+
+  }
+
+  gotoModelInfo(userId:number){
 
   }
 

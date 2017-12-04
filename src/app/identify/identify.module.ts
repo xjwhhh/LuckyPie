@@ -20,6 +20,7 @@ import {ShowLikeComponent} from './userinfo/like/showlike.component';
 import {UserBasicInfoComponent} from './userinfo/basicinfo/basicinfo.component';
 import {ShowBasicInfoComponent} from './userinfo/basicinfo/showbasicinfo.component';
 import {UserEditInfoComponent} from './userinfo/editinfo/editinfo.component';
+import {ChatComponent} from './userinfo/chat/chat.component';
 import {CarouselModule} from 'ngx-bootstrap';
 import {FileUploadModule} from 'ng2-file-upload';
 
@@ -48,6 +49,7 @@ import {FileUploadModule} from 'ng2-file-upload';
     ShowLikeComponent,
     ShowPhotoComponent,
     ShowBasicInfoComponent,
+    ChatComponent,
   ],
   providers: [IdentifyService],
   bootstrap: [IdentifyComponent]

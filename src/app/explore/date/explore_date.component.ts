@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
   Share,
-  Dating
+  Dating,
+  User
 } from 'app/entity/entity';
-import {URLSearchParams} from '@angular/http';
+import { URLSearchParams } from '@angular/http';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { UtilService } from 'app/util.service';
 
 
 @Component({
@@ -30,9 +33,10 @@ export class ExploreDateComponent implements OnInit {
 
   userId: number;
 
+  users: User[] = [];
 
-  constructor(private exploreService: ExploreService) {
-  }
+
+  constructor(private exploreService: ExploreService, private utilService: UtilService,private router:Router) {}
 
 
   ngOnInit(): void {
@@ -42,7 +46,7 @@ export class ExploreDateComponent implements OnInit {
     this.getIdentities();
     this.getGenders();
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings => this.datings = datings);
+    this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   getAddresses(): void {
@@ -65,28 +69,28 @@ export class ExploreDateComponent implements OnInit {
     console.log(selectedAddress);
     this.selectedAddress = selectedAddress;
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings => this.datings = datings);
+    this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectCost(selectedCostType: string): void {
     console.log(selectedCostType);
     this.selectedCostType = selectedCostType;
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings => this.datings = datings);
+    this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectIdentity(selectedIdentity: string): void {
     console.log(selectedIdentity);
     this.selectedIdentity = selectedIdentity;
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings => this.datings = datings);
+    this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectGender(selectedGender: string): void {
     console.log(selectedGender);
     this.selectedGender = selectedGender;
     let data = this.createData();
-    this.exploreService.getDating(data).then(datings => this.datings = datings);
+    this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   createData() {
@@ -96,5 +100,20 @@ export class ExploreDateComponent implements OnInit {
     data.append("identity", this.selectedIdentity);
     data.append("gender", this.selectedGender);
     return data;
+  }
+
+  getDatingUser(datings: Dating[]) {
+    this.datings = datings;
+    console.log(datings);
+    for (let i = 0; i < datings.length; i++) {
+      let userId = datings[i].userId;
+      this.utilService.getUserBasicInfo(userId).then(user => this.users.push(user));
+    }
+  }
+
+
+  gotoHomePage(ownerId: number) {
+    console.log(ownerId);
+    this.router.navigate(['/identify/homePage', ownerId]);
   }
 }

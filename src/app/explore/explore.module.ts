@@ -13,6 +13,7 @@ import {ExploreTagDetailComponent} from './tagdetail/tag_detail.component';
 import {ExploreRoutingModule} from './explore-routing.module';
 import {ExploreShowAllTagsComponent} from './alltags/all_tags.component';
 import {CarouselModule} from 'ngx-bootstrap';
+import {UtilService} from 'app/util.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import {CarouselModule} from 'ngx-bootstrap';
     ExploreTagDetailComponent,
     ExploreShowAllTagsComponent,
   ],
-  providers: [ExploreService],
+  providers: [ExploreService,UtilService],
   bootstrap: [ExploreComponent]
 })
 export class ExploreModule {

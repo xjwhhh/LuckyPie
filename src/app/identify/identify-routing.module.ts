@@ -17,6 +17,7 @@ import {ShowActivityComponent} from './userinfo/date/showdate.component';
 import {ShowAlbumComponent} from './userinfo/album/showalbum.component';
 import {ShowLikeComponent} from './userinfo/like/showlike.component';
 import {ShowBasicInfoComponent} from './userinfo/basicinfo/showbasicinfo.component';
+import {ChatComponent} from './userinfo/chat/chat.component';
 
 const IdentifyRoutes: Routes = [{
   path: 'identify',

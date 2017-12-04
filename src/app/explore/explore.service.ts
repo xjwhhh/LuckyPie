@@ -122,10 +122,10 @@ export class ExploreService {
 
   private getHotModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/hot';
 
-  getHotModel() {
-    this.http.get(this.getHotModelUrl)
+  getHotModel():Promise<User[]> {
+    return this.http.get(this.getHotModelUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
 
   }
