@@ -17,12 +17,14 @@ import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 export class ExplorePhotographerComponent implements OnInit {
 
   photographers: User[];
-  shares: Share[]; //应该每个user都有对应的shares
+  // shares: Share[]; //应该每个user都有对应的sharess
   selectedShare: Share = new Share();
 
   userId: number;
 
   photographerArray: User[];
+
+  followLabelStyles=[];
 
   constructor(private exploreService: ExploreService) {
   }

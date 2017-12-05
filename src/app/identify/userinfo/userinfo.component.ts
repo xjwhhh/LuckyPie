@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Params} from '@angular/router';
-import {Location} from '@angular/common';
-import {IdentifyService} from 'app/identify/identify.service';
-import {User, ResultMessage} from 'app/entity/entity';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { IdentifyService } from 'app/identify/identify.service';
+import { User, ResultMessage } from 'app/entity/entity';
 import {
   FileUploader
 } from 'ng2-file-upload';
@@ -10,7 +9,7 @@ import {
 @Component({
   selector: 'userinfo',
   templateUrl: './userinfo.component.html',
-  // styleUrls: ['./login.component.css'],
+  styleUrls: ['./userinfo.component.css'],
 })
 export class UserInfoComponent implements OnInit {
 
@@ -18,7 +17,7 @@ export class UserInfoComponent implements OnInit {
 
   user: User = new User();
 
-  uploader: FileUploader = new FileUploader({url: '图片上传地址'});
+  uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
 
   userHead: string;
 
@@ -26,17 +25,22 @@ export class UserInfoComponent implements OnInit {
     'display': 'none'
   };
 
+  followIdArray: number[];
+  followerIdArray: number[];
+
+  followArray: User[] = [];
+
+  ifWantChange=false;
+
 
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute,
-              private location: Location) {
-  }
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.userId = +params['id'];
     });
-    // console.log(this.userId);
     this.getUserBasicInfo(this.userId);
   }
 
@@ -45,6 +49,9 @@ export class UserInfoComponent implements OnInit {
       this.user = user;
       this.userHead = this.user.head
     });
+    this.identifyService.getUserFollows(userId).then(userIdArray => this.followIdArray = userIdArray);
+    this.identifyService.getUserFollowers(userId).then(userIdArray => this.followerIdArray = userIdArray);
+
   }
 
   selectedFileOnChanged() {
@@ -52,7 +59,7 @@ export class UserInfoComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(this.uploader.queue[this.uploader.queue.length - 1].some);
     console.log(reader);
-    reader.onload = function () {
+    reader.onload = function() {
       $this.user.head = this.result;
     }
     this.buttonStyle = {
@@ -73,6 +80,7 @@ export class UserInfoComponent implements OnInit {
       };
       this.uploader.queue.splice(0, this.uploader.queue.length);
       console.log(this.uploader.queue);
+      this.ifWantChange=false;
     } else {
       this.user.head = this.userHead;
       alert("更新头像失败");
@@ -80,6 +88,7 @@ export class UserInfoComponent implements OnInit {
         'display': 'none'
       };
       this.uploader.queue.splice(0, this.uploader.queue.length);
+      this.ifWantChange=true;
     }
 
   }
@@ -90,6 +99,33 @@ export class UserInfoComponent implements OnInit {
       'display': 'none'
     };
     this.uploader.queue.splice(0, this.uploader.queue.length);
+    this.ifWantChange=false;
+  }
+
+  getFollowsInfo() {
+    this.followArray.splice(0, this.followArray.length);
+    for (let i = 0; i < this.followIdArray.length; i++) {
+      this.identifyService.getUserBasicInfo(this.followIdArray[i]).then(user => this.followArray.push(user));
+    }
+  }
+
+  getFollowersInfo() {
+    this.followArray.splice(0, this.followArray.length);
+    for (let i = 0; i < this.followerIdArray.length; i++) {
+      this.identifyService.getUserBasicInfo(this.followerIdArray[i]).then(user => this.followArray.push(user));
+    }
+  }
+
+  gotoHomePage(ownerId) {
+    if (ownerId == this.userId) {
+      this.router.navigate(['/identify/info', ownerId]);
+    } else {
+      this.router.navigate(['/identify/homePage', ownerId]);
+    }
+  }
+
+  wantChange(){
+    this.ifWantChange=true;
   }
 
 
