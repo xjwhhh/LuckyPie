@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { IdentifyService } from 'app/identify/identify.service';
-import { Share, User, ResultMessage, Comment } from 'app/entity/entity';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {IdentifyService} from 'app/identify/identify.service';
+import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
 
 @Component({
   selector: 'user-like',
@@ -26,8 +26,9 @@ export class UserLikeComponent implements OnInit {
   commentAreaStyle = [];
 
   constructor(private identifyService: IdentifyService,
-    private route: ActivatedRoute,
-    private router: Router) {}
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
@@ -37,7 +38,7 @@ export class UserLikeComponent implements OnInit {
   }
 
   getUserLikes(userId: number) {
-    this.identifyService.getUserLikes(userId).then(shares => this.shares=shares);
+    this.identifyService.getUserLikes(userId).then(shares => this.shares = shares);
   }
 
   onClickShare(shareId: number) {
@@ -90,7 +91,8 @@ export class UserLikeComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
+    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
@@ -170,7 +172,6 @@ export class UserLikeComponent implements OnInit {
   }
 
   fixheight = window.outerHeight;
-
 
 
 }

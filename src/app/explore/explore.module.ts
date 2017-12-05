@@ -30,7 +30,7 @@ import {UtilService} from 'app/util.service';
     ExploreTagDetailComponent,
     ExploreShowAllTagsComponent,
   ],
-  providers: [ExploreService,UtilService],
+  providers: [ExploreService, UtilService],
   bootstrap: [ExploreComponent]
 })
 export class ExploreModule {

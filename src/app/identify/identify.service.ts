@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Identities, Genders, Album, User, Share, Dating, ResultMessage, Comment } from 'app/entity/entity';
-import { Router } from '@angular/router';
+import {Identities, Genders, Album, User, Share, Dating, ResultMessage, Comment} from 'app/entity/entity';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class IdentifyService {
@@ -11,10 +11,11 @@ export class IdentifyService {
 
   ownerId: number;
 
-  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  options = new RequestOptions({ headers: this.headers });
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
-  constructor(private http: Http, private router: Router) {}
+  constructor(private http: Http, private router: Router) {
+  }
 
   setUserId(userId: number) {
     this.userId = userId;
@@ -32,23 +33,23 @@ export class IdentifyService {
     return this.ownerId;
   }
 
-  private handleError(error: any): Promise < any > {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
 
-  getIdentities(): Promise < string[] > {
+  getIdentities(): Promise<string[]> {
     return Promise.resolve(Identities);
   }
 
-  getGenders(): Promise < string[] > {
+  getGenders(): Promise<string[]> {
     return Promise.resolve(Genders);
   }
 
   private loginUrl = 'http://localhost/LuckyPie-Server/api/post/user/login';
 
-  login(account: string, password: string): Promise < User > {
+  login(account: string, password: string): Promise<User> {
     let data = new URLSearchParams();
     data.append("account", account);
     data.append("password", password);
@@ -60,7 +61,7 @@ export class IdentifyService {
 
   private registerUrl = 'http://localhost/LuckyPie-Server/api/post/user/register';
 
-  register(account: string, password: string): Promise < User > {
+  register(account: string, password: string): Promise<User> {
     let data = new URLSearchParams();
     data.append("account", account);
     data.append("password", password);
@@ -72,7 +73,7 @@ export class IdentifyService {
 
   private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/basicinfo/';
 
-  getUserBasicInfo(userId: number): Promise < User > {
+  getUserBasicInfo(userId: number): Promise<User> {
     return this.http.get(this.userBasciInfoUrl + userId)
       .toPromise()
       .then(response => response.json() as User)
@@ -81,7 +82,7 @@ export class IdentifyService {
 
   private getUserAlbumsUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/album/';
 
-  getUserAlbums(userId: number): Promise < Album[] > {
+  getUserAlbums(userId: number): Promise<Album[]> {
     return this.http.get(this.getUserAlbumsUrl + userId)
       .toPromise()
       .then(response => response.json() as Album[])
@@ -91,7 +92,7 @@ export class IdentifyService {
 
   private getUserSharesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/share/';
 
-  getUserShares(userId: number): Promise < Share[] > {
+  getUserShares(userId: number): Promise<Share[]> {
     return this.http.get(this.getUserSharesUrl + userId)
       .toPromise()
       .then(response => response.json() as Share[])
@@ -100,7 +101,7 @@ export class IdentifyService {
 
   private getUserDatingUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/dating/';
 
-  getUserDating(userId: number): Promise < Dating[] > {
+  getUserDating(userId: number): Promise<Dating[]> {
     return this.http.get(this.getUserDatingUrl + userId)
       .toPromise()
       .then(response => response.json() as Dating[])
@@ -109,7 +110,7 @@ export class IdentifyService {
 
   private getUserLikesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/like/';
 
-  getUserLikes(userId: number): Promise < Share[] > {
+  getUserLikes(userId: number): Promise<Share[]> {
     return this.http.get(this.getUserLikesUrl + userId)
       .toPromise()
       .then(response => response.json() as Share[])
@@ -118,7 +119,7 @@ export class IdentifyService {
 
   private updateUserBasicInfoUrl = 'http://localhost/LuckyPie-Server/api/post/user/info';
 
-  updateUserBasicInfo(userId: number, name: string, introduction: string, gender: string, identity: string, telephone: string, email: string): Promise < User > {
+  updateUserBasicInfo(userId: number, name: string, introduction: string, gender: string, identity: string, telephone: string, email: string): Promise<User> {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
     data.append("name", name);
@@ -135,7 +136,7 @@ export class IdentifyService {
 
   private getShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/comment';
 
-  getShareComment(shareId: number): Promise < Comment[] > {
+  getShareComment(shareId: number): Promise<Comment[]> {
     let data = new URLSearchParams();
     data.append("shareId", shareId + "");
     return this.http.post(this.getShareCommentUrl, data, this.options)
@@ -148,7 +149,7 @@ export class IdentifyService {
 
   private getAlbumCommentUrl = 'http://localhost/LuckyPie-Server/api/post/album/comment';
 
-  getAlbumComment(albumId: number): Promise < Comment[] > {
+  getAlbumComment(albumId: number): Promise<Comment[]> {
     let data = new URLSearchParams();
     data.append("albumId", albumId + "");
     return this.http.post(this.getAlbumCommentUrl, data, this.options)
@@ -160,7 +161,7 @@ export class IdentifyService {
 
   private doShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/doComment';
 
-  doShareComment(startUserId: number, userId: number, shareId: number, comment: string): Promise < ResultMessage > {
+  doShareComment(startUserId: number, userId: number, shareId: number, comment: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -173,7 +174,7 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  replyShareComment(startUserId: number, userId: number, shareId: number, commentId: number, content: string): Promise < ResultMessage > {
+  replyShareComment(startUserId: number, userId: number, shareId: number, commentId: number, content: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -188,7 +189,7 @@ export class IdentifyService {
 
   private doAlbumCommentUrl = 'http://localhost/LuckyPie-Server/api/post/album/doComment';
 
-  doAlbumComment(startUserId: number, userId: number, albumId: number, comment: string): Promise < ResultMessage > {
+  doAlbumComment(startUserId: number, userId: number, albumId: number, comment: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -204,7 +205,7 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
-  replyAlbumComment(startUserId: number, userId: number, albumId: number, commentId: number, content: string): Promise < ResultMessage > {
+  replyAlbumComment(startUserId: number, userId: number, albumId: number, commentId: number, content: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -219,7 +220,7 @@ export class IdentifyService {
 
   private updateHeadUrl = "http://localhost/LuckyPie-Server/api/post/user/info/head";
 
-  updateHead(userId: number, headInfo: string): Promise < ResultMessage > {
+  updateHead(userId: number, headInfo: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
     data.append("headInfo", headInfo);
@@ -231,7 +232,7 @@ export class IdentifyService {
 
   private getUserFollowsUrl = 'http://localhost/LuckyPie-Server/api/get/follow/';
 
-  getUserFollows(userId: number): Promise < number[] > {
+  getUserFollows(userId: number): Promise<number[]> {
     return this.http.get(this.getUserFollowsUrl + userId)
       .toPromise()
       .then(response => response.json() as number[])
@@ -240,7 +241,7 @@ export class IdentifyService {
 
   private getUserFollowersUrl = 'http://localhost/LuckyPie-Server/api/get/follower/';
 
-  getUserFollowers(userId: number): Promise < number[] > {
+  getUserFollowers(userId: number): Promise<number[]> {
     return this.http.get(this.getUserFollowersUrl + userId)
       .toPromise()
       .then(response => response.json() as number[])

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { IdentifyService } from 'app/identify/identify.service';
-import { User, ResultMessage } from 'app/entity/entity';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {IdentifyService} from 'app/identify/identify.service';
+import {User, ResultMessage} from 'app/entity/entity';
 import {
   FileUploader
 } from 'ng2-file-upload';
@@ -17,7 +17,7 @@ export class UserInfoComponent implements OnInit {
 
   user: User = new User();
 
-  uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
+  uploader: FileUploader = new FileUploader({url: '图片上传地址'});
 
   userHead: string;
 
@@ -30,12 +30,13 @@ export class UserInfoComponent implements OnInit {
 
   followArray: User[] = [];
 
-  ifWantChange=false;
+  ifWantChange = false;
 
 
   constructor(private identifyService: IdentifyService,
-    private route: ActivatedRoute,
-    private router: Router) {}
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -59,7 +60,7 @@ export class UserInfoComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(this.uploader.queue[this.uploader.queue.length - 1].some);
     console.log(reader);
-    reader.onload = function() {
+    reader.onload = function () {
       $this.user.head = this.result;
     }
     this.buttonStyle = {
@@ -80,7 +81,7 @@ export class UserInfoComponent implements OnInit {
       };
       this.uploader.queue.splice(0, this.uploader.queue.length);
       console.log(this.uploader.queue);
-      this.ifWantChange=false;
+      this.ifWantChange = false;
     } else {
       this.user.head = this.userHead;
       alert("更新头像失败");
@@ -88,7 +89,7 @@ export class UserInfoComponent implements OnInit {
         'display': 'none'
       };
       this.uploader.queue.splice(0, this.uploader.queue.length);
-      this.ifWantChange=true;
+      this.ifWantChange = true;
     }
 
   }
@@ -99,7 +100,7 @@ export class UserInfoComponent implements OnInit {
       'display': 'none'
     };
     this.uploader.queue.splice(0, this.uploader.queue.length);
-    this.ifWantChange=false;
+    this.ifWantChange = false;
   }
 
   getFollowsInfo() {
@@ -124,8 +125,8 @@ export class UserInfoComponent implements OnInit {
     }
   }
 
-  wantChange(){
-    this.ifWantChange=true;
+  wantChange() {
+    this.ifWantChange = true;
   }
 
 

@@ -3,8 +3,11 @@ import {
   ExploreService
 } from 'app/explore/explore.service';
 import {
-  User, Share
+  User,
+  Share,
+  ResultMessage
 } from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'explore-model',
@@ -14,100 +17,86 @@ import {
 export class ExploreModelComponent implements OnInit {
 
   modelArray: User[];
-  shares: Share[];//应该每个user都有对应的shares
+
   selectedShare: Share = new Share();
 
-  constructor(private exploreService: ExploreService) {
+  userId: number;
+
+  followButtonContent = [];
+
+  constructor(private exploreService: ExploreService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.userId = this.exploreService.getUserId();
     this.selectHotModels();
   }
 
   selectHotModels() {
-    this.exploreService.getHotModel().then(users=>this.setModels(users));
-    // console.log("1");
-
+    this.exploreService.getHotModel().then(users => this.setModels(users));
   }
 
   selectBestModels() {
-    this.exploreService.getBestModel();
-    // console.log("1");
-
+    this.exploreService.getBestModel().then(users => this.setModels(users));
   }
 
   selectNewModels() {
-    this.exploreService.getNewModel();
-    // console.log("1");
-
+    this.exploreService.getNewModel().then(users => this.setModels(users));
   }
 
-  setModels(users:User[]){
+
+  setModels(users: User[]) {
+    this.followButtonContent.splice(0, this.followButtonContent.length);
     this.modelArray = users;
     for (let i = 0; i < this.modelArray.length; i++) {
       console.log(this.modelArray[i].id);
       this.exploreService.getUserShares(this.modelArray[i].id).then(shares => this.modelArray[i].shares = shares);
+      this.exploreService.isFollow(this.userId, this.modelArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }
-
-
   }
 
-  gotoModelInfo(userId:number){
-
+  setFollowButton(resultMessage: ResultMessage) {
+    if (resultMessage.result == "success") {
+      this.followButtonContent.push("取消关注");
+    } else {
+      this.followButtonContent.push("关注");
+    }
   }
 
-  follow() {
-
+  follow(followUserId: number, index: number) {
+    let content = this.followButtonContent[index];
+    if (content == "关注") {
+      this.exploreService.follow(followUserId).then(resultMessage => this.checkFollow(resultMessage, index));
+    } else {
+      this.exploreService.removeFollow(followUserId).then(resultMessage => this.checkRemoveFollow(resultMessage, index));
+    }
   }
 
-  onClickShare() {
-    // this.albums.forEach((album, i) => {
-    //   if (album.id == albumid) {
-    //     this.selectedAlbum = album;
-    //   }
-    // });
-    // console.log(this.selectedAlbum.imageUrls);
-    this.setCurrentStyles();
+  checkFollow(resultMessage: ResultMessage, index: number) {
+    if (resultMessage.result != "success") {
+      alert("关注失败");
+    } else {
+
+      alert("关注成功");
+      this.followButtonContent[index] = "取消关注";
+    }
   }
 
-  currentStyles = {
-    'width': '0',
-    'height': '0',
-    'opacity': '1',
-    'background-color': '#000',
-    'position': 'fixed',
-    'top': '0',
-    'left': '0',
-    'z-index': '-1',
-    'display': 'none'
-  };
-
-  setCurrentStyles() {
-    this.currentStyles = {
-      'width': '100%',
-      'height': '100%',
-      'opacity': '1',
-      'background-color': '#000',
-      'position': 'fixed',
-      'top': '0',
-      'left': '0',
-      'z-index': '1000',
-      'display': 'block'
-    };
-    console.log("success");
+  checkRemoveFollow(resultMessage: ResultMessage, index: number) {
+    if (resultMessage.result != "success") {
+      alert("取消关注失败");
+    } else {
+      alert("取消关注成功");
+      this.followButtonContent[index] = "关注";
+    }
   }
 
-  closeBigPicture() {
-    this.currentStyles = {
-      'width': '0',
-      'height': '0',
-      'opacity': '1',
-      'background-color': '#000',
-      'position': 'fixed',
-      'top': '0',
-      'left': '0',
-      'z-index': '-1',
-      'display': 'none'
-    };
+  gotoHomePage(ownerId) {
+    if (ownerId == this.userId) {
+      this.router.navigate(['/identify/info', ownerId]);
+    } else {
+      this.router.navigate(['/identify/homePage', ownerId]);
+    }
   }
+
 }

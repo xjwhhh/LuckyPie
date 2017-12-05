@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -8,7 +8,8 @@ import {
   User,
   Comment
 } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
+
 @Component({
   selector: 'explore-tag-detail',
   templateUrl: './tag_detail.component.html',
@@ -37,7 +38,8 @@ export class ExploreTagDetailComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private utilService: UtilService, private exploreService: ExploreService) {}
+              private utilService: UtilService, private exploreService: ExploreService) {
+  }
 
   ngOnInit(): void {
     this.getShares();
@@ -51,9 +53,6 @@ export class ExploreTagDetailComponent implements OnInit {
       }
     });
   }
-
-
-
 
 
 }

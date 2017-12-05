@@ -1,38 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Share } from 'app/entity/entity';
-import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Share} from 'app/entity/entity';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Addresses, CostTypes, Identities, Genders, User, Dating, Album, ResultMessage } from 'app/entity/entity';
+import {Addresses, CostTypes, Identities, Genders, User, Dating, Album, ResultMessage} from 'app/entity/entity';
 
 @Injectable()
 export class ExploreService {
-  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  options = new RequestOptions({ headers: this.headers });
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
   private selectedTag: String;
 
   userId: number;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
-  private handleError(error: any): Promise < any > {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
-  getAddresses(): Promise < string[] > {
+  getAddresses(): Promise<string[]> {
     return Promise.resolve(Addresses);
   }
 
-  getCostTypes(): Promise < string[] > {
+  getCostTypes(): Promise<string[]> {
     return Promise.resolve(CostTypes);
   }
 
-  getIdentities(): Promise < string[] > {
+  getIdentities(): Promise<string[]> {
     return Promise.resolve(Identities);
   }
 
-  getGenders(): Promise < string[] > {
+  getGenders(): Promise<string[]> {
     return Promise.resolve(Genders);
   }
 
@@ -46,7 +47,7 @@ export class ExploreService {
 
   private getSharesUrl = 'http://localhost/LuckyPie-Server/api/post/explore/share';
 
-  getSharesByTag(selectedTag: string): Promise < Share[] > {
+  getSharesByTag(selectedTag: string): Promise<Share[]> {
     let data = new URLSearchParams();
     data.append("selectedTag", selectedTag);
     return this.http.post(this.getSharesUrl, data, this.options)
@@ -57,7 +58,7 @@ export class ExploreService {
 
   private getAllTagsUrl = 'http://localhost/LuckyPie-Server/api/get/explore/tags';
 
-  getAllTags(): Promise < string[] > {
+  getAllTags(): Promise<string[]> {
     return this.http.get(this.getAllTagsUrl)
       .toPromise()
       .then(response => response.json() as string[])
@@ -74,7 +75,7 @@ export class ExploreService {
 
   private getDatingUrl = 'http://localhost/LuckyPie-Server/api/post/explore/dating';
 
-  getDating(data: URLSearchParams): Promise < Dating[] > {
+  getDating(data: URLSearchParams): Promise<Dating[]> {
     return this.http.post(this.getDatingUrl, data, this.options)
       .toPromise()
       .then(response => response.json() as Dating[])
@@ -83,7 +84,7 @@ export class ExploreService {
 
   private getUserSharesUrl = 'http://localhost/LuckyPie-Server/api/get/user/info/share/limit/';
 
-  getUserShares(userId: number): Promise < Share[] > {
+  getUserShares(userId: number): Promise<Share[]> {
     return this.http.get(this.getUserSharesUrl + userId)
       .toPromise()
       .then(response => response.json() as Share[])
@@ -92,7 +93,7 @@ export class ExploreService {
 
   private getHotPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/hot';
 
-  getHotPhotographer(): Promise < User[] > {
+  getHotPhotographer(): Promise<User[]> {
     return this.http.get(this.getHotPhotographerUrl)
       .toPromise()
       .then(response => response.json() as User[])
@@ -101,27 +102,27 @@ export class ExploreService {
 
   private getBestPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/best';
 
-  getBestPhotographer() {
-    this.http.get(this.getBestPhotographerUrl)
+  getBestPhotographer(): Promise<User[]> {
+    return this.http.get(this.getBestPhotographerUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
 
   }
 
   private getNewPhotographerUrl = 'http://localhost/LuckyPie-Server/api/get/explore/photographer/new';
 
-  getNewPhotographer() {
-    this.http.get(this.getNewPhotographerUrl)
+  getNewPhotographer(): Promise<User[]> {
+    return this.http.get(this.getNewPhotographerUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
 
   }
 
   private getHotModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/hot';
 
-  getHotModel(): Promise < User[] > {
+  getHotModel(): Promise<User[]> {
     return this.http.get(this.getHotModelUrl)
       .toPromise()
       .then(response => response.json() as User[])
@@ -131,26 +132,26 @@ export class ExploreService {
 
   private getBestModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/best';
 
-  getBestModel() {
-    this.http.get(this.getBestModelUrl)
+  getBestModel(): Promise<User[]> {
+    return this.http.get(this.getBestModelUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
 
   }
 
   private getNewModelUrl = 'http://localhost/LuckyPie-Server/api/get/explore/model/new';
 
-  getNewModel() {
-    this.http.get(this.getNewModelUrl)
+  getNewModel(): Promise<User[]> {
+    return this.http.get(this.getNewModelUrl)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response.json() as User[])
       .catch(this.handleError);
   }
 
   private followUrl = 'http://localhost/LuckyPie-Server/api/post/follow';
 
-  follow(followUserId: number): Promise < ResultMessage > {
+  follow(followUserId: number): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("followId", followUserId + "");
     data.append("followerId", this.userId + "");
@@ -160,12 +161,24 @@ export class ExploreService {
       .catch(this.handleError);
   }
 
+  private removeFollowUrl = 'http://localhost/LuckyPie-Server/api/post/removeFollow';
+
+  removeFollow(followUserId: number): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("followId", followUserId + "");
+    data.append("followerId", this.userId + "");
+    return this.http.post(this.removeFollowUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
   private isFollowUrl = 'http://localhost/LuckyPie-Server/api/post/isFollow';
 
-  isFollow(userId: number, checkUserId: number): Promise < ResultMessage > {
+  isFollow(userId: number, checkUserId: number): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
-    data.append("chcekUserId", checkUserId + "");
+    data.append("checkUserId", checkUserId + "");
     return this.http.post(this.isFollowUrl, data, this.options)
       .toPromise()
       .then(response => response.json() as ResultMessage)

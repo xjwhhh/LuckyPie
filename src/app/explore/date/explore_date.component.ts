@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -7,9 +7,9 @@ import {
   Dating,
   User
 } from 'app/entity/entity';
-import { URLSearchParams } from '@angular/http';
+import {URLSearchParams} from '@angular/http';
 import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
 
 
 @Component({
@@ -36,7 +36,8 @@ export class ExploreDateComponent implements OnInit {
   users: User[] = [];
 
 
-  constructor(private exploreService: ExploreService, private utilService: UtilService,private router:Router) {}
+  constructor(private exploreService: ExploreService, private utilService: UtilService, private router: Router) {
+  }
 
 
   ngOnInit(): void {

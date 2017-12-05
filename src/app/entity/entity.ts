@@ -111,12 +111,12 @@ export class Notice {
   content: string;
 }
 
-export class Chatting{
-  id:number;
-  fromUserId:number;
-  toUserId:number;
-  content:string;
-  postTime:string;
+export class Chatting {
+  id: number;
+  fromUserId: number;
+  toUserId: number;
+  content: string;
+  postTime: string;
 }
 
 export class ResultMessage {
