@@ -1,0 +1,29 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<div class="container">
+  <div class="row">
+    <P style="height: 20px"></P>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-3">
+        <label routerLink="user" routerLinkActive="active">用户</label>
+      </div>
+      <div class="col-md-3">
+        <label routerLink="dating" routerLinkActive="active">約拍</label>
+      </div>
+      <div class="col-md-3">
+        <label routerLink="share" routerLinkActive="active">分享</label>
+      </div>
+      <div class="col-md-3">
+        <label routerLink="album" routerLinkActive="active">相册</label>
+      </div>
+    </div>
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

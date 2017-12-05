@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {IdentifyService} from 'app/identify/identify.service';
-import {NoticeService} from 'app/notice/notice.service';
-import {Router} from '@angular/router';
-import {Notice, User} from 'app/entity/entity';
+import { Component, OnInit } from '@angular/core';
+import { IdentifyService } from 'app/identify/identify.service';
+import { NoticeService } from 'app/notice/notice.service';
+import { Router } from '@angular/router';
+import { Notice, User } from 'app/entity/entity';
 
 @Component({
   selector: 'app-root',
@@ -94,6 +94,19 @@ export class AppComponent implements OnInit {
       alert("请先登录或注册");
     } else {
       this.router.navigate(['/identify/info', this.userId]);
+    }
+  }
+
+  search(content: string) {
+    this.userId = this.identifyService.getUserId();
+    if (this.userId == -1) {
+      alert("请先登录或注册");
+    } else {
+      if (content == "") {
+        alert("未输入搜索内容");
+      } else {
+        this.router.navigate(['/search', this.userId],{queryParams:{'content':content}});
+      }
     }
   }
 }

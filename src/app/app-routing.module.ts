@@ -17,6 +17,7 @@ import {
 import {
   PostComponent
 } from './post/post.component';
+import{SearchComponent} from './search/search.component';
 
 const routes: Routes = [{
   path: '',
@@ -47,8 +48,6 @@ const routes: Routes = [{
   },
   {
     path: 'notice/:id',
-    // loadChildren: 'app/notice/notice.module#NoticeModule',
-    // data: { preload: true },
     component: NoticeComponent
   },
   {
@@ -57,6 +56,10 @@ const routes: Routes = [{
     data: {
       preload: true
     }
+  },
+    {
+    path: 'search/:id',
+    component: SearchComponent
   },
   {
     path: '**',

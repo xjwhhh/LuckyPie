@@ -12,6 +12,7 @@ import {ExploreModule} from './explore/explore.module';
 import {IdentifyModule} from './identify/identify.module';
 import {NoticeModule} from './notice/notice.module';
 import {PostModule} from './post/post.module';
+import {SearchModule} from './search/search.module';
 
 import {BsDropdownModule} from 'ngx-bootstrap';
 import {ImageUploadModule} from 'angular2-image-upload';
@@ -27,6 +28,7 @@ import {ImageUploadModule} from 'angular2-image-upload';
     IdentifyModule,
     NoticeModule,
     PostModule,
+    SearchModule,
     AppRoutingModule,
   ],
   declarations: [AppComponent],
