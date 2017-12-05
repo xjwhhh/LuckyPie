@@ -118,7 +118,7 @@ export class UserAlbumComponent implements OnInit {
     }
   }
 
-  getoHomePage(ownerId) {
+  gotoHomePage(ownerId) {
     if (ownerId == this.userId) {
       this.router.navigate(['/identify/info', ownerId]);
     } else {

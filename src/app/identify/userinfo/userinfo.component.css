@@ -1,0 +1,11 @@
+#head_portrait {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
+
+#big_head_portrait {
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+}

@@ -2,19 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {IdentifyService} from 'app/identify/identify.service';
 import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
-import {UtilService} from 'app/util.service';
 
 @Component({
-  selector: 'user-photo',
-  templateUrl: './usershare.component.html',
-  styleUrls: ['./usershare.component.css'],
+  selector: 'show-like',
+  templateUrl: './showlike.component.html',
+  styleUrls: ['./like.component.css'],
 })
-export class UserPhotoComponent implements OnInit {
+export class ShowLikeComponent implements OnInit {
+  ownerId: number;
 
   userId: number;
 
   shares: Share[];
-
 
   selectedShare: Share = new Share();
 
@@ -29,23 +28,24 @@ export class UserPhotoComponent implements OnInit {
   commentAreaStyle = [];
 
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute, private router: Router,
-              private utilService: UtilService) {
+              private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+    console.log(" dr");
+    this.ownerId = this.identifyService.getOwnerId();
     this.userId = this.identifyService.getUserId();
-    this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
-    this.getUserShares(this.userId);
+    this.identifyService.getUserBasicInfo(this.ownerId).then(user => this.user = user);
+    this.getUserLikes(this.ownerId);
   }
 
-  getUserShares(userId: number) {
-    this.identifyService.getUserShares(userId).then(shares => this.shares = shares);
+  getUserLikes(userId: number) {
+    this.identifyService.getUserLikes(userId).then(shares => this.shares = shares);
   }
 
-  onClickShare(shareId: number) {
+  onClickShare(shareid: number) {
     this.shares.forEach((share, i) => {
-      if (share.id == shareId) {
+      if (share.id == shareid) {
         this.selectedShare = share;
       }
     });
@@ -54,6 +54,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   getShareComment() {
+    console.log("6789");
     this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
   }
 
@@ -81,7 +82,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   replyShare(comment: string) {
-    this.identifyService.doShareComment(this.userId, this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+    this.identifyService.doShareComment(this.userId, this.ownerId, this.selectedShare.id, comment).then(result => this.check(result));
   }
 
   showCommentArea(i: number) {
@@ -120,7 +121,7 @@ export class UserPhotoComponent implements OnInit {
     }
   }
 
-  gotoHomePage(ownerId) {
+  getoHomePage(ownerId) {
     if (ownerId == this.userId) {
       this.router.navigate(['/identify/info', ownerId]);
     } else {
@@ -174,6 +175,5 @@ export class UserPhotoComponent implements OnInit {
   }
 
   fixheight = window.outerHeight;
-
 
 }

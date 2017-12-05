@@ -7,11 +7,12 @@ import {
   Tags
 } from 'app/entity/entity';
 import {Router, ActivatedRoute} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'explore-tag',
   templateUrl: './explore_tag.component.html',
-  // styleUrls: ['./explore_photo.component.css'],
+  styleUrls: ['./explore_tag.component.css'],
 })
 export class ExploreTagComponent implements OnInit {
 
@@ -25,15 +26,25 @@ export class ExploreTagComponent implements OnInit {
 
   userId: number;
 
-  imageUrls: string[];
+  imageUrls: any[];
 
-  constructor(private exploreService: ExploreService, private router: Router, private route: ActivatedRoute) {
+  constructor(private exploreService: ExploreService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
     this.Tags = Tags;
     this.userId = this.exploreService.getUserId();
-    this.exploreService.getAllTags().then(imageUrls => this.imageUrls = imageUrls);
+    this.exploreService.getAllTags().then(imageUrls => this.modifyImages(imageUrls));
+  }
+
+  modifyImages(imageUrls:any[]){
+    for(let i=0;i<imageUrls.length;i++){
+      imageUrls[i]=this.sanitizer.bypassSecurityTrustStyle("url("+imageUrls[i]+")");
+    }
+    this.imageUrls=imageUrls;
   }
 
   gotoTagDetail(tag: string): void {

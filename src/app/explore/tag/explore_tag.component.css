@@ -1,0 +1,10 @@
+#tag {
+  width: 220px;
+  height: 150px;
+  background-size: 100%, 100%;
+  background-repeat: no-repeat;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  font-family: "SimSun";
+}

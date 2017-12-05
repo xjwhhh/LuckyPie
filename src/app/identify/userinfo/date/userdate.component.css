@@ -1,0 +1,25 @@
+#dateInfo {
+  position: absolute;
+  left: 76%;
+
+  overflow-y: auto;
+
+  width: 25%;
+  height: 95%;
+}
+
+p {
+  color: #777777;
+}
+
+#head_portrait {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
+
+label {
+  color: #777777;
+}
+
+

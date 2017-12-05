@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {IdentifyService} from 'app/identify/identify.service';
-import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
-import {UtilService} from 'app/util.service';
+import {Album, Comment, User, ResultMessage} from 'app/entity/entity';
+import {CarouselConfig} from 'ngx-bootstrap/carousel';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
-  selector: 'user-photo',
-  templateUrl: './usershare.component.html',
-  styleUrls: ['./usershare.component.css'],
+  selector: 'show-album',
+  templateUrl: './showalbum.component.html',
+  styleUrls: ['./useralbum.component.css'],
+  providers: [{provide: CarouselConfig, useValue: {interval: false}}]
 })
-export class UserPhotoComponent implements OnInit {
+export class ShowAlbumComponent implements OnInit {
+
+  albums: Album[] = [];
+  selectedAlbum: Album = new Album();
+  ownerId: number;
 
   userId: number;
-
-  shares: Share[];
-
-
-  selectedShare: Share = new Share();
 
   user: User;
 
@@ -28,36 +28,36 @@ export class UserPhotoComponent implements OnInit {
 
   commentAreaStyle = [];
 
-  constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute, private router: Router,
-              private utilService: UtilService) {
+  constructor(private identifyService: IdentifyService, private router: Router) {
+
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.ownerId = this.identifyService.getOwnerId();
     this.userId = this.identifyService.getUserId();
-    this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
-    this.getUserShares(this.userId);
+    this.identifyService.getUserBasicInfo(this.ownerId).then(user => this.user = user);
+    this.getUserAlbums(this.ownerId);
   }
 
-  getUserShares(userId: number) {
-    this.identifyService.getUserShares(userId).then(shares => this.shares = shares);
+  getUserAlbums(userId: number): void {
+    this.identifyService.getUserAlbums(userId).then(albums => this.albums = albums);
   }
 
-  onClickShare(shareId: number) {
-    this.shares.forEach((share, i) => {
-      if (share.id == shareId) {
-        this.selectedShare = share;
+  onClickAlbum(albumid: number) {
+    this.albums.forEach((album, i) => {
+      if (album.id == albumid) {
+        this.selectedAlbum = album;
       }
     });
     this.setCurrentStyles();
-    this.getShareComment();
+    this.getAlbumComment();
   }
 
-  getShareComment() {
-    this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
+  getAlbumComment() {
+    this.identifyService.getAlbumComment(this.selectedAlbum.id).then(comments => this.getAlbumUser(comments));
   }
 
-  getCommentUser(comments: Comment[]) {
+  getAlbumUser(comments: Comment[]) {
     for (let i = 0; i < comments.length; i++) {
       this.commentAreaStyle.push({
         'display': 'none',
@@ -80,8 +80,8 @@ export class UserPhotoComponent implements OnInit {
     this.comments = comments;
   }
 
-  replyShare(comment: string) {
-    this.identifyService.doShareComment(this.userId, this.userId, this.selectedShare.id, comment).then(result => this.check(result));
+  replyAlbum(comment: string) {
+    this.identifyService.doAlbumComment(this.userId, this.ownerId, this.selectedAlbum.id, comment).then(result => this.check(result));
   }
 
   showCommentArea(i: number) {
@@ -93,7 +93,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    this.identifyService.replyAlbumComment(this.userId, userId, this.selectedAlbum.id, commentId, content).then(result => this.check(result));
     ;
     this.commentAreaStyle[i] = {
       'display': 'none',
@@ -114,7 +114,7 @@ export class UserPhotoComponent implements OnInit {
   check(resultMessage: ResultMessage) {
     if (resultMessage.result == "success") {
       alert("评论成功");
-      this.getShareComment();
+      this.getAlbumComment();
     } else {
       alert("评论失败");
     }
@@ -174,6 +174,4 @@ export class UserPhotoComponent implements OnInit {
   }
 
   fixheight = window.outerHeight;
-
-
 }
