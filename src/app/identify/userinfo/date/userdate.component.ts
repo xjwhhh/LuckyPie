@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {IdentifyService} from 'app/identify/identify.service';
-import {Dating, User} from 'app/entity/entity';
+import {Dating, User,ResultMessage} from 'app/entity/entity';
 
 @Component({
   selector: 'user-activity',
@@ -24,7 +24,6 @@ export class UserActivityComponent implements OnInit {
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
-    console.log(this.userId);
     this.getUserDating(this.userId);
 
   }
@@ -39,7 +38,6 @@ export class UserActivityComponent implements OnInit {
         this.selectedDating = dating;
       }
     });
-    console.log(this.selectedDating);
     this.setCurrentStyles();
   }
 
@@ -73,7 +71,6 @@ export class UserActivityComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

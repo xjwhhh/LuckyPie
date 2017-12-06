@@ -1,0 +1,142 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<div class="container">
+  <div class="row">
+    <P style="height: 5px"></P>
+  </div>
+  <div class="row">
+    <div *ngFor="let album of albumArray ">
+      <div class="col-md-3">
+        <div class="row">
+          <img src="{{album.imageUrls[0]}}" width="90%" height="100%" (click)="onClickAlbum(album.id)">
+        </div>
+        <div class="row">
+          <P style="height: 5px"></P>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="maskLayer" [ngStyle]="currentStyles">
+  <div class="row">
+    <P style="height: 10px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-7">
+          </div>
+          <div class="col-md-2">
+            <label>点击图片即可下载</label>
+          </div>
+          <div class="col-md-1">
+            <img src="assets/image/close.png" (click)="closeBigPicture()" width="75%" height="75%">
+          </div>
+        </div>
+        <div class="row">
+          <P style="height: 10px"></P>
+        </div>
+        <div class="row">
+          <carousel>
+            <slide *ngFor="let image of selectedAlbum.imageUrls">
+              <a href="{{image}}" download="">
+                <img src="{{image}}" width="100%">
+              </a>
+            </slide>
+          </carousel>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" id="albumInfo">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <div class="row">
+          <P style="height: 20px"></P>
+        </div>
+        <div class="row">
+          <div class="col-md-3" *ngIf="selectedUser">
+            <img [src]="selectedUser.head" width="100%" height="100%">
+          </div>
+          <div class="col-md-9">
+            <label style="color: #dddddd" *ngIf="selectedUser">{{selectedUser.name}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <p style="height: 3px"></p>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+            <label>{{selectedAlbum.postTime}}</label>
+          </div>
+          <div class="col-md-3">
+            <label>{{selectedAlbum.postAddress}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <p style="height: 3px"></p>
+        </div>
+        <div class="row">
+          <p>{{selectedAlbum.desc}}</p>
+        </div>
+        <div class="row">
+          <p style="height: 3px"></p>
+        </div>
+        <div class="row ">
+          <label *ngFor="let tag of selectedAlbum.tags " (click)="gotoTagDetail(tag) ">#{{tag}}</label>
+        </div>
+        <div class="row">
+          <P style="height: 20px"></P>
+        </div>
+        <div class="row">
+          <textarea class="commentArea" placeholder="写下你对他的评论吧 " #comment></textarea>
+        </div>
+        <div class="row">
+          <div class="col-md-9"></div>
+          <div class="col-md-3">
+            <label (click)="replyAlbum(selectedUser.id,comment.value)" style="">评论</label>
+          </div>
+        </div>
+        <div class="row" id='comment' *ngFor="let comment of comments;let i=index">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2" *ngIf="commentUsers[i]">
+                <img id="head_portrait" [src]="commentUsers[i].head" (click)="getoHomePage(comment.userId)">
+              </div>
+              <div class="col-md-10">
+                <h5 style="color: #dddddd" (click)="getoHomePage(comment.userId)">{{comment.userName}}</h5>
+              </div>
+            </div>
+            <div class="row" *ngIf="replyedCommentUsers[i]">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复
+                  {{replyedCommentUsers[i].name}}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <p>{{comment.content}}</p>
+                <p>{{comment.times}}</p>
+                <p (click)="showCommentArea(i)">回复</p>
+                <div [ngStyle]="commentAreaStyle[i]">
+                  <textarea class="commentArea" #childComment></textarea>
+                  <p style="height: 2px"></p>
+                  <label (click)="replyComment(comment.userId,comment.id,childComment.value,i)">评论</label>
+                  <label type="button" (click)="cancelComment(i)">取消</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

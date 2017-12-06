@@ -174,7 +174,6 @@ export class FollowComponent implements OnInit {
   }
 
   gotoHomePage(ownerId: number) {
-    console.log(ownerId);
     this.router.navigate(['/identify/homePage', ownerId]);
   }
 
@@ -206,7 +205,6 @@ export class FollowComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

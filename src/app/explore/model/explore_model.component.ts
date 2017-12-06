@@ -49,7 +49,6 @@ export class ExploreModelComponent implements OnInit {
     this.followButtonContent.splice(0, this.followButtonContent.length);
     this.modelArray = users;
     for (let i = 0; i < this.modelArray.length; i++) {
-      console.log(this.modelArray[i].id);
       this.exploreService.getUserShares(this.modelArray[i].id).then(shares => this.modelArray[i].shares = shares);
       this.exploreService.isFollow(this.userId, this.modelArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }

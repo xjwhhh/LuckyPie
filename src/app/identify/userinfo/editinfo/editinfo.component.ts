@@ -27,12 +27,8 @@ export class UserEditInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      console.log(params);
-    });
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.createForm(user));
-    // this.createForm();
     this.getGenders();
     this.getIdentities();
   }
@@ -47,7 +43,6 @@ export class UserEditInfoComponent implements OnInit {
 
   createForm(user: User) {
     this.user = user;
-    console.log(user);
     this.editInfoForm = new FormGroup({
       name: new FormControl(this.user.name, Validators.required),
       introduction: new FormControl(this.user.introduction, Validators.required),

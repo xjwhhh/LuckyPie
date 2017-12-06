@@ -67,28 +67,24 @@ export class ExploreDateComponent implements OnInit {
   }
 
   selectAddress(selectedAddress: string): void {
-    console.log(selectedAddress);
     this.selectedAddress = selectedAddress;
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectCost(selectedCostType: string): void {
-    console.log(selectedCostType);
     this.selectedCostType = selectedCostType;
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectIdentity(selectedIdentity: string): void {
-    console.log(selectedIdentity);
     this.selectedIdentity = selectedIdentity;
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
 
   selectGender(selectedGender: string): void {
-    console.log(selectedGender);
     this.selectedGender = selectedGender;
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
@@ -105,7 +101,6 @@ export class ExploreDateComponent implements OnInit {
 
   getDatingUser(datings: Dating[]) {
     this.datings = datings;
-    console.log(datings);
     for (let i = 0; i < datings.length; i++) {
       let userId = datings[i].userId;
       this.utilService.getUserBasicInfo(userId).then(user => this.users.push(user));
@@ -114,7 +109,6 @@ export class ExploreDateComponent implements OnInit {
 
 
   gotoHomePage(ownerId: number) {
-    console.log(ownerId);
     this.router.navigate(['/identify/homePage', ownerId]);
   }
 }

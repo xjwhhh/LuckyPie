@@ -33,7 +33,6 @@ export class UserLikeComponent implements OnInit {
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
-    console.log(this.userId);
     this.getUserLikes(this.userId);
   }
 
@@ -154,7 +153,6 @@ export class UserLikeComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

@@ -42,6 +42,7 @@ export class ExploreTagDetailComponent implements OnInit {
     private utilService: UtilService, private exploreService: ExploreService) {}
 
   ngOnInit(): void {
+    this.userId = this.exploreService.getUserId();
     this.getShares();
   }
 
@@ -140,7 +141,6 @@ export class ExploreTagDetailComponent implements OnInit {
   }
 
   gotoHomePage(ownerId: number) {
-    console.log(ownerId);
     this.router.navigate(['/identify/homePage', ownerId]);
   }
 
@@ -173,7 +173,6 @@ export class ExploreTagDetailComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {
@@ -190,7 +189,6 @@ export class ExploreTagDetailComponent implements OnInit {
     };
   }
 
-  fixheight = window.outerHeight;
 
 
 }

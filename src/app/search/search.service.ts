@@ -44,7 +44,7 @@ export class SearchService {
     data.append("content", content);
     return this.http.post(this.searchUserUrl, data, this.options)
       .toPromise()
-      .then(response => response.json() as User[])
+      .then(response =>response.json() as User[])
       .catch(this.handleError);
   }
 

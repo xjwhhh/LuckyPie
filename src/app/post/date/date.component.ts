@@ -24,7 +24,6 @@ export class PostDateComponent implements OnInit {
   addresses: string[];
   costTypes: string[];
   Tags: string[];
-  // Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
   selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
@@ -233,7 +232,6 @@ export class PostDateComponent implements OnInit {
       this.dating.imageUrls = this.imageUrls;
       let now = new Date();
       let postTime = this.postService.dateFormat("yyyy-MM-dd hh:mm:ss", now);
-      console.log(photoTime);
       this.dating.postTime = postTime;
       this.dating.postAddress = '中国';
       this.dating.tags = this.selectedTags;
@@ -243,7 +241,6 @@ export class PostDateComponent implements OnInit {
 
 
   check(dating: Dating) {
-    console.log(dating);
     if (dating.id != null) {
       alert("发布约拍信息成功");
       this.router.navigate(['/follow', dating.userId]);

@@ -31,13 +31,11 @@ export class AppComponent implements OnInit {
 
   getNotice(noticeArray: Notice[]) {
     this.userId = this.identifyService.getUserId();
-    console.log(this.userId);
     this.noticeService.getNewThumbNotice(this.userId).then(noticeArray => this.thumbNumber = noticeArray.length);
     this.noticeService.getNewCommentNotice(this.userId).then(noticeArray => this.commentNumber = noticeArray.length);
   }
 
   gotoFollow() {
-    console.log("gotofollow");
     this.userId = this.identifyService.getUserId();
     if (this.userId == -1) {
       alert("请先登录或注册");
@@ -49,7 +47,6 @@ export class AppComponent implements OnInit {
 
   gotoPost() {
     this.userId = this.identifyService.getUserId();
-    console.log("gotopost");
     if (this.userId == -1) {
       alert("请先登录或注册");
     } else {

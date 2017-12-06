@@ -31,7 +31,6 @@ export class NoticeCommentComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.noticeService.getUserId();
-    console.log(this.userId);
     this.getNewNoticeArray();
     this.getOldNoticeArray();
   }
@@ -49,7 +48,6 @@ export class NoticeCommentComponent implements OnInit {
 
   setNewNotice(noticeArray: Notice[]) {
     this.newNoticeArray = noticeArray;
-    console.log(this.newNoticeArray);
     for (let i = noticeArray.length - 1; i >= 0; i--) {
       let startUserId = noticeArray[i].startUserId;
       this.noticeService.getUserBasicInfo(startUserId).then(user => this.newStartUserArray.push(user));
@@ -64,7 +62,6 @@ export class NoticeCommentComponent implements OnInit {
 
   setOldNotice(noticeArray: Notice[]) {
     this.oldNoticeArray = noticeArray;
-    console.log(this.oldNoticeArray);
     for (let i = noticeArray.length - 1; i >= 0; i--) {
       let startUserId = noticeArray[i].startUserId;
       this.noticeService.getUserBasicInfo(startUserId).then(user => this.oldStartUserArray.push(user));

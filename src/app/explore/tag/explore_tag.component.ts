@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -6,8 +6,8 @@ import {
   Share,
   Tags
 } from 'app/entity/entity';
-import {Router, ActivatedRoute} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
+import  { DomSanitizer }  from  '@angular/platform-browser';
 
 @Component({
   selector: 'explore-tag',
@@ -28,11 +28,10 @@ export class ExploreTagComponent implements OnInit {
 
   imageUrls: any[];
 
-  constructor(private exploreService: ExploreService, 
-    private router: Router, 
+  constructor(private exploreService: ExploreService,
+    private router: Router,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer) {
-  }
+    private  sanitizer:  DomSanitizer) {}
 
   ngOnInit(): void {
     this.Tags = Tags;
@@ -40,17 +39,15 @@ export class ExploreTagComponent implements OnInit {
     this.exploreService.getAllTags().then(imageUrls => this.modifyImages(imageUrls));
   }
 
-  modifyImages(imageUrls:any[]){
-    for(let i=0;i<imageUrls.length;i++){
-      imageUrls[i]=this.sanitizer.bypassSecurityTrustStyle("url("+imageUrls[i]+")");
+  modifyImages(imageUrls: any[]) {
+    for (let i = 0; i < imageUrls.length; i++) {
+      imageUrls[i] = this.sanitizer.bypassSecurityTrustStyle("url(" + imageUrls[i] + ")");
     }
-    this.imageUrls=imageUrls;
+    this.imageUrls = imageUrls;
   }
 
   gotoTagDetail(tag: string): void {
     this.router.navigate(['/explore/' + this.userId + '/tagdetail', tag]);
-    console.log(tag);
-    console.log("4567uio");
   }
 
 }

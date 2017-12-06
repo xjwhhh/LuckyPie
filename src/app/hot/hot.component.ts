@@ -160,7 +160,6 @@ export class HotComponent implements OnInit {
   }
 
   gotoHomePage(ownerId: number) {
-    console.log(ownerId);
     this.router.navigate(['/identify/homePage', ownerId]);
   }
 
@@ -188,7 +187,6 @@ export class HotComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

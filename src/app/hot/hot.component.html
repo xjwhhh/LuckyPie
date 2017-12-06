@@ -143,16 +143,16 @@
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-2" *ngIf="commentUsers[i]">
-                <img id="head_portrait" [src]="commentUsers[i].head" (click)="getoHomePage(comment.userId)">
+                <img id="head_portrait" [src]="commentUsers[i].head" (click)="gotoHomePage(comment.userId)">
               </div>
               <div class="col-md-10">
-                <h5 style="color: #dddddd" (click)="getoHomePage(comment.userId)">{{comment.userName}}</h5>
+                <h5 style="color: #dddddd" (click)="gotoHomePage(comment.userId)">{{comment.userName}}</h5>
               </div>
             </div>
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复
+                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复
                   {{replyedCommentUsers[i].name}}
                 </label>
               </div>

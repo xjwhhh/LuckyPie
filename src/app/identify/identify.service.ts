@@ -198,10 +198,7 @@ export class IdentifyService {
     data.append("content", comment);
     return this.http.post(this.doAlbumCommentUrl, data, this.options)
       .toPromise()
-      .then(response => {
-        console.log(response);
-        response.json() as ResultMessage
-      })
+      .then(response => response.json() as ResultMessage)
       .catch(this.handleError);
   }
 

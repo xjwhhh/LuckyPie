@@ -8,11 +8,14 @@ import { SearchAlbumComponent } from './album/search_album.component';
 import { SearchShareComponent } from './share/search_share.component';
 import { SearchDatingComponent } from './dating/search_dating.component';
 import { SearchUserComponent } from './user/search_user.component';
+import {CarouselModule} from 'ngx-bootstrap';
+import {UtilService} from 'app/util.service';
 
 @NgModule({
   imports: [
     CommonModule,
     SearchRoutingModule,
+    CarouselModule.forRoot(),
   ],
   declarations: [
     SearchComponent,
@@ -21,7 +24,7 @@ import { SearchUserComponent } from './user/search_user.component';
     SearchDatingComponent,
     SearchAlbumComponent
   ],
-  providers: [SearchService],
+  providers: [SearchService,UtilService],
   bootstrap: [SearchComponent]
 })
 export class SearchModule {}

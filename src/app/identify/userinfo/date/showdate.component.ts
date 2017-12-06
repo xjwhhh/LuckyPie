@@ -26,7 +26,6 @@ export class ShowActivityComponent implements OnInit {
     this.ownerId = this.identifyService.getOwnerId();
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.ownerId).then(user => this.user = user);
-    console.log(this.userId);
     this.getUserDating(this.ownerId);
   }
 
@@ -40,7 +39,6 @@ export class ShowActivityComponent implements OnInit {
         this.selectedDating = dating;
       }
     });
-    console.log(this.selectedDating);
     this.setCurrentStyles();
   }
 
@@ -74,7 +72,6 @@ export class ShowActivityComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

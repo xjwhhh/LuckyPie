@@ -30,27 +30,21 @@ export class UserHomePageComponent implements OnInit {
       this.ownerId = +params['id'];
     });
     this.userId = this.identifyService.getUserId();
-    console.log(this.ownerId);
-    console.log(this.userId);
     this.getUserBasicInfo(this.ownerId);
     this.identifyService.setOwnerId(this.ownerId);
 
   }
 
   getUserBasicInfo(ownerId: number) {
-    // console.log(userId);
     this.identifyService.getUserBasicInfo(ownerId).then(user => {
       this.owner = user;
     });
-    // console.log(userId);
     this.identifyService.getUserFollows(ownerId).then(userIdArray => this.followIdArray = userIdArray);
     this.identifyService.getUserFollowers(ownerId).then(userIdArray => this.followerIdArray = userIdArray);
   }
 
-  //todo null undefinded的问题
 
   startChatting() {
-    // this.
   }
 
   getFollowsInfo() {

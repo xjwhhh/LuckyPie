@@ -16,10 +16,11 @@ export class SearchUserComponent implements OnInit {
 
   content: string;
 
-  userArray:User[];
+  userArray: User[];
 
   constructor(private route: ActivatedRoute,
-    private searchService: SearchService) {
+    private searchService: SearchService,
+    private router:Router) {
 
   }
 
@@ -30,6 +31,14 @@ export class SearchUserComponent implements OnInit {
   }
 
   searchUser() {
-    this.searchService.searchUser(this.content).then(user => this.userArray=user);
+    this.searchService.searchUser(this.content).then(user => this.userArray = user);
+  }
+
+  gotoHomePage(ownerId) {
+    if (ownerId == this.userId) {
+      this.router.navigate(['/identify/info', ownerId]);
+    } else {
+      this.router.navigate(['/identify/homePage', ownerId]);
+    }
   }
 }

@@ -48,7 +48,6 @@ export class ExplorePhotographerComponent implements OnInit {
     this.followButtonContent.splice(0, this.followButtonContent.length);
     this.photographerArray = users;
     for (let i = 0; i < this.photographerArray.length; i++) {
-      console.log(this.photographerArray[i].id);
       this.exploreService.getUserShares(this.photographerArray[i].id).then(shares => this.photographerArray[i].shares = shares);
       this.exploreService.isFollow(this.userId, this.photographerArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }

@@ -20,14 +20,12 @@ import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 export class PostAlbumComponent implements OnInit {
   albumForm: FormGroup;
   Tags: string[];
-  // Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
   selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
 
   imageUrls: string[] = [];
 
-  // ifSelected = [];
   tagStyles = [];
 
   album: Album;
@@ -203,7 +201,6 @@ export class PostAlbumComponent implements OnInit {
   }
 
   check(album: Album) {
-    console.log(album);
     if (album.id != null) {
       alert("发布相册成功");
       this.router.navigate(['/follow', album.userId]);

@@ -59,7 +59,6 @@ export class UserInfoComponent implements OnInit {
     let $this = this;
     let reader = new FileReader();
     reader.readAsDataURL(this.uploader.queue[this.uploader.queue.length - 1].some);
-    console.log(reader);
     reader.onload = function () {
       $this.user.head = this.result;
     }
@@ -73,14 +72,12 @@ export class UserInfoComponent implements OnInit {
   }
 
   check(resultMessage: ResultMessage) {
-    console.log(this.uploader.queue);
     if (resultMessage.result == "success") {
       alert("更新头像成功");
       this.buttonStyle = {
         'display': 'none'
       };
       this.uploader.queue.splice(0, this.uploader.queue.length);
-      console.log(this.uploader.queue);
       this.ifWantChange = false;
     } else {
       this.user.head = this.userHead;

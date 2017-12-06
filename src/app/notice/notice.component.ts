@@ -27,7 +27,6 @@ export class NoticeComponent {
       this.userId = +params['id'];
     });
     this.noticeService.setUserId(this.userId);
-    console.log(this.userId);
   }
 
   getNotice(userId: number) {

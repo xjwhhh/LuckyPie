@@ -33,7 +33,6 @@ export class NoticeThumbComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.noticeService.getUserId();
-    console.log(this.userId);
     this.getNewNoticeArray();
     this.getOldNoticeArray();
   }
@@ -63,7 +62,6 @@ export class NoticeThumbComponent implements OnInit {
 
   setOldNotice(noticeArray: Notice[]) {
     this.oldNoticeArray = noticeArray;
-    console.log(this.oldNoticeArray);
     for (let i = noticeArray.length - 1; i >= 0; i--) {
       let startUserId = noticeArray[i].startUserId;
       this.noticeService.getUserBasicInfo(startUserId).then(user => this.oldStartUserArray.push(user));
@@ -86,7 +84,6 @@ export class NoticeThumbComponent implements OnInit {
 
   refresh(result: ResultMessage) {
     if (result.result == "success") {
-      console.log("34");
       this.getNewNoticeArray();
       this.getOldNoticeArray();
     }

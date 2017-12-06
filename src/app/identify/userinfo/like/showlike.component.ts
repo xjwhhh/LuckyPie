@@ -32,7 +32,6 @@ export class ShowLikeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(" dr");
     this.ownerId = this.identifyService.getOwnerId();
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.ownerId).then(user => this.user = user);
@@ -54,7 +53,6 @@ export class ShowLikeComponent implements OnInit {
   }
 
   getShareComment() {
-    console.log("6789");
     this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
   }
 
@@ -157,7 +155,6 @@ export class ShowLikeComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

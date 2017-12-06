@@ -54,7 +54,6 @@ export class ShowPhotoComponent implements OnInit {
   }
 
   getShareComment() {
-    console.log("6789");
     this.identifyService.getShareComment(this.selectedShare.id).then(comments => this.getCommentUser(comments));
   }
 
@@ -157,7 +156,6 @@ export class ShowPhotoComponent implements OnInit {
       'z-index': '1000',
       'display': 'block'
     };
-    console.log("success");
   }
 
   closeBigPicture() {

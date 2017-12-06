@@ -21,7 +21,6 @@ import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 export class PostShareComponent implements OnInit {
   photoForm: FormGroup;
   Tags: string[];
-  // Tags: string[] = ["情侣", "商务", "民国", "汉服", "孕照", "儿童", "暗黑", "情绪", "私房", "夜景", "校园", "妆容", "古风", "淘宝", "时尚", "和服", "旗袍", "韩系", "欧美", "森系", "少女", "清新", "婚礼", "cos", "胶片", "黑白", "纪实", "日系"];
   selectedTags: string[] = [];
 
   public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
@@ -189,7 +188,6 @@ export class PostShareComponent implements OnInit {
   }
 
   check(share: Share) {
-    console.log(share);
     if (share.id != null) {
       alert("发布分享成功");
       this.router.navigate(['/follow', share.userId]);
