@@ -2,17 +2,13 @@
 <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-
 <div class="container">
   <div class="row">
     <P style="height: 10px"></P>
   </div>
-
   <div class="row">
     <P style="height: 100px"></P>
   </div>
-
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-6" id="image1">
@@ -53,33 +49,86 @@
           <input type="password" #password>
         </div>
       </div>
-      <!-- 记住密码todo -->
-      <!--  <div class="row">
-         <div class="col-md-12">
-           <label><input type="radio" name="rememberPasswordRadioButton" >记住密码</label>
-         </div>
-       </div> -->
       <div class="row">
         <P style="height: 10px"></P>
       </div>
-      <!--   <div class="row">
-          <a>{{user.account}}</a>
-        </div> -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="row">
+            <P style="height: 1px"></P>
+          </div>
+          <div class="row">
           <label (click)="gotoRegister()">没有账号，现在注册</label>
+        </div>
         </div>
         <div class="col-md-4">
           <div align="right">
-            <button type="button" (click)="login(account.value,password.value)">
+            <button type="button" class="btn btn-primary" (click)="login(account.value,password.value)">
               登录
             </button>
           </div>
         </div>
       </div>
-      <!--    <div class="row">
-           <a *ngIf="account.value">34567</a>
-         </div> -->
     </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 advertisement" >
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>爱摄影，找不到模特？</p>
+        <p>想记录，找不到摄影师？</p>
+        <p>在乐拍，一切迎刃而解</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/image/dating.jpg" width="100%" height="100%">
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="assets/image/share.jpg" width="100%" height="100%">
+    </div>
+    <div class="col-md-6 advertisement" >
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>分享美图</p>
+        <p>分享故事</p>
+        <p>分享生活</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-6 advertisement" >
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>你的私人相册</p>
+        <p>你的三餐四季</p>
+        <p>你的独家记忆</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/image/album.jpg" width="100%" height="100%">
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
   </div>
 </div>

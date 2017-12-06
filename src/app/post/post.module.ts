@@ -10,6 +10,9 @@ import {PostAlbumComponent} from './album/album.component';
 import {PostRoutingModule} from './post-routing.module';
 
 import {FileUploadModule} from 'ng2-file-upload';
+import { AlertModule } from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   imports: [
@@ -17,6 +20,8 @@ import {FileUploadModule} from 'ng2-file-upload';
     PostRoutingModule,
     FileUploadModule,
     ReactiveFormsModule,
+    AlertModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
   declarations: [
     PostComponent,

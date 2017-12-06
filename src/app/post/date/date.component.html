@@ -6,7 +6,6 @@
   <P style="height: 20px"></P>
 </div>
 <div class="row">
-  <!-- <div class="col-md-1"></div> -->
   <div class="col-md-8">
     <form [formGroup]="activityForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
@@ -36,15 +35,22 @@
         <div class="row">
           <div *ngFor="let tag of Tags;let i= index">
             <div class="col-md-1">
-              <button [ngStyle]="tagStyles[i]" type="button" (click)="onClickTag(tag,i)">{{tag}}</button>
+              <button [ngStyle]="tagStyles[i]" type="button" class="btn btn-primary" (click)="onClickTag(tag,i)">{{tag}}</button>
             </div>
           </div>
         </div>
       </div>
       <div formArrayName="photos">
         <div class="row">
-          <label>添加图片</label>
-          <label>最多添加九张，每张大小不超过20M</label>
+          <P style="height: 10px"></P>
+        </div>
+        <div class="row">
+          <alert type="info">
+            添加图片，最多添加九张，每张大小不超过20M
+          </alert>
+        </div>
+        <div class="row">
+          <P style="height: 10px"></P>
         </div>
         <div class="row">
           <div *ngFor="let photo of photos.controls; let i=index" [formGroupName]="i">
@@ -56,23 +62,30 @@
           </div>
         </div>
         <div class="row">
+          <P style="height: 10px"></P>
+        </div>
+        <div class="row">
           <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
+        </div>
+        <div class="row">
+          <P style="height: 5px"></P>
         </div>
       </div>
     </form>
     <div>
-      <button type="button" (click)="upload(photoAddress.value,photoTime.value,cost.value,desc.value)">上传</button>
+      <button type="button" class="btn btn-primary" (click)="upload(photoAddress.value,photoTime.value,cost.value,desc.value)">上传</button>
     </div>
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">
-    <p>注意事项 </p>
-    <p>1 了解乐拍约拍机制：发布约拍信息，有意的模特或摄影应征发起约拍，你就可以看到对方联系方式。同样你发起约拍对方也可以看到你的联系方式。 </p>
-    <p>注：勿在约拍信息和图片中留联系方式。 </p>
-    <p>2 摄会社作品发布原则：我们默认所有摄影、模特、化妆师等发布的图片/相册/作品均为个人原创作品，尊重他人劳动成果和作品。 </p>
+        <alert type="info">
+    <h4 style="text-align: center">注意事项 </h4>
+    <p>1.了解乐拍约拍机制：发布约拍信息，有意的摄影师或者模特会与你联系</p>
+    <p>2.乐拍作品发布原则：我们默认所有摄影、模特发布的图片/相册作品均为个人原创作品，尊重他人劳动成果和作品。 </p>
     <p>注：引用他人作品务必注明来源和出处，明确表明非个人作品，如被原摄影投诉侵删。 </p>
-    <p>3 信息发布请遵循相关法律法规、道德伦理和摄会社社区发布原则。 </p>
+    <p>3.信息发布请遵循相关法律法规、道德伦理和乐拍社区发布原则。 </p>
     <p>注：约拍作品禁露点；发布信息两天通过一条，重复发布以后一条为准。 </p>
-    <p>4 所有对约拍信息的处理遵循第1、2、3条。 </p>
+    <p>4.所有对约拍信息的处理遵循第1、2、3条。 </p>
+  </alert>
   </div>
 </div>

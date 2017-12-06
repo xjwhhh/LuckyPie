@@ -41,9 +41,8 @@ export class PostShareComponent implements OnInit {
     this.createForm();
     this.userId = this.postService.getUserId();
     for (let i = 0; i < this.Tags.length; i++) {
-      // this.ifSelected.push(false);
       this.tagStyles.push({
-        'background-color': 'white'
+        'background-color': 'black'
       });
     }
   }
@@ -144,12 +143,12 @@ export class PostShareComponent implements OnInit {
     if (isExist) {
       this.selectedTags.splice(index, 1);
       this.tagStyles[i] = {
-        'background-color': 'white'
+        'background-color': 'black'
       };
     } else {
       this.selectedTags.push(tagValue);
       this.tagStyles[i] = {
-        'background-color': 'red'
+        'background-color': 'green'
       };
     }
   }

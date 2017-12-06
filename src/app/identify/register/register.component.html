@@ -2,17 +2,13 @@
 <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-
 <div class="container">
   <div class="row">
     <P style="height: 10px"></P>
   </div>
-
   <div class="row">
     <P style="height: 100px"></P>
   </div>
-
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-6" id="image1">
@@ -42,17 +38,6 @@
           <input type="text" #account>
         </div>
       </div>
-      <!-- <div class="row">
-        <P style="height: 10px"></P>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          用户名
-        </div>
-        <div class="col-md-8">
-          <input type="text">
-        </div>
-      </div> -->
       <div class="row">
         <P style="height: 10px"></P>
       </div>
@@ -79,13 +64,18 @@
         <P style="height: 10px"></P>
       </div>
       <div class="row">
-        <div class="col-md-8">
-          <label (click)="gotoLogin()">已有账号，直接登录</label>
-          <!-- <a href="http://localhost:4200/identify/login">已有账号，直接登录</a> -->
+         <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="row">
+            <P style="height: 1px"></P>
+          </div>
+          <div class="row">
+            <label (click)="gotoLogin()">已有账号，直接登录</label>
+          </div>
         </div>
         <div class="col-md-4">
           <div align="right">
-            <button type="button" (click)="register(account.value,password.value,ensurePassword.value)">
+            <button type="button" class="btn btn-primary" (click)="register(account.value,password.value,ensurePassword.value)">
               注册
             </button>
           </div>
@@ -93,5 +83,63 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
 </div>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 advertisement">
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>爱摄影，找不到模特？</p>
+        <p>想记录，找不到摄影师？</p>
+        <p>在乐拍，一切迎刃而解</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/image/dating.jpg" width="100%" height="100%">
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="assets/image/share.jpg" width="100%" height="100%">
+    </div>
+    <div class="col-md-6 advertisement">
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>分享美图</p>
+        <p>分享故事</p>
+        <p>分享生活</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-6 advertisement">
+      <div class="row">
+        <P style="height: 50px"></P>
+      </div>
+      <div class="row">
+        <p>你的私人相册</p>
+        <p>你的三餐四季</p>
+        <p>你的独家记忆</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/image/album.jpg" width="100%" height="100%">
+    </div>
+  </div>
+  <div class="row">
+    <P style="height: 50px"></P>
+  </div>
+</div>

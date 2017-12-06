@@ -6,10 +6,9 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  // styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // @Output() onLogin = new EventEmitter<boolean>();
   user: User = new User();
 
   constructor(private identifyService: IdentifyService, private router: Router) {

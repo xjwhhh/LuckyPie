@@ -7,7 +7,7 @@ import {IdentifyService} from 'app/identify/identify.service';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
-  // styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   user: User = new User();
