@@ -21,3 +21,15 @@ textarea {
 .header {
   background-color: black;
 }
+
+.footer{
+ background-color: black;
+}
+
+.bigText{
+  color: #ff9933;
+}
+
+.smallText{
+  color: grey;
+}
