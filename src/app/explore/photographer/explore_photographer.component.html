@@ -7,13 +7,13 @@
     <div class="col-md-1"></div>
     <div class="col-md-4">
       <div class="col-md-4">
-        <label (click)="selectHotPhotographers()">热门摄影师</label>
+        <label [ngStyle]="labelStyles[0]" (click)="selectHotPhotographers()">热门摄影师</label>
       </div>
       <div class="col-md-4">
-        <label (click)="selectBestPhotographers()">最受关注</label>
+        <label [ngStyle]="labelStyles[1]" (click)="selectBestPhotographers()">最受关注</label>
       </div>
       <div class="col-md-4">
-        <label (click)="selectNewPhotographers()">潜力新人</label>
+        <label [ngStyle]="labelStyles[2]" (click)="selectNewPhotographers()">潜力新人</label>
       </div>
     </div>
   </div>

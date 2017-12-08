@@ -23,7 +23,7 @@ import { UtilService } from 'app/util.service';
 
 export class FollowComponent implements OnInit {
 
-  shares: Share[];
+  shares: Share[]=[];
 
   users: User[] = [];
 
@@ -71,9 +71,11 @@ export class FollowComponent implements OnInit {
   }
 
   setShares(shares: Share[]) {
-    this.shares = shares;
-    for (let i = 0; i < shares.length; i++) {
-      if (shares[i].thumb == 1) {
+    for(let i=shares.length-1;i>=0;i--){
+      this.shares.push(shares[i]);
+    }
+    for (let i = 0; i < this.shares.length; i++) {
+      if (this.shares[i].thumb == 1) {
         this.thumbUrl.push("assets/image/thumb1.png");
         this.thumb.push(true);
       } else {

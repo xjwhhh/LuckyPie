@@ -16,8 +16,8 @@ export class UserHomePageComponent implements OnInit {
 
   owner: User = new User();
 
-  followIdArray: number[];
-  followerIdArray: number[];
+  followIdArray: number[]=[];
+  followerIdArray: number[]=[];
 
   followArray: User[] = [];
 

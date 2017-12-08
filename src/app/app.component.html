@@ -11,7 +11,7 @@
       <div class="col-md-1"></div>
       <div class="col-md-3">
         <div class="col-md-9">
-          <input type="text" placeholder="想搜点什么？" #searchContent>
+          <input type="text" placeholder=" 想搜点什么？" style="border-radius: 10px" #searchContent>
         </div>
         <div class="col-md-3">
           <img src="assets/image/search.png" (click)="search(searchContent.value)">
@@ -52,7 +52,7 @@
 <router-outlet></router-outlet>
 <div class="container">
   <div class="row">
-    <p style="height: 100px"></p>
+    <p style="height: 550px"></p>
   </div>
 </div>
 <div class="footer">
@@ -62,7 +62,10 @@
         <div class="row">
           <h4 class="bigText">关于我们</h4>
         </div>
-        <div class="row smallText" >
+             <div class="row">
+              <p style="height: 10px"></p>
+            </div>
+        <div class="row smallText">
           <p style="font-size: 12px">已经有超过百万的摄影爱好者加入了乐拍</p>
           <p style="font-size: 12px">在这里，发现基于共同兴趣的同好，鼓励原创和分享精神</p>
           <p style="font-size: 12px">除了美好的摄影和技能，我们更在意影像背后价值观的认同</p>
@@ -75,6 +78,9 @@
             <h4 class="bigText">下载APP</h4>
           </div>
         </div>
+             <div class="row">
+              <p style="height: 10px"></p>
+            </div>
         <div class="row">
           <div class="col-md-6">
             <img src="assets/image/QRCode.jpg" width="80%" height="80%">
@@ -84,7 +90,7 @@
               <p style="height: 10px"></p>
             </div>
             <div class="row  smallText">
-              <label >iphone版下载</label>
+              <label>iphone版下载</label>
             </div>
             <div class="row">
               <p style="height: 10px"></p>
@@ -96,26 +102,32 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="row" >
-           <div class="col-md-8"></div>
-           <div class="col-md-4" style="text-align: center;">
-          <h4 class="bigText">关注乐拍</h4>
+        <div class="row">
+          <div class="col-md-8"></div>
+          <div class="col-md-4" style="text-align: center;">
+            <h4 class="bigText">关注乐拍</h4>
+          </div>
         </div>
-        </div>
+             <div class="row">
+              <p style="height: 10px"></p>
+            </div>
         <div class="row">
           <div class="col-md-8"></div>
           <div class="col-md-2">
+            <a href="https://weibo.com/" target="_blank">
             <img src="assets/image/weibo.png" width="100%" height="100%">
+          </a>
           </div>
           <div class="col-md-2">
-            <img src="assets/image/weChat.png"  width="100%" height="100%">
+            <a href="https://wx.qq.com/" target="_blank">
+            <img src="assets/image/weChat.png" width="100%" height="100%">
+          </a>
           </div>
         </div>
       </div>
     </div>
-      <div class="row">
-    <p style="height: 20px"></p>
-  </div>
+    <div class="row">
+      <p style="height: 20px"></p>
+    </div>
   </div>
 </div>
-

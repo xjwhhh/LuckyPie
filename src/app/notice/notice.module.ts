@@ -11,12 +11,14 @@ import {
   NoticeService
 } from './notice.service';
 import {BsDropdownModule} from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     NoticeRoutingModule,
     BsDropdownModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
   declarations: [
     NoticeComponent,

@@ -52,11 +52,12 @@ export class HotComponent implements OnInit {
   }
 
   getHotShares(): void {
-    this.hotService.getHotShares().then(shares => this.setShares(shares));
+    this.hotService.getHotShares(this.userId).then(shares => this.setShares(shares));
   }
 
   setShares(shares: Share[]) {
     this.shares = shares;
+    console.log(shares);
     for (let i = 0; i < shares.length; i++) {
       if (shares[i].thumb == 1) {
         this.thumbUrl.push("assets/image/thumb1.png");
@@ -203,7 +204,6 @@ export class HotComponent implements OnInit {
     };
   }
 
-  fixheight = window.outerHeight;
 
 
 }

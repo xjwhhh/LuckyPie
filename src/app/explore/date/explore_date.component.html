@@ -9,9 +9,9 @@
       <div class="col-md-1">
         <label>地點：</label>
       </div>
-      <div *ngFor="let address of addresses">
+      <div *ngFor="let address of addresses;let i= index">
         <div class="col-md-1">
-          <label (click)="selectAddress(address)">{{address}}</label>
+          <label [ngStyle]="addressStyles[i]" (click)="selectAddress(address,i)">{{address}}</label>
         </div>
       </div>
     </div>
@@ -25,9 +25,9 @@
       <div class="col-md-1">
         <label>费用：</label>
       </div>
-      <div *ngFor="let costType of costTypes">
+      <div *ngFor="let costType of costTypes;let i=index">
         <div class="col-md-1">
-          <label (click)="selectCost(costType)">{{costType}}</label>
+          <label [ngStyle]="costTypeStyles[i]" (click)="selectCost(costType,i)">{{costType}}</label>
         </div>
       </div>
     </div>
@@ -41,9 +41,9 @@
       <div class="col-md-1">
         <label>身份：</label>
       </div>
-      <div *ngFor="let identity of identities">
+      <div *ngFor="let identity of identities;let i=index">
         <div class="col-md-1">
-          <label (click)="selectIdentity(identity)">{{identity}}</label>
+          <label [ngStyle]="identityStyles[i]" (click)="selectIdentity(identity,i)">{{identity}}</label>
         </div>
       </div>
     </div>
@@ -57,9 +57,9 @@
       <div class="col-md-1">
         <label>性別：</label>
       </div>
-      <div *ngFor="let gender of genders">
+      <div *ngFor="let gender of genders;let i=index">
         <div class="col-md-1">
-          <label (click)="selectGender(gender)">{{gender}}</label>
+          <label [ngStyle]="genderStyles[i]" (click)="selectGender(gender,i)">{{gender}}</label>
         </div>
       </div>
     </div>

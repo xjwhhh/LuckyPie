@@ -28,6 +28,7 @@ export class UserPhotoComponent implements OnInit {
 
   commentAreaStyle = [];
 
+// test:string;
   constructor(private identifyService: IdentifyService,
               private route: ActivatedRoute, private router: Router,
               private utilService: UtilService) {
@@ -37,6 +38,8 @@ export class UserPhotoComponent implements OnInit {
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
     this.getUserShares(this.userId);
+  // this.test="";
+    
   }
 
   getUserShares(userId: number) {

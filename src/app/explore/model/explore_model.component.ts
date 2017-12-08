@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -7,7 +7,7 @@ import {
   Share,
   ResultMessage
 } from 'app/entity/entity';
-import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'explore-model',
@@ -24,8 +24,9 @@ export class ExploreModelComponent implements OnInit {
 
   followButtonContent = [];
 
-  constructor(private exploreService: ExploreService, private router: Router) {
-  }
+  labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
+
+  constructor(private exploreService: ExploreService, private router: Router) {}
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();
@@ -33,14 +34,20 @@ export class ExploreModelComponent implements OnInit {
   }
 
   selectHotModels() {
+    this.resetLabelStyles();
+    this.labelStyles[0] = { 'background-color': '#97cbff' };
     this.exploreService.getHotModel().then(users => this.setModels(users));
   }
 
   selectBestModels() {
+    this.resetLabelStyles();
+    this.labelStyles[1] = { 'background-color': '#97cbff' };
     this.exploreService.getBestModel().then(users => this.setModels(users));
   }
 
   selectNewModels() {
+    this.resetLabelStyles();
+    this.labelStyles[2] = { 'background-color': '#97cbff' };
     this.exploreService.getNewModel().then(users => this.setModels(users));
   }
 
@@ -52,6 +59,10 @@ export class ExploreModelComponent implements OnInit {
       this.exploreService.getUserShares(this.modelArray[i].id).then(shares => this.modelArray[i].shares = shares);
       this.exploreService.isFollow(this.userId, this.modelArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }
+  }
+
+  resetLabelStyles() {
+    this.labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
   }
 
   setFollowButton(resultMessage: ResultMessage) {

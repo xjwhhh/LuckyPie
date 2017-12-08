@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" id="shareInfo">
+    <div  class="col-md-3" id="shareInfo">
       <div class="col-md-1"></div>
       <div class="col-md-11">
         <div class="row">
@@ -86,6 +86,17 @@
           <P style="height: 20px"></P>
         </div>
         <div class="row">
+          <div class="col-md-9"></div>
+          <div class="col-md-3">
+            <a *ngIf="selectedShare.imageUrls" href="http://service.weibo.com/share/share.php?appkey=xxxx&url=https://weibo.com/&title={{selectedShare.desc}}&pic={{selectedShare.imageUrls[0]}}" target="_blank">
+          <img src="assets/image/weibo.png" width="100%" height="100%">
+        </a>
+          </div>
+        </div>
+        <div class="row">
+          <P style="height: 10px"></P>
+        </div>
+        <div class="row">
           <textarea class="commentArea" placeholder="写下你对他的评论吧 " #comment></textarea>
         </div>
         <div class="row">
@@ -107,8 +118,8 @@
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复
-                  {{replyedCommentUsers[i].name}}</label>
+                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                </label>
               </div>
             </div>
             <div class="row">
@@ -131,6 +142,3 @@
     </div>
   </div>
 </div>
-
-
-
