@@ -7,10 +7,10 @@ import {
   FileUploader
 } from 'ng2-file-upload';
 
-import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Photo, Share, Tags} from 'app/entity/entity';
-import {PostService} from 'app/post/post.service';
-import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Photo, Share, Tags } from 'app/entity/entity';
+import { PostService } from 'app/post/post.service';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class PostShareComponent implements OnInit {
   Tags: string[];
   selectedTags: string[] = [];
 
-  public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
+  public uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
 
   imageUrls: string[] = [];
 
@@ -33,8 +33,7 @@ export class PostShareComponent implements OnInit {
 
   tagStyles = [];
 
-  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute, private router: Router) {
-  }
+  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.Tags = Tags;
@@ -84,7 +83,7 @@ export class PostShareComponent implements OnInit {
       // console.log(i);
       let reader = new FileReader();
       reader.readAsDataURL(q.some); //生成base64图片地址，实现本地预览。
-      reader.onload = function () {
+      reader.onload = function() {
         if (selectedArr.length > 0) {
           let isSame = false; //标识是否选择过同一张图片
           selectedArr.forEach((url, j) => {
@@ -171,6 +170,8 @@ export class PostShareComponent implements OnInit {
   upload(desc: string) {
     if (desc == "") {
       alert("未填写分享內容");
+    } else if (this.photos.length > 9) {
+      alert("超过九张图片");
     } else {
       this.share = new Share();
       this.share.userId = this.userId;

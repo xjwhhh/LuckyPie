@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
   login(account: string, password: string) {
     if (account == "") {
       alert("未输入用户名");

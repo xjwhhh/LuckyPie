@@ -56,7 +56,7 @@
           <div *ngFor="let photo of photos.controls; let i=index" [formGroupName]="i">
             <div class="col-md-4">
               <div class="form-group">
-                <img src="{{photo.value.url}}" width="100%" (click)="deleteImage(photo.value.url)">
+                <img src="{{photo.value.url}}" width="200px" height="150px" (click)="deleteImage(photo.value.url)">
               </div>
             </div>
           </div>

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {IdentifyService} from 'app/identify/identify.service';
-import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
-import {UtilService} from 'app/util.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { IdentifyService } from 'app/identify/identify.service';
+import { Share, User, ResultMessage, Comment } from 'app/entity/entity';
+import { UtilService } from 'app/util.service';
 
 @Component({
   selector: 'user-photo',
@@ -28,18 +28,15 @@ export class UserPhotoComponent implements OnInit {
 
   commentAreaStyle = [];
 
-// test:string;
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute, private router: Router,
-              private utilService: UtilService) {
-  }
+    private route: ActivatedRoute, private router: Router,
+    private utilService: UtilService) {}
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
     this.identifyService.getUserBasicInfo(this.userId).then(user => this.user = user);
     this.getUserShares(this.userId);
-  // this.test="";
-    
+
   }
 
   getUserShares(userId: number) {
@@ -96,8 +93,7 @@ export class UserPhotoComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
-    ;
+    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
@@ -175,7 +171,21 @@ export class UserPhotoComponent implements OnInit {
     };
   }
 
-  fixheight = window.outerHeight;
+  deleteShare(){
+    this.identifyService.deleteShare(this.selectedShare.id).then(resultMessage=>this.checkDelete(resultMessage));
+  }
+
+  checkDelete(resultMessage:ResultMessage){
+    if(resultMessage.result=="success"){
+      alert("删除分享成功");
+      this.closeBigPicture();
+      this.getUserShares(this.userId);
+    }
+    else{
+      alert("删除分享失败");
+    }
+  }
+
 
 
 }

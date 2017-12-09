@@ -87,7 +87,20 @@ export class UserActivityComponent implements OnInit {
     };
   }
 
-  fixheight = window.outerHeight;
+   deleteDating(){
+    this.identifyService.deleteDating(this.selectedDating.id).then(resultMessage=>this.checkDelete(resultMessage));
+  }
+
+  checkDelete(resultMessage:ResultMessage){
+    if(resultMessage.result=="success"){
+      alert("删除约拍成功");
+      this.closeBigPicture();
+      this.getUserDating(this.userId);
+    }
+    else{
+      alert("删除约拍失败");
+    }
+  }
 
 
 }

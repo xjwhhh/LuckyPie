@@ -245,5 +245,39 @@ export class IdentifyService {
       .catch(this.handleError);
   }
 
+    private deleteShareUrl = "http://localhost/LuckyPie-Server/api/post/post/share/delete";
+
+  deleteShare(shareId:number): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("shareId", shareId + "");
+    return this.http.post(this.deleteShareUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
+      private deleteAlbumUrl = "http://localhost/LuckyPie-Server/api/post/post/album/delete";
+
+  deleteAlbum(albumId:number): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("albumId", albumId + "");
+    return this.http.post(this.deleteAlbumUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
+
+      private deleteDatingUrl = "http://localhost/LuckyPie-Server/api/post/post/dating/delete";
+
+  deleteDating(datingId:number): Promise<ResultMessage> {
+    let data = new URLSearchParams();
+    data.append("datingId", datingId + "");
+    return this.http.post(this.deleteDatingUrl, data, this.options)
+      .toPromise()
+      .then(response => response.json() as ResultMessage)
+      .catch(this.handleError);
+  }
+
 
 }

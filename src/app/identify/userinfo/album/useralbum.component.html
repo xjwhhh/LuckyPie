@@ -2,11 +2,17 @@
 <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-<div *ngIf="albums" class="row">
+<!-- <div *ngIf="albums" class="row">
   <div *ngFor="let album of albums">
-    <div class="col-md-3">
-      <img [src]="album.imageUrls[0]" width="100%" (click)="onClickAlbum(album.id)">
+    <div class="col-md-3" style="margin-bottom: 5px">
+      <img [src]="album.imageUrls[0]" width="200px" height="125px" (click)="onClickAlbum(album.id)">
+    </div>
+  </div>
+</div> -->
+<div class="waterfall">
+  <div *ngFor="let album of albums">
+    <div class="item">
+      <img [src]="album.imageUrls[0]" (click)="onClickAlbum(album.id)">
     </div>
   </div>
 </div>
@@ -90,6 +96,20 @@
           <P style="height: 20px"></P>
         </div>
         <div class="row">
+          <div class="col-md-6">
+            <label (click)="deleteAlbum()">删除相册</label>
+          </div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <a *ngIf="selectedAlbum.imageUrls" href="http://service.weibo.com/share/share.php?appkey=xxxx&url=https://weibo.com/&title={{selectedAlbum.desc}}&pic={{selectedAlbum.imageUrls[0]}}" target="_blank">
+          <img src="assets/image/weibo.png" width="100%" height="100%">
+        </a>
+          </div>
+        </div>
+        <div class="row">
+          <P style="height: 10px"></P>
+        </div>
+        <div class="row">
           <textarea class="commentArea" placeholder="写下你对他的评论吧 " #comment></textarea>
         </div>
         <div class="row">
@@ -111,8 +131,8 @@
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复
-                  {{replyedCommentUsers[i].name}}</label>
+                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                </label>
               </div>
             </div>
             <div class="row">

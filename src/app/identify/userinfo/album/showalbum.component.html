@@ -3,10 +3,17 @@
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-<div *ngIf="albums" class="row">
+<!-- <div *ngIf="albums" class="row">
   <div *ngFor="let album of albums">
     <div class="col-md-3">
-      <img [src]="album.imageUrls[0]" width="100%" (click)="onClickAlbum(album.id)">
+      <img [src]="album.imageUrls[0]" width="200px" height="125px" (click)="onClickAlbum(album.id)">
+    </div>
+  </div>
+</div> -->
+<div class="waterfall">
+  <div *ngFor="let album of albums">
+    <div class="item">
+      <img [src]="album.imageUrls[0]"  (click)="onClickAlbum(album.id)">
     </div>
   </div>
 </div>

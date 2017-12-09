@@ -38,3 +38,26 @@ label {
   color: #777777;
 }
 
+.waterfall {
+  -webkit-column-count: 4;
+  /* Safari 和 Chrome */
+  column-count: 4;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+  column-gap: 1em;
+}
+
+.item {
+  padding: 1em;
+  margin: 0 0 1em 0;
+  -moz-page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+  border: 1px solid #dddddd;
+}
+
+.item img {
+  width: 100%;
+  margin-bottom: 10px;
+
+}

@@ -170,5 +170,18 @@ export class UserAlbumComponent implements OnInit {
     };
   }
 
-  fixheight = window.outerHeight;
+  deleteAlbum(){
+    this.identifyService.deleteAlbum(this.selectedAlbum.id).then(resultMessage=>this.checkDelete(resultMessage));
+  }
+
+  checkDelete(resultMessage:ResultMessage){
+    if(resultMessage.result=="success"){
+      alert("删除相册成功");
+      this.closeBigPicture();
+      this.getUserAlbums(this.userId);
+    }
+    else{
+      alert("删除相册失败");
+    }
+  }
 }

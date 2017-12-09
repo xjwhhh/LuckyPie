@@ -7,10 +7,10 @@ import {
 import {
   FileUploader
 } from 'ng2-file-upload';
-import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Photo, Dating, Tags} from 'app/entity/entity';
-import {PostService} from 'app/post/post.service';
-import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Photo, Dating, Tags } from 'app/entity/entity';
+import { PostService } from 'app/post/post.service';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class PostDateComponent implements OnInit {
   Tags: string[];
   selectedTags: string[] = [];
 
-  public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
+  public uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
 
   imageUrls: string[] = [];
 
@@ -37,8 +37,7 @@ export class PostDateComponent implements OnInit {
   tagStyles = [];
 
 
-  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {
-  }
+  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {}
 
 
   ngOnInit(): void {
@@ -55,8 +54,7 @@ export class PostDateComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   ngOnChanges() {
 
@@ -127,7 +125,7 @@ export class PostDateComponent implements OnInit {
       // console.log(i);
       let reader = new FileReader();
       reader.readAsDataURL(q.some); //生成base64图片地址，实现本地预览。
-      reader.onload = function () {
+      reader.onload = function() {
         if (selectedArr.length > 0) {
           let isSame = false; //标识是否选择过同一张图片
           selectedArr.forEach((url, j) => {
@@ -214,6 +212,7 @@ export class PostDateComponent implements OnInit {
   }
 
   upload(photoAddress: string, photoTime: string, cost: string, desc: string) {
+    console.log(photoTime);
     if (photoAddress == "") {
       alert("未填写拍摄地点");
     } else if (photoTime == "") {
@@ -222,6 +221,8 @@ export class PostDateComponent implements OnInit {
       alert("未填写费用要求");
     } else if (desc == "") {
       alert("未填写约拍描述");
+    } else if (this.photos.length > 9) {
+      alert("超过九张图片");
     } else {
       this.dating = new Dating();
       this.dating.userId = this.userId;
