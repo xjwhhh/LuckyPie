@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {IdentifyService} from 'app/identify/identify.service';
-import {Dating, User,ResultMessage} from 'app/entity/entity';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { IdentifyService } from 'app/identify/identify.service';
+import { Dating, User, ResultMessage } from 'app/entity/entity';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'user-activity',
@@ -17,9 +18,12 @@ export class UserActivityComponent implements OnInit {
 
   selectedDating: Dating = new Dating();
 
+  modalRef: BsModalRef;
+
   constructor(private identifyService: IdentifyService,
-              private route: ActivatedRoute, private router: Router) {
-  }
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: BsModalService) {}
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
@@ -43,7 +47,7 @@ export class UserActivityComponent implements OnInit {
 
   gotoTagDetail(tag: string): void {
     this.router.navigate(['/explore/' + this.userId +
-    '/tagdetail', tag
+      '/tagdetail', tag
     ]);
   }
 
@@ -87,20 +91,23 @@ export class UserActivityComponent implements OnInit {
     };
   }
 
-   deleteDating(){
-    this.identifyService.deleteDating(this.selectedDating.id).then(resultMessage=>this.checkDelete(resultMessage));
+  deleteDating(template: TemplateRef < any > ) {
+    this.modalRef = this.modalService.show(template);
   }
 
-  checkDelete(resultMessage:ResultMessage){
-    if(resultMessage.result=="success"){
+  checkDelete(resultMessage: ResultMessage) {
+    if (resultMessage.result == "success") {
       alert("删除约拍成功");
       this.closeBigPicture();
       this.getUserDating(this.userId);
-    }
-    else{
+    } else {
       alert("删除约拍失败");
     }
   }
 
+  confirmDelete() {
+    this.identifyService.deleteDating(this.selectedDating.id).then(resultMessage => this.checkDelete(resultMessage));
+    this.modalRef.hide();
+  }
 
 }

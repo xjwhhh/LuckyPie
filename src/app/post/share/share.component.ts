@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  TemplateRef
 } from '@angular/core';
 
 import {
@@ -8,9 +9,13 @@ import {
 } from 'ng2-file-upload';
 
 import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Photo, Share, Tags } from 'app/entity/entity';
+import { Photo, Share, Tags,User } from 'app/entity/entity';
 import { PostService } from 'app/post/post.service';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+// import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 
 
 @Component({
@@ -33,7 +38,22 @@ export class PostShareComponent implements OnInit {
 
   tagStyles = [];
 
-  constructor(private fb: FormBuilder, private postService: PostService, private route: ActivatedRoute, private router: Router) {}
+  descLength: number = 0;
+
+  description:string="";
+
+  modalRef: BsModalRef;
+
+  followIdArray: number[] = [];
+  followerIdArray: number[] = [];
+
+    followArray: User[] = [];
+
+  constructor(private fb: FormBuilder,
+    private postService: PostService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.Tags = Tags;
@@ -44,6 +64,8 @@ export class PostShareComponent implements OnInit {
         'background-color': 'black'
       });
     }
+    this.postService.getUserFollows(this.userId).then(userIdArray => this.followIdArray = userIdArray);
+    this.postService.getUserFollowers(this.userId).then(userIdArray => this.followerIdArray = userIdArray);
   }
 
   ngAfterViewInit(): void {
@@ -194,6 +216,33 @@ export class PostShareComponent implements OnInit {
     } else {
       alert("发布分享失败");
     }
+  }
+
+  isAt(desc: string, template: TemplateRef < any > ) {
+    if (desc.length > this.descLength) {
+      if (desc.charAt(desc.length - 1) == "@") {
+        this.openModal(template);
+      }
+    }
+    this.descLength = desc.length;
+
+
+  }
+
+  openModal(template: TemplateRef < any > ) {
+    this.followArray.splice(0, this.followArray.length);
+    for (let i = 0; i < this.followIdArray.length; i++) {
+      this.postService.getUserBasicInfo(this.followIdArray[i]).then(user => this.followArray.push(user));
+    }
+    for (let i = 0; i < this.followerIdArray.length; i++) {
+      this.postService.getUserBasicInfo(this.followerIdArray[i]).then(user => this.followArray.push(user));
+    }
+    this.modalRef = this.modalService.show(template);
+  }
+
+  selectAtUser(userId:number,userName:string,desc:string){
+    this.modalRef.hide();
+    this.description=this.description+userName;
   }
 
 

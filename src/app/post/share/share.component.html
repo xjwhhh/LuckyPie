@@ -10,7 +10,7 @@
     <form [formGroup]="photoForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
         <label>发布内容</label>
-        <input class="form-control" formControlName="desc" #desc>
+        <input class="form-control" formControlName="desc" [(ngModel)]="description" (keyup)="isAt(desc.value,template)" #desc>
       </div>
       <div formArrayName="tags">
         <div class="row">
@@ -45,13 +45,13 @@
             </div>
           </div>
         </div>
-              <div class="row">
+        <div class="row">
           <P style="height: 10px"></P>
         </div>
         <div class="row">
           <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
         </div>
-              <div class="row">
+        <div class="row">
           <P style="height: 5px"></P>
         </div>
       </div>
@@ -62,15 +62,39 @@
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">
-       <alert type="info">
-    <h4 style="text-align: center">注意事项 </h4>
-    <p>1.我们默认所有摄影、模特、发布的图片/相册/作品均为个人原创作品，尊重他人劳动成果和作品。 </p>
-    <p>注：注意个人作品保护，该打水印还是打水印； 我们会采用若干技术措施以确保您的作品不被轻易盗用； 不允许在作品页发布非自己个人作品。 </p>
-    <p>2.作品发布请遵循相关法律法规、道德伦理和乐拍社区发布原则。 </p>
-    <p>注：引用他人作品务必注明来源和出处，明确表明非个人作品，如被原摄影投诉侵删。 </p>
-    <p>3.所有对个人作品相册的处理遵循第1、2条。 </p>
-    <p>4.我们可能在部分情况下引用您发布的作品，遵循非商用原则且会注明您昵称并附上您的乐拍个人主页。 </p>
-    <p>注：如果可能我们会尽力让您先行知晓</p>
-  </alert>
+    <alert type="info">
+      <h4 style="text-align: center">注意事项 </h4>
+      <p>1.我们默认所有摄影、模特、发布的图片/相册/作品均为个人原创作品，尊重他人劳动成果和作品。 </p>
+      <p>注：注意个人作品保护，该打水印还是打水印； 我们会采用若干技术措施以确保您的作品不被轻易盗用； 不允许在作品页发布非自己个人作品。 </p>
+      <p>2.作品发布请遵循相关法律法规、道德伦理和乐拍社区发布原则。 </p>
+      <p>注：引用他人作品务必注明来源和出处，明确表明非个人作品，如被原摄影投诉侵删。 </p>
+      <p>3.所有对个人作品相册的处理遵循第1、2条。 </p>
+      <p>4.我们可能在部分情况下引用您发布的作品，遵循非商用原则且会注明您昵称并附上您的乐拍个人主页。 </p>
+      <p>注：如果可能我们会尽力让您先行知晓</p>
+    </alert>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">想@谁？</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let user of followArray" (click)="selectAtUser(user.id,user.name,desc.value)">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+          <img id="head_portrait" [src]="user.head">
+        </div>
+        <div class="col-md-2">
+          {{user.name}}
+        </div>
+      </div>
+              <div class="row">
+          <P style="height: 1px"></P>
+        </div>
+    </div>
+  </div>
+</ng-template>

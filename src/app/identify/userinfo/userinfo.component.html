@@ -62,9 +62,24 @@
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-9">
-        <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()"/>
-        <button type="button" [ngStyle]="buttonStyle" (click)="updateHead()">上传</button>
-        <button type="button" [ngStyle]="buttonStyle" (click)="cancel()">取消</button>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-6">
+            <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" />
+          </div>
+        </div>
+        <div class="row">
+          <P style="height: 5px"></P>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" [ngStyle]="buttonStyle" (click)="updateHead()">上传</button>
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" [ngStyle]="buttonStyle" (click)="cancel()">取消</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -94,8 +109,8 @@
     </div>
   </div>
   <div class="row">
-  <P style="height: 20px"></P>
-</div>
+    <P style="height: 20px"></P>
+  </div>
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">

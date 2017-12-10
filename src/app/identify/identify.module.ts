@@ -24,6 +24,7 @@ import { ChatComponent } from './userinfo/chat/chat.component';
 import { CarouselModule } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ButtonsModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ButtonsModule } from 'ngx-bootstrap';
     IdentifyRoutingModule,
     CarouselModule.forRoot(),
     ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
     FileUploadModule,
     ReactiveFormsModule,
   ],

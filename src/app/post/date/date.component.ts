@@ -1,16 +1,18 @@
 import {
   Component,
   OnInit,
-  OnChanges
+  OnChanges,
+  TemplateRef
 } from '@angular/core';
 
 import {
   FileUploader
 } from 'ng2-file-upload';
 import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Photo, Dating, Tags } from 'app/entity/entity';
+import { Photo, Dating, Tags, User } from 'app/entity/entity';
 import { PostService } from 'app/post/post.service';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -36,8 +38,22 @@ export class PostDateComponent implements OnInit {
 
   tagStyles = [];
 
+  descLength: number = 0;
 
-  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {}
+  description: string = "";
+
+  modalRef: BsModalRef;
+
+  followIdArray: number[] = [];
+  followerIdArray: number[] = [];
+
+  followArray: User[] = [];
+
+
+  constructor(private fb: FormBuilder,
+    private postService: PostService,
+    private router: Router,
+    private modalService: BsModalService) {}
 
 
   ngOnInit(): void {
@@ -52,6 +68,8 @@ export class PostDateComponent implements OnInit {
         'background-color': 'black'
       });
     }
+    this.postService.getUserFollows(this.userId).then(userIdArray => this.followIdArray = userIdArray);
+    this.postService.getUserFollowers(this.userId).then(userIdArray => this.followerIdArray = userIdArray);
   }
 
   ngAfterViewInit(): void {}
@@ -248,5 +266,32 @@ export class PostDateComponent implements OnInit {
     } else {
       alert("发布约拍信息失败");
     }
+  }
+
+  isAt(desc: string, template: TemplateRef < any > ) {
+    if (desc.length > this.descLength) {
+      if (desc.charAt(desc.length - 1) == "@") {
+        this.openModal(template);
+      }
+    }
+    this.descLength = desc.length;
+
+
+  }
+
+  openModal(template: TemplateRef < any > ) {
+    this.followArray.splice(0, this.followArray.length);
+    for (let i = 0; i < this.followIdArray.length; i++) {
+      this.postService.getUserBasicInfo(this.followIdArray[i]).then(user => this.followArray.push(user));
+    }
+    for (let i = 0; i < this.followerIdArray.length; i++) {
+      this.postService.getUserBasicInfo(this.followerIdArray[i]).then(user => this.followArray.push(user));
+    }
+    this.modalRef = this.modalService.show(template);
+  }
+
+  selectAtUser(userId: number, userName: string, desc: string) {
+    this.modalRef.hide();
+    this.description = this.description + userName;
   }
 }

@@ -94,7 +94,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label (click)="deleteShare()">删除分享</label>
+            <label (click)="deleteShare(template)">删除分享</label>
           </div>
           <div class="col-md-3"></div>
           <div class="col-md-3">
@@ -152,3 +152,27 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">确定删除？</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10"><h5>你确定要删除该分享吗？</h5></div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary" (click)="confirmDelete()">确定</button>
+      </div>
+      <div class="col-md-2">
+         <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

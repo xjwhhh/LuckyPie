@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { IdentifyService } from 'app/identify/identify.service';
 import { Share, User, ResultMessage, Comment } from 'app/entity/entity';
 import { UtilService } from 'app/util.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'user-photo',
@@ -28,9 +30,13 @@ export class UserPhotoComponent implements OnInit {
 
   commentAreaStyle = [];
 
+    modalRef: BsModalRef;
+
   constructor(private identifyService: IdentifyService,
-    private route: ActivatedRoute, private router: Router,
-    private utilService: UtilService) {}
+    private route: ActivatedRoute, 
+    private router: Router,
+    private utilService: UtilService,
+    private modalService: BsModalService) {}
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
@@ -171,8 +177,8 @@ export class UserPhotoComponent implements OnInit {
     };
   }
 
-  deleteShare(){
-    this.identifyService.deleteShare(this.selectedShare.id).then(resultMessage=>this.checkDelete(resultMessage));
+  deleteShare( template: TemplateRef < any >){
+     this.modalRef = this.modalService.show(template);
   }
 
   checkDelete(resultMessage:ResultMessage){
@@ -184,6 +190,11 @@ export class UserPhotoComponent implements OnInit {
     else{
       alert("删除分享失败");
     }
+  }
+
+  confirmDelete(){
+     this.identifyService.deleteShare(this.selectedShare.id).then(resultMessage=>this.checkDelete(resultMessage));
+     this.modalRef.hide();
   }
 
 
