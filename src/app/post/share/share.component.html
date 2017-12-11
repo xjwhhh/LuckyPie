@@ -49,16 +49,20 @@
           <P style="height: 10px"></P>
         </div>
         <div class="row">
-          <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
+          <div class="col-md-3">
+            <div class="upload">选择文件
+              <input type="file" accept="image/*" style="background-color: red" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary" (click)="upload(desc.value)">上传</button>
+          </div>
         </div>
         <div class="row">
           <P style="height: 5px"></P>
         </div>
       </div>
     </form>
-    <div>
-      <button type="button" class="btn btn-primary" (click)="upload(desc.value)">上传</button>
-    </div>
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">
@@ -92,9 +96,9 @@
           {{user.name}}
         </div>
       </div>
-              <div class="row">
-          <P style="height: 1px"></P>
-        </div>
+      <div class="row">
+        <P style="height: 1px"></P>
+      </div>
     </div>
   </div>
 </ng-template>

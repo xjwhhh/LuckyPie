@@ -99,7 +99,8 @@ export class PostDateComponent implements OnInit {
       photoTime: '',
       costType: '',
       desc: '',
-      photos: this.fb.array([]),
+      photos
+: this.fb.array([]),
       tags: this.fb.array([]),
     });
   }
@@ -239,9 +240,11 @@ export class PostDateComponent implements OnInit {
       alert("未填写费用要求");
     } else if (desc == "") {
       alert("未填写约拍描述");
-    } else if (this.photos.length > 9) {
+    } else if (this.imageUrls.length > 9) {
       alert("超过九张图片");
-    } else {
+    }else if(this.imageUrls.length==0){
+      alert("未选择图片");
+    }  else {
       this.dating = new Dating();
       this.dating.userId = this.userId;
       this.dating.photoAddress = photoAddress;

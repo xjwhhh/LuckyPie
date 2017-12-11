@@ -65,7 +65,9 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-6">
-            <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" />
+            <div class="upload">选择文件
+              <input type="file" accept="image/*" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" />
+            </div>
           </div>
         </div>
         <div class="row">

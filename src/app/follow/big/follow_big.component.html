@@ -2,20 +2,61 @@
 <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<div class="row">
-  <P style="height: 10px"></P>
-</div>
-<!-- <div *ngIf="shares" class="row">
-  <div *ngFor="let share of shares">
-    <div class="col-md-3"  style="margin-bottom: 5px">
-      <img [src]="share.imageUrls[0]" width="200px" height="125px" (click)="onClickShare(share.id)">
-    </div>
+<div class="container">
+  <div class="row">
+    <P style="height: 20px"></P>
   </div>
-</div> -->
-<div class="waterfall">
-  <div *ngFor="let share of shares">
-    <div class="item">
-      <img [src]="share.imageUrls[0]"  (click)="onClickShare(share.id)">
+  <div *ngFor="let share of shares;let i=index">
+    <div class="photo">
+      <div class="row">
+        <P style="height: 5px"></P>
+      </div>
+      <div class="row" *ngIf="users[i]">
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+          <img (click)="gotoHomePage(users[i].id)" id="head_portrait" [src]="users[i].head">
+        </div>
+        <div class="col-md-2">
+          <label (click)="gotoHomePage(users[i].id)">{{users[i].name}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <P style="height: 5px"></P>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div *ngFor="let imageUrl of share.imageUrls">
+            <div class="col-md-4" style="margin-top: 15px">
+              <img [src]="imageUrl" width="250px" height="150px" (click)="onClickShare(share.id)">
+            </div>
+          </div>
+          <div class="row">
+            <p style="height: 3px"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <P style="height: 5px"></P>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+          <img src="{{thumbUrl[i]}}" (click)="doThumb(i,users[i].id,share.id)">
+        </div>
+        <div class="col-md-2">
+          <label>{{share.postTime}}</label>
+        </div>
+        <div class="col-md-1">
+          <label>{{share.postAddress}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <P style="height: 2px"></P>
+      </div>
+    </div>
+    <div class="row">
+      <P style="height: 5px"></P>
     </div>
   </div>
 </div>
@@ -59,11 +100,11 @@
           <P style="height: 20px"></P>
         </div>
         <div class="row">
-          <div class="col-md-3" *ngIf="user">
-            <img [src]="user.head" width="100%" height="100%">
+          <div class="col-md-3" *ngIf="selectedUser">
+            <img [src]="selectedUser.head" width="100%" height="100%">
           </div>
           <div class="col-md-9">
-            <label style="color: #dddddd" *ngIf="user">{{user.name}}</label>
+            <label style="color: #dddddd" *ngIf="selectedUser">{{selectedUser.name}}</label>
           </div>
         </div>
         <div class="row">
@@ -93,44 +134,29 @@
           <P style="height: 20px"></P>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <label (click)="deleteShare(template)">删除分享</label>
-          </div>
-          <div class="col-md-5">
-            <label >编辑分享</label>
-          </div>
-          <div class="col-md-3">
-            <a *ngIf="selectedShare.imageUrls" href="http://service.weibo.com/share/share.php?appkey=xxxx&url=https://weibo.com/&title={{selectedShare.desc}}&pic={{selectedShare.imageUrls[0]}}" target="_blank">
-          <img src="assets/image/weibo.png" width="100%" height="100%">
-        </a>
-          </div>
-        </div>
-        <div class="row">
-          <P style="height: 10px"></P>
-        </div>
-        <div class="row">
           <textarea class="commentArea" placeholder="写下你对他的评论吧 " #comment></textarea>
         </div>
         <div class="row">
           <div class="col-md-9"></div>
           <div class="col-md-3">
-            <label (click)="replyShare(comment.value)" style="">评论</label>
+            <label (click)="replyShare(selectedUser.id,comment.value)" style="">评论</label>
           </div>
         </div>
         <div class="row" id='comment' *ngFor="let comment of comments;let i=index">
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-2" *ngIf="commentUsers[i]">
-                <img id="head_portrait" [src]="commentUsers[i].head" (click)="gotoHomePage(comment.userId)">
+                <img id="head_portrait" [src]="commentUsers[i].head" (click)="getoHomePage(comment.userId)">
               </div>
               <div class="col-md-10">
-                <h5 style="color: #dddddd" (click)="gotoHomePage(comment.userId)">{{comment.userName}}</h5>
+                <h5 style="color: #dddddd" (click)="getoHomePage(comment.userId)">{{comment.userName}}</h5>
               </div>
             </div>
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复
+                  {{replyedCommentUsers[i].name}}
                 </label>
               </div>
             </div>
@@ -154,27 +180,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">确定删除？</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10"><h5>你确定要删除该分享吗？</h5></div>
-    </div>
-    <div class="row">
-      <div class="col-md-8"></div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-primary" (click)="confirmDelete()">确定</button>
-      </div>
-      <div class="col-md-2">
-         <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
-      </div>
-    </div>
-  </div>
-</ng-template>

@@ -17,7 +17,6 @@
           <img src="assets/image/search.png" (click)="search(searchContent.value)">
         </div>
       </div>
-      <div class="col-md-1"></div>
       <div class="col-md-4">
         <div class="col-md-2">
           <img (click)="gotoPost()" src="assets/image/edit.png">
@@ -38,10 +37,9 @@
           <div class="btn-group" dropdown>
             <img dropdownToggle class="btn dropdown-toggle" src="assets/image/notice.png" (click)="getNotice()">
             <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}">{{thumbNumber}}个新点赞</a></li>
-              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}/comment">{{commentNumber}}个新评论</a>
+              <li role="menuitem"><a class="dropdown-item" (click)="gotoThumb()">{{thumbNumber}}个新点赞</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="gotoComment()">{{commentNumber}}个新评论</a>
               </li>
-              <li role="menuitem"><a class="dropdown-item" href="/notice/{{userId}}/">分组3</a></li>
             </ul>
           </div>
         </div>
@@ -62,9 +60,9 @@
         <div class="row">
           <h4 class="bigText">关于我们</h4>
         </div>
-             <div class="row">
-              <p style="height: 10px"></p>
-            </div>
+        <div class="row">
+          <p style="height: 10px"></p>
+        </div>
         <div class="row smallText">
           <p style="font-size: 12px">已经有超过百万的摄影爱好者加入了乐拍</p>
           <p style="font-size: 12px">在这里，发现基于共同兴趣的同好，鼓励原创和分享精神</p>
@@ -78,9 +76,9 @@
             <h4 class="bigText">下载APP</h4>
           </div>
         </div>
-             <div class="row">
-              <p style="height: 10px"></p>
-            </div>
+        <div class="row">
+          <p style="height: 10px"></p>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <img src="assets/image/QRCode.jpg" width="80%" height="80%">
@@ -108,9 +106,9 @@
             <h4 class="bigText">关注乐拍</h4>
           </div>
         </div>
-             <div class="row">
-              <p style="height: 10px"></p>
-            </div>
+        <div class="row">
+          <p style="height: 10px"></p>
+        </div>
         <div class="row">
           <div class="col-md-8"></div>
           <div class="col-md-2">

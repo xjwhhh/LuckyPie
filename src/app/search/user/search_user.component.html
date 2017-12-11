@@ -3,23 +3,22 @@
 <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <div class="container">
-  <div class="row" *ngFor="let user of userArray">
     <div class="row">
-      <p style="height: 5px"></p>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <img id="head_portrait" [src]="user.head" (click)="gotoHomePage(user.id)">
-      </div>
-      <div class="col-md-9">
-        <div class="row">
-          <p style="height: 5px"></p>
-        </div>
-        <div class="row">
-          <p (click)="gotoHomePage(user.id)">用户名：{{user.name}} </p>
-        </div>
-        <div class="row">
-          <p (click)="gotoHomePage(user.id)">个人介绍：{{user.introduction}}</p>
+    <P style="height: 5px"></P>
+  </div>
+  <div class="row">
+    <div class="col-md-3 userCard" *ngFor="let user of userArray" >
+      <div class="row" >
+        <div class="thumbnail">
+          <img id="head_portrait" [src]="user.head">
+          <div class="caption">
+            <div class="row" style="text-align: center">
+              <p (click)="gotoHomePage(user.id)">用户名：{{user.name}} </p>
+            </div>
+            <div class="row" style="text-align: center">
+              <p (click)="gotoHomePage(user.id)">个人介绍：{{user.introduction}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

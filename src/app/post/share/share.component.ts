@@ -9,7 +9,7 @@ import {
 } from 'ng2-file-upload';
 
 import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Photo, Share, Tags,User } from 'app/entity/entity';
+import { Photo, Share, Tags, User } from 'app/entity/entity';
 import { PostService } from 'app/post/post.service';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 
@@ -40,14 +40,14 @@ export class PostShareComponent implements OnInit {
 
   descLength: number = 0;
 
-  description:string="";
+  description: string = "";
 
   modalRef: BsModalRef;
 
   followIdArray: number[] = [];
   followerIdArray: number[] = [];
 
-    followArray: User[] = [];
+  followArray: User[] = [];
 
   constructor(private fb: FormBuilder,
     private postService: PostService,
@@ -192,8 +192,10 @@ export class PostShareComponent implements OnInit {
   upload(desc: string) {
     if (desc == "") {
       alert("未填写分享內容");
-    } else if (this.photos.length > 9) {
+    } else if (this.imageUrls.length > 9) {
       alert("超过九张图片");
+    } else if (this.imageUrls.length == 0) {
+      alert("未选择图片");
     } else {
       this.share = new Share();
       this.share.userId = this.userId;
@@ -240,9 +242,9 @@ export class PostShareComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  selectAtUser(userId:number,userName:string,desc:string){
+  selectAtUser(userId: number, userName: string, desc: string) {
     this.modalRef.hide();
-    this.description=this.description+userName;
+    this.description = this.description + userName;
   }
 
 

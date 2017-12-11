@@ -106,4 +106,12 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+  gotoThumb(){
+    this.router.navigate(['/notice/'+this.userId+"/thumb"]);
+  }
+
+  gotoComment(){
+    this.router.navigate(['/notice/'+this.userId+'/comment']);
+  }
 }

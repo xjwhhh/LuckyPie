@@ -12,7 +12,7 @@ import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 @Component({
   selector: 'explore-model',
   templateUrl: './explore_model.component.html',
-  // styleUrls: ['./explore_photographer.component.css'],
+  styleUrls: ['./explore_model.component.css'],
 })
 export class ExploreModelComponent implements OnInit {
 

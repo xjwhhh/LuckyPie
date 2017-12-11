@@ -1,26 +1,35 @@
-import {Injectable} from '@angular/core';
-import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
-import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Share, User, ResultMessage, Comment } from 'app/entity/entity';
+import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FollowService {
 
-  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-  options = new RequestOptions({headers: this.headers});
+  userId: number;
 
-  constructor(private http: Http) {
-  }
+  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  options = new RequestOptions({ headers: this.headers });
+
+  constructor(private http: Http) {}
 
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Promise < any > {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
+  setUserId(userId: number) {
+    this.userId = userId;
+  }
+
+  getUserId() {
+    return this.userId;
+  }
+
   private getFollowSharesUrl = 'http://localhost/LuckyPie-Server/api/post/follow/share'
 
-  getFollowShares(userId: number): Promise<Share[]> {
+  getFollowShares(userId: number): Promise < Share[] > {
     let data = new URLSearchParams();
     data.append("userId", userId + "");
     return this.http.post(this.getFollowSharesUrl, data, this.options)

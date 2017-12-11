@@ -12,7 +12,7 @@ import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 @Component({
   selector: 'explore-photographer',
   templateUrl: './explore_photographer.component.html',
-  // styleUrls: ['./explore_photographer.component.css'],
+  styleUrls: ['./explore_photographer.component.css'],
 })
 export class ExplorePhotographerComponent implements OnInit {
 
@@ -55,7 +55,7 @@ export class ExplorePhotographerComponent implements OnInit {
   setPhotographers(users: User[]) {
     this.followButtonContent.splice(0, this.followButtonContent.length);
     this.photographerArray = users;
-    for (let i = 0; i < this.photographerArray.length; i++) {
+    for (let i =0; i < this.photographerArray.length ; i++) {
       this.exploreService.getUserShares(this.photographerArray[i].id).then(shares => this.photographerArray[i].shares = shares);
       this.exploreService.isFollow(this.userId, this.photographerArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }

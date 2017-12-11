@@ -30,4 +30,16 @@ p {
   width: 25px;
 }
 
+#dateInfo {
+  position: absolute;
+  left: 76%;
+
+  overflow-y: auto;
+
+  width: 25%;
+  height: 95%;
+}
+
+
+
 

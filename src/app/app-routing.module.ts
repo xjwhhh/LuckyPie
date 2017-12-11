@@ -8,6 +8,7 @@ import {
 import {
   FollowComponent
 } from './follow/follow.component';
+
 import {
   HotComponent
 } from './hot/hot.component';

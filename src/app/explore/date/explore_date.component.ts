@@ -5,7 +5,8 @@ import {
 import {
   Share,
   Dating,
-  User
+  User,
+  ResultMessage
 } from 'app/entity/entity';
 import { URLSearchParams } from '@angular/http';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
@@ -29,7 +30,7 @@ export class ExploreDateComponent implements OnInit {
   selectedIdentity: string = '无';
   selectedGender: string = '无';
 
-  datings: Dating[]=[];
+  datings: Dating[] = [];
 
   userId: number;
 
@@ -40,12 +41,20 @@ export class ExploreDateComponent implements OnInit {
   identityStyles = [];
   genderStyles = [];
 
+  selectedDating: Dating = new Dating();
 
-  constructor(private exploreService: ExploreService, private utilService: UtilService, private router: Router) {}
+  user: User;
+
+
+  constructor(private exploreService: ExploreService,
+    private utilService: UtilService,
+    private router: Router,
+  ) {}
 
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();
+    this.utilService.getUserBasicInfo(this.userId).then(user => this.user = user);
     this.getAddresses();
     this.getCostTypes();
     this.getIdentities();
@@ -140,8 +149,8 @@ export class ExploreDateComponent implements OnInit {
   }
 
   getDatingUser(datings: Dating[]) {
-    this.datings=[];
-    for(let i=datings.length-1;i>=0;i--){
+    this.datings = [];
+    for (let i = datings.length - 1; i >= 0; i--) {
       this.datings.push(datings[i]);
     }
     for (let i = 0; i < this.datings.length; i++) {
@@ -178,5 +187,61 @@ export class ExploreDateComponent implements OnInit {
 
   gotoHomePage(ownerId: number) {
     this.router.navigate(['/identify/homePage', ownerId]);
+  }
+
+
+  onClickDating(datingId: number) {
+    this.datings.forEach((dating, i) => {
+      if (dating.id == datingId) {
+        this.selectedDating = dating;
+      }
+    });
+    this.setCurrentStyles();
+  }
+
+  gotoTagDetail(tag: string): void {
+    this.router.navigate(['/explore/' + this.userId +
+      '/tagdetail', tag
+    ]);
+  }
+
+  currentStyles = {
+    'width': '0',
+    'height': '0',
+    'opacity': '1',
+    'background-color': '#000',
+    'position': 'fixed',
+    'top': '0',
+    'left': '0',
+    'z-index': '-1',
+    'display': 'none'
+  };
+
+  setCurrentStyles() {
+    this.currentStyles = {
+      'width': '100%',
+      'height': '100%',
+      'opacity': '1',
+      'background-color': '#000',
+      'position': 'fixed',
+      'top': '0',
+      'left': '0',
+      'z-index': '1000',
+      'display': 'block'
+    };
+  }
+
+  closeBigPicture() {
+    this.currentStyles = {
+      'width': '0',
+      'height': '0',
+      'opacity': '1',
+      'background-color': '#000',
+      'position': 'fixed',
+      'top': '0',
+      'left': '0',
+      'z-index': '-1',
+      'display': 'none'
+    };
   }
 }

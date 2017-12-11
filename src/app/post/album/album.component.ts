@@ -1,16 +1,16 @@
 import {
   Component,
   OnInit,
-    TemplateRef
+  TemplateRef
 } from '@angular/core';
 import {
   FileUploader
 } from 'ng2-file-upload';
 
-import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Photo, Album, Tags,User} from 'app/entity/entity';
-import {PostService} from 'app/post/post.service';
-import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Photo, Album, Tags, User } from 'app/entity/entity';
+import { PostService } from 'app/post/post.service';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -23,7 +23,7 @@ export class PostAlbumComponent implements OnInit {
   Tags: string[];
   selectedTags: string[] = [];
 
-  public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
+  public uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
 
   imageUrls: string[] = [];
 
@@ -40,20 +40,19 @@ export class PostAlbumComponent implements OnInit {
 
   descLength: number = 0;
 
-  description:string="";
+  description: string = "";
 
   modalRef: BsModalRef;
 
   followIdArray: number[] = [];
   followerIdArray: number[] = [];
 
-    followArray: User[] = [];
+  followArray: User[] = [];
 
-  constructor(private fb: FormBuilder, 
-    private postService: PostService, 
+  constructor(private fb: FormBuilder,
+    private postService: PostService,
     private router: Router,
-    private modalService: BsModalService) {
-  }
+    private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.Tags = Tags;
@@ -67,7 +66,7 @@ export class PostAlbumComponent implements OnInit {
       });
     }
 
-     this.postService.getUserFollows(this.userId).then(userIdArray => this.followIdArray = userIdArray);
+    this.postService.getUserFollows(this.userId).then(userIdArray => this.followIdArray = userIdArray);
     this.postService.getUserFollowers(this.userId).then(userIdArray => this.followerIdArray = userIdArray);
   }
 
@@ -114,7 +113,7 @@ export class PostAlbumComponent implements OnInit {
       // console.log(i);
       let reader = new FileReader();
       reader.readAsDataURL(q.some); //生成base64图片地址，实现本地预览。
-      reader.onload = function () {
+      reader.onload = function() {
         if (selectedArr.length > 0) {
           let isSame = false; //标识是否选择过同一张图片
           selectedArr.forEach((url, j) => {
@@ -202,6 +201,8 @@ export class PostAlbumComponent implements OnInit {
       alert("未填写相册名字");
     } else if (desc == "") {
       alert("未填写相册描述");
+    } else if (this.imageUrls.length == 0) {
+      alert("未选择图片");
     } else {
       this.album = new Album();
       this.album.userId = this.userId;
@@ -227,7 +228,7 @@ export class PostAlbumComponent implements OnInit {
     }
   }
 
-    isAt(desc: string, template: TemplateRef < any > ) {
+  isAt(desc: string, template: TemplateRef < any > ) {
     if (desc.length > this.descLength) {
       if (desc.charAt(desc.length - 1) == "@") {
         this.openModal(template);
@@ -249,9 +250,9 @@ export class PostAlbumComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  selectAtUser(userId:number,userName:string,desc:string){
+  selectAtUser(userId: number, userName: string, desc: string) {
     this.modalRef.hide();
-    this.description=this.description+userName;
+    this.description = this.description + userName;
   }
 
 }

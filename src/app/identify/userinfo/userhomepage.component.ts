@@ -6,7 +6,7 @@ import {User} from 'app/entity/entity';
 @Component({
   selector: 'userhomepage',
   templateUrl: './userhomepage.component.html',
-  // styleUrls: ['./login.component.css'],
+  styleUrls: ['./userinfo.component.css'],
 })
 export class UserHomePageComponent implements OnInit {
 

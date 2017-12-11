@@ -9,7 +9,7 @@ import { User } from 'app/entity/entity';
 @Component({
   selector: 'search-user',
   templateUrl: './search_user.component.html',
-  // styleUrls: ['./share.component.css'],
+  styleUrls: ['./search_user.component.css'],
 })
 export class SearchUserComponent implements OnInit {
   userId: number;
