@@ -9,11 +9,11 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
-<!--       <div class="row">
-        <div class="col-md-4" style="margin-bottom: 10px" *ngFor="let image of imageUrls;let i=index">
-          <div id="tag" [style.background-image]=image (click)="gotoTagDetail(Tags[i])">{{Tags[i]}}</div>
-        </div>
-      </div> -->
+      <!--       <div class="row">
+              <div class="col-md-4" style="margin-bottom: 10px" *ngFor="let image of imageUrls;let i=index">
+                <div id="tag" [style.background-image]=image (click)="gotoTagDetail(Tags[i])">{{Tags[i]}}</div>
+              </div>
+            </div> -->
       <div class="waterfall">
         <div *ngFor="let image of imageUrls;let i=index">
           <div class="item" id="tag" [style.background-image]=image (click)="gotoTagDetail(Tags[i])">{{Tags[i]}}

@@ -5,8 +5,8 @@ import {
 import {
   NoticeService
 } from 'app/notice/notice.service';
-import { Notice, User, ResultMessage } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {Notice, User, ResultMessage} from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 
 @Component({

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { IdentifyService } from 'app/identify/identify.service';
-import { NoticeService } from 'app/notice/notice.service';
-import { Router } from '@angular/router';
-import { Notice, User } from 'app/entity/entity';
+import {Component, OnInit} from '@angular/core';
+import {IdentifyService} from 'app/identify/identify.service';
+import {NoticeService} from 'app/notice/notice.service';
+import {Router} from '@angular/router';
+import {Notice, User} from 'app/entity/entity';
 
 @Component({
   selector: 'app-root',
@@ -102,16 +102,16 @@ export class AppComponent implements OnInit {
       if (content == "") {
         alert("未输入搜索内容");
       } else {
-        this.router.navigate(['/search', this.userId],{queryParams:{'content':content}});
+        this.router.navigate(['/search', this.userId], {queryParams: {'content': content}});
       }
     }
   }
 
-  gotoThumb(){
-    this.router.navigate(['/notice/'+this.userId+"/thumb"]);
+  gotoThumb() {
+    this.router.navigate(['/notice/' + this.userId + "/thumb"]);
   }
 
-  gotoComment(){
-    this.router.navigate(['/notice/'+this.userId+'/comment']);
+  gotoComment() {
+    this.router.navigate(['/notice/' + this.userId + '/comment']);
   }
 }

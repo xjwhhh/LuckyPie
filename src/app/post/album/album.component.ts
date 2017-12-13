@@ -7,11 +7,11 @@ import {
   FileUploader
 } from 'ng2-file-upload';
 
-import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Photo, Album, Tags, User } from 'app/entity/entity';
-import { PostService } from 'app/post/post.service';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {FormControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {Photo, Album, Tags, User} from 'app/entity/entity';
+import {PostService} from 'app/post/post.service';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'post-album',
@@ -23,7 +23,7 @@ export class PostAlbumComponent implements OnInit {
   Tags: string[];
   selectedTags: string[] = [];
 
-  public uploader: FileUploader = new FileUploader({ url: '图片上传地址' });
+  public uploader: FileUploader = new FileUploader({url: '图片上传地址'});
 
   imageUrls: string[] = [];
 
@@ -50,9 +50,10 @@ export class PostAlbumComponent implements OnInit {
   followArray: User[] = [];
 
   constructor(private fb: FormBuilder,
-    private postService: PostService,
-    private router: Router,
-    private modalService: BsModalService) {}
+              private postService: PostService,
+              private router: Router,
+              private modalService: BsModalService) {
+  }
 
   ngOnInit(): void {
     this.Tags = Tags;
@@ -113,7 +114,7 @@ export class PostAlbumComponent implements OnInit {
       // console.log(i);
       let reader = new FileReader();
       reader.readAsDataURL(q.some); //生成base64图片地址，实现本地预览。
-      reader.onload = function() {
+      reader.onload = function () {
         if (selectedArr.length > 0) {
           let isSame = false; //标识是否选择过同一张图片
           selectedArr.forEach((url, j) => {
@@ -228,7 +229,7 @@ export class PostAlbumComponent implements OnInit {
     }
   }
 
-  isAt(desc: string, template: TemplateRef < any > ) {
+  isAt(desc: string, template: TemplateRef<any>) {
     if (desc.length > this.descLength) {
       if (desc.charAt(desc.length - 1) == "@") {
         this.openModal(template);
@@ -239,7 +240,7 @@ export class PostAlbumComponent implements OnInit {
 
   }
 
-  openModal(template: TemplateRef < any > ) {
+  openModal(template: TemplateRef<any>) {
     this.followArray.splice(0, this.followArray.length);
     for (let i = 0; i < this.followIdArray.length; i++) {
       this.postService.getUserBasicInfo(this.followIdArray[i]).then(user => this.followArray.push(user));

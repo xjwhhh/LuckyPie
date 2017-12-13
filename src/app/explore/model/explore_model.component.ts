@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -7,7 +7,7 @@ import {
   Share,
   ResultMessage
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'explore-model',
@@ -24,9 +24,10 @@ export class ExploreModelComponent implements OnInit {
 
   followButtonContent = [];
 
-  labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
+  labelStyles = [{'background-color': 'white'}, {'background-color': 'white'}, {'background-color': 'white'}];
 
-  constructor(private exploreService: ExploreService, private router: Router) {}
+  constructor(private exploreService: ExploreService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();
@@ -35,19 +36,19 @@ export class ExploreModelComponent implements OnInit {
 
   selectHotModels() {
     this.resetLabelStyles();
-    this.labelStyles[0] = { 'background-color': '#97cbff' };
+    this.labelStyles[0] = {'background-color': '#97cbff'};
     this.exploreService.getHotModel().then(users => this.setModels(users));
   }
 
   selectBestModels() {
     this.resetLabelStyles();
-    this.labelStyles[1] = { 'background-color': '#97cbff' };
+    this.labelStyles[1] = {'background-color': '#97cbff'};
     this.exploreService.getBestModel().then(users => this.setModels(users));
   }
 
   selectNewModels() {
     this.resetLabelStyles();
-    this.labelStyles[2] = { 'background-color': '#97cbff' };
+    this.labelStyles[2] = {'background-color': '#97cbff'};
     this.exploreService.getNewModel().then(users => this.setModels(users));
   }
 
@@ -62,7 +63,7 @@ export class ExploreModelComponent implements OnInit {
   }
 
   resetLabelStyles() {
-    this.labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
+    this.labelStyles = [{'background-color': 'white'}, {'background-color': 'white'}, {'background-color': 'white'}];
   }
 
   setFollowButton(resultMessage: ResultMessage) {

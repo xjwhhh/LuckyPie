@@ -10,7 +10,8 @@
     <form [formGroup]="photoForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
         <label>发布内容</label>
-        <input class="form-control" formControlName="desc" [(ngModel)]="description" (keyup)="isAt(desc.value,template)" #desc>
+        <input class="form-control" formControlName="desc" [(ngModel)]="description" (keyup)="isAt(desc.value,template)"
+               #desc>
       </div>
       <div formArrayName="tags">
         <div class="row">
@@ -19,7 +20,9 @@
         <div class="row">
           <div *ngFor="let tag of Tags;let i= index">
             <div class="col-md-1">
-              <button [ngStyle]="tagStyles[i]" type="button" class="btn btn-primary" (click)="onClickTag(tag,i)">{{tag}}</button>
+              <button [ngStyle]="tagStyles[i]" type="button" class="btn btn-primary" (click)="onClickTag(tag,i)">
+                {{tag}}
+              </button>
             </div>
           </div>
         </div>
@@ -51,7 +54,8 @@
         <div class="row">
           <div class="col-md-3">
             <div class="upload">选择文件
-              <input type="file" accept="image/*" style="background-color: red" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged()" multiple/>
+              <input type="file" accept="image/*" style="background-color: red" ng2FileSelect [uploader]="uploader"
+                     (change)="selectedFileOnChanged()" multiple/>
             </div>
           </div>
           <div class="col-md-3">

@@ -2,15 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { SearchService } from 'app/search/search.service'
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {SearchService} from 'app/search/search.service'
 import {
   Share,
   User,
   Comment,
   ResultMessage
 } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'search-share',
@@ -23,7 +23,7 @@ export class SearchShareComponent implements OnInit {
 
   content: string;
 
-  shareArray:Share[];
+  shareArray: Share[];
 
   users: User[] = [];
 
@@ -42,9 +42,9 @@ export class SearchShareComponent implements OnInit {
   commentAreaStyle = [];
 
   constructor(private route: ActivatedRoute,
-    private searchService: SearchService,
-    private utilService: UtilService,
-    private router:Router) {
+              private searchService: SearchService,
+              private utilService: UtilService,
+              private router: Router) {
 
   }
 
@@ -55,7 +55,7 @@ export class SearchShareComponent implements OnInit {
   }
 
   searchShare() {
-    this.searchService.searchShare(this.content).then(shares=>this.setShares(shares));
+    this.searchService.searchShare(this.content).then(shares => this.setShares(shares));
   }
 
   setShares(shares: Share[]) {
@@ -117,7 +117,8 @@ export class SearchShareComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
+    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',

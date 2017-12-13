@@ -25,8 +25,8 @@ export class UserInfoComponent implements OnInit {
     'display': 'none'
   };
 
-  followIdArray: number[]=[];
-  followerIdArray: number[]=[];
+  followIdArray: number[] = [];
+  followerIdArray: number[] = [];
 
   followArray: User[] = [];
 

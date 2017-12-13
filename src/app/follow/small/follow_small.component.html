@@ -12,18 +12,18 @@
         <div class="thumbnail">
           <img [src]="share.imageUrls[0]" (click)="onClickShare(share.id)">
           <div class="caption" *ngIf="users[i]">
-            <div class="row" >
-                <div class="col-md-3"></div>
+            <div class="row">
+              <div class="col-md-3"></div>
               <div class="col-md-2">
-                <img id="head_portrait" [src]="users[i].head"  (click)="gotoHomePage(users[i].id)">
+                <img id="head_portrait" [src]="users[i].head" (click)="gotoHomePage(users[i].id)">
               </div>
               <div class="col-md-4">
                 <label (click)="gotoHomePage(users[i].id)">{{users[i].name}} </label>
               </div>
             </div>
-            <div class="row" >
-                <div class="col-md-1"></div>
-                <div class="col-md-11"><p >{{share.desc}}</p></div>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-11" style="text-align: center"><p>{{share.desc}}</p></div>
             </div>
           </div>
         </div>
@@ -126,7 +126,8 @@
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复
+                  {{replyedCommentUsers[i].name}}
                 </label>
               </div>
             </div>

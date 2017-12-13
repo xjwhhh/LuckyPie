@@ -12,7 +12,7 @@
 <div class="waterfall">
   <div *ngFor="let share of shares">
     <div class="item">
-      <img [src]="share.imageUrls[0]"  (click)="onClickShare(share.id)">
+      <img [src]="share.imageUrls[0]" (click)="onClickShare(share.id)">
     </div>
   </div>
 </div>
@@ -111,7 +111,8 @@
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                <label style="color: #dddddd" (click)="getoHomePage(replyedCommentUsers[i].id)">回复
+                  {{replyedCommentUsers[i].name}}
                 </label>
               </div>
             </div>

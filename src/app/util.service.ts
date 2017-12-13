@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Share, User, Comment, ResultMessage } from 'app/entity/entity';
-import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Share, User, Comment, ResultMessage} from 'app/entity/entity';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UtilService {
 
-  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  options = new RequestOptions({ headers: this.headers });
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
-  private handleError(error: any): Promise < any > {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
@@ -44,7 +45,7 @@ export class UtilService {
 
   private userBasciInfoUrl = 'http://localhost/LuckyPie-Server/api/get/user/basicinfo/';
 
-  getUserBasicInfo(userId: number): Promise < User > {
+  getUserBasicInfo(userId: number): Promise<User> {
     return this.http.get(this.userBasciInfoUrl + userId)
       .toPromise()
       .then(response => response.json() as User)
@@ -53,7 +54,7 @@ export class UtilService {
 
   private getShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/comment';
 
-  getShareComment(shareId: number): Promise < Comment[] > {
+  getShareComment(shareId: number): Promise<Comment[]> {
     let data = new URLSearchParams();
     data.append("shareId", shareId + "");
     return this.http.post(this.getShareCommentUrl, data, this.options)
@@ -66,7 +67,7 @@ export class UtilService {
 
   private getAlbumCommentUrl = 'http://localhost/LuckyPie-Server/api/post/album/comment';
 
-  getAlbumComment(albumId: number): Promise < Comment[] > {
+  getAlbumComment(albumId: number): Promise<Comment[]> {
     let data = new URLSearchParams();
     data.append("albumId", albumId + "");
     return this.http.post(this.getAlbumCommentUrl, data, this.options)
@@ -79,7 +80,7 @@ export class UtilService {
   private doShareCommentUrl = 'http://localhost/LuckyPie-Server/api/post/share/doComment';
 
 
-  doShareComment(startUserId: number, userId: number, shareId: number, comment: string): Promise < ResultMessage > {
+  doShareComment(startUserId: number, userId: number, shareId: number, comment: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     console.log(startUserId);
     console.log(userId);
@@ -96,7 +97,7 @@ export class UtilService {
       .catch(this.handleError);
   }
 
-  replyShareComment(startUserId: number, userId: number, shareId: number, commentId: number, content: string): Promise < ResultMessage > {
+  replyShareComment(startUserId: number, userId: number, shareId: number, commentId: number, content: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -111,7 +112,7 @@ export class UtilService {
 
   private doAlbumCommentUrl = 'http://localhost/LuckyPie-Server/api/post/album/doComment';
 
-  doAlbumComment(startUserId: number, userId: number, albumId: number, comment: string): Promise < ResultMessage > {
+  doAlbumComment(startUserId: number, userId: number, albumId: number, comment: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");
@@ -124,7 +125,7 @@ export class UtilService {
       .catch(this.handleError);
   }
 
-  replyAlbumComment(startUserId: number, userId: number, albumId: number, commentId: number, content: string): Promise < ResultMessage > {
+  replyAlbumComment(startUserId: number, userId: number, albumId: number, commentId: number, content: string): Promise<ResultMessage> {
     let data = new URLSearchParams();
     data.append("startUserId", startUserId + "");
     data.append("userId", userId + "");

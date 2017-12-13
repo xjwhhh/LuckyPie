@@ -18,7 +18,7 @@ import {
 import {
   PostComponent
 } from './post/post.component';
-import{SearchComponent} from './search/search.component';
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [{
   path: '',
@@ -58,7 +58,7 @@ const routes: Routes = [{
       preload: true
     }
   },
-    {
+  {
     path: 'search/:id',
     component: SearchComponent
   },

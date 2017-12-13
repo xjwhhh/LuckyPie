@@ -5,7 +5,7 @@ import {
 import {
   FollowService
 } from './follow.service';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'follow',
@@ -17,8 +17,8 @@ export class FollowComponent implements OnInit {
   userId: number;
 
   constructor(private followService: FollowService,
-   private route: ActivatedRoute,
-   private router:Router) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {

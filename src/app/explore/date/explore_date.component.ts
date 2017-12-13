@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -8,9 +8,9 @@ import {
   User,
   ResultMessage
 } from 'app/entity/entity';
-import { URLSearchParams } from '@angular/http';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { UtilService } from 'app/util.service';
+import {URLSearchParams} from '@angular/http';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {UtilService} from 'app/util.service';
 
 
 @Component({
@@ -47,9 +47,9 @@ export class ExploreDateComponent implements OnInit {
 
 
   constructor(private exploreService: ExploreService,
-    private utilService: UtilService,
-    private router: Router,
-  ) {}
+              private utilService: UtilService,
+              private router: Router,) {
+  }
 
 
   ngOnInit(): void {
@@ -70,7 +70,7 @@ export class ExploreDateComponent implements OnInit {
   setAddress(addresses: string[]) {
     this.addresses = addresses;
     for (let i = 0; i < this.addresses.length; i++) {
-      this.addressStyles.push({ 'background-color': 'white' });
+      this.addressStyles.push({'background-color': 'white'});
     }
   }
 
@@ -81,7 +81,7 @@ export class ExploreDateComponent implements OnInit {
   setCostType(costTypes: string[]) {
     this.costTypes = costTypes;
     for (let i = 0; i < this.costTypes.length; i++) {
-      this.costTypeStyles.push({ 'background-color': 'white' });
+      this.costTypeStyles.push({'background-color': 'white'});
     }
   }
 
@@ -92,7 +92,7 @@ export class ExploreDateComponent implements OnInit {
   setIdentity(identities: string[]) {
     this.identities = identities;
     for (let i = 0; i < this.identities.length; i++) {
-      this.identityStyles.push({ 'background-color': 'white' });
+      this.identityStyles.push({'background-color': 'white'});
     }
   }
 
@@ -103,14 +103,14 @@ export class ExploreDateComponent implements OnInit {
   setGender(genders: string[]) {
     this.genders = genders;
     for (let i = 0; i < this.genders.length; i++) {
-      this.genderStyles.push({ 'background-color': 'white' });
+      this.genderStyles.push({'background-color': 'white'});
     }
   }
 
   selectAddress(selectedAddress: string, i: number): void {
     this.selectedAddress = selectedAddress;
     this.resetAddressStyles();
-    this.addressStyles[i] = { 'background-color': '#97cbff' };
+    this.addressStyles[i] = {'background-color': '#97cbff'};
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
@@ -118,7 +118,7 @@ export class ExploreDateComponent implements OnInit {
   selectCost(selectedCostType: string, i: number): void {
     this.selectedCostType = selectedCostType;
     this.resetCostTypeStyles();
-    this.costTypeStyles[i] = { 'background-color': '#97cbff' };
+    this.costTypeStyles[i] = {'background-color': '#97cbff'};
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
@@ -126,7 +126,7 @@ export class ExploreDateComponent implements OnInit {
   selectIdentity(selectedIdentity: string, i: number): void {
     this.selectedIdentity = selectedIdentity;
     this.resetIdentityStyles();
-    this.identityStyles[i] = { 'background-color': '#97cbff' };
+    this.identityStyles[i] = {'background-color': '#97cbff'};
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
@@ -134,7 +134,7 @@ export class ExploreDateComponent implements OnInit {
   selectGender(selectedGender: string, i: number): void {
     this.selectedGender = selectedGender;
     this.resetGenderStyles();
-    this.genderStyles[i] = { 'background-color': '#97cbff' };
+    this.genderStyles[i] = {'background-color': '#97cbff'};
     let data = this.createData();
     this.exploreService.getDating(data).then(datings => this.getDatingUser(datings));
   }
@@ -161,26 +161,26 @@ export class ExploreDateComponent implements OnInit {
 
   resetAddressStyles() {
     for (let i = 0; i < this.addresses.length; i++) {
-      this.addressStyles[i] = { 'background-color': 'white' };
+      this.addressStyles[i] = {'background-color': 'white'};
     }
   }
 
   resetCostTypeStyles() {
     for (let i = 0; i < this.costTypeStyles.length; i++) {
-      this.costTypeStyles[i] = { 'background-color': 'white' };
+      this.costTypeStyles[i] = {'background-color': 'white'};
     }
   }
 
   resetIdentityStyles() {
     for (let i = 0; i < this.identityStyles.length; i++) {
-      this.identityStyles[i] = { 'background-color': 'white' };
+      this.identityStyles[i] = {'background-color': 'white'};
     }
   }
 
 
   resetGenderStyles() {
     for (let i = 0; i < this.genderStyles.length; i++) {
-      this.genderStyles[i] = { 'background-color': 'white' };
+      this.genderStyles[i] = {'background-color': 'white'};
     }
   }
 
@@ -201,7 +201,7 @@ export class ExploreDateComponent implements OnInit {
 
   gotoTagDetail(tag: string): void {
     this.router.navigate(['/explore/' + this.userId +
-      '/tagdetail', tag
+    '/tagdetail', tag
     ]);
   }
 

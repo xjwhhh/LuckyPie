@@ -11,8 +11,8 @@ import {
   ResultMessage,
   Comment
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { UtilService } from 'app/util.service';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'follow-big',
@@ -46,9 +46,9 @@ export class FollowBigComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
-    private followService: FollowService,
-    private router: Router,
-    private utilService: UtilService) {
+              private followService: FollowService,
+              private router: Router,
+              private utilService: UtilService) {
 
   }
 
@@ -146,7 +146,8 @@ export class FollowBigComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
+    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',

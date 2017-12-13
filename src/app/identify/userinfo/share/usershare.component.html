@@ -15,7 +15,7 @@
 <div class="waterfall">
   <div *ngFor="let share of shares">
     <div class="item">
-      <img [src]="share.imageUrls[0]"  (click)="onClickShare(share.id)">
+      <img [src]="share.imageUrls[0]" (click)="onClickShare(share.id)">
     </div>
   </div>
 </div>
@@ -97,12 +97,14 @@
             <label (click)="deleteShare(template)">删除分享</label>
           </div>
           <div class="col-md-5">
-            <label >编辑分享</label>
+            <label>编辑分享</label>
           </div>
           <div class="col-md-3">
-            <a *ngIf="selectedShare.imageUrls" href="http://service.weibo.com/share/share.php?appkey=xxxx&url=https://weibo.com/&title={{selectedShare.desc}}&pic={{selectedShare.imageUrls[0]}}" target="_blank">
-          <img src="assets/image/weibo.png" width="100%" height="100%">
-        </a>
+            <a *ngIf="selectedShare.imageUrls"
+               href="http://service.weibo.com/share/share.php?appkey=xxxx&url=https://weibo.com/&title={{selectedShare.desc}}&pic={{selectedShare.imageUrls[0]}}"
+               target="_blank">
+              <img src="assets/image/weibo.png" width="100%" height="100%">
+            </a>
           </div>
         </div>
         <div class="row">
@@ -130,7 +132,8 @@
             <div class="row" *ngIf="replyedCommentUsers[i]">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复 {{replyedCommentUsers[i].name}}
+                <label style="color: #dddddd" (click)="gotoHomePage(replyedCommentUsers[i].id)">回复
+                  {{replyedCommentUsers[i].name}}
                 </label>
               </div>
             </div>
@@ -173,7 +176,7 @@
         <button type="button" class="btn btn-primary" (click)="confirmDelete()">确定</button>
       </div>
       <div class="col-md-2">
-         <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
+        <button type="button" class="btn btn-primary" (click)="modalRef.hide()">取消</button>
       </div>
     </div>
   </div>

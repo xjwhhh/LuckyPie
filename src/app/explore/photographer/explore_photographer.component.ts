@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -7,7 +7,7 @@ import {
   Share,
   ResultMessage
 } from 'app/entity/entity';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'explore-photographer',
@@ -24,9 +24,10 @@ export class ExplorePhotographerComponent implements OnInit {
 
   followButtonContent = [];
 
-  labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
+  labelStyles = [{'background-color': 'white'}, {'background-color': 'white'}, {'background-color': 'white'}];
 
-  constructor(private exploreService: ExploreService, private router: Router) {}
+  constructor(private exploreService: ExploreService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();
@@ -36,33 +37,33 @@ export class ExplorePhotographerComponent implements OnInit {
 
   selectHotPhotographers() {
     this.resetLabelStyles();
-    this.labelStyles[0] = { 'background-color': '#97cbff' };
+    this.labelStyles[0] = {'background-color': '#97cbff'};
     this.exploreService.getHotPhotographer().then(users => this.setPhotographers(users));
   }
 
   selectBestPhotographers() {
     this.resetLabelStyles();
-    this.labelStyles[1] = { 'background-color': '#97cbff' };
+    this.labelStyles[1] = {'background-color': '#97cbff'};
     this.exploreService.getBestPhotographer().then(users => this.setPhotographers(users));
   }
 
   selectNewPhotographers() {
     this.resetLabelStyles();
-    this.labelStyles[2] = { 'background-color': '#97cbff' };
+    this.labelStyles[2] = {'background-color': '#97cbff'};
     this.exploreService.getNewPhotographer().then(users => this.setPhotographers(users));
   }
 
   setPhotographers(users: User[]) {
     this.followButtonContent.splice(0, this.followButtonContent.length);
     this.photographerArray = users;
-    for (let i =0; i < this.photographerArray.length ; i++) {
+    for (let i = 0; i < this.photographerArray.length; i++) {
       this.exploreService.getUserShares(this.photographerArray[i].id).then(shares => this.photographerArray[i].shares = shares);
       this.exploreService.isFollow(this.userId, this.photographerArray[i].id).then(resultMessage => this.setFollowButton(resultMessage));
     }
   }
 
   resetLabelStyles() {
-    this.labelStyles = [{ 'background-color': 'white' }, { 'background-color': 'white' }, { 'background-color': 'white' }];
+    this.labelStyles = [{'background-color': 'white'}, {'background-color': 'white'}, {'background-color': 'white'}];
   }
 
   setFollowButton(resultMessage: ResultMessage) {

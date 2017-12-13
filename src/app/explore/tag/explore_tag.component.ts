@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -6,8 +6,8 @@ import {
   Share,
   Tags
 } from 'app/entity/entity';
-import { Router, ActivatedRoute } from '@angular/router';
-import  { DomSanitizer }  from  '@angular/platform-browser';
+import {Router, ActivatedRoute} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'explore-tag',
@@ -29,9 +29,10 @@ export class ExploreTagComponent implements OnInit {
   imageUrls: any[];
 
   constructor(private exploreService: ExploreService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private  sanitizer:  DomSanitizer) {}
+              private router: Router,
+              private route: ActivatedRoute,
+              private  sanitizer: DomSanitizer) {
+  }
 
   ngOnInit(): void {
     this.Tags = Tags;

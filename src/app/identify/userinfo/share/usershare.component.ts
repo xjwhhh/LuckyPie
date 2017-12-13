@@ -1,9 +1,9 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { IdentifyService } from 'app/identify/identify.service';
-import { Share, User, ResultMessage, Comment } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {IdentifyService} from 'app/identify/identify.service';
+import {Share, User, ResultMessage, Comment} from 'app/entity/entity';
+import {UtilService} from 'app/util.service';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -30,13 +30,14 @@ export class UserPhotoComponent implements OnInit {
 
   commentAreaStyle = [];
 
-    modalRef: BsModalRef;
+  modalRef: BsModalRef;
 
   constructor(private identifyService: IdentifyService,
-    private route: ActivatedRoute, 
-    private router: Router,
-    private utilService: UtilService,
-    private modalService: BsModalService) {}
+              private route: ActivatedRoute,
+              private router: Router,
+              private utilService: UtilService,
+              private modalService: BsModalService) {
+  }
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
@@ -99,7 +100,8 @@ export class UserPhotoComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
+    this.identifyService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
@@ -177,26 +179,25 @@ export class UserPhotoComponent implements OnInit {
     };
   }
 
-  deleteShare( template: TemplateRef < any >){
-     this.modalRef = this.modalService.show(template);
+  deleteShare(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
-  checkDelete(resultMessage:ResultMessage){
-    if(resultMessage.result=="success"){
+  checkDelete(resultMessage: ResultMessage) {
+    if (resultMessage.result == "success") {
       alert("删除分享成功");
       this.closeBigPicture();
       this.getUserShares(this.userId);
     }
-    else{
+    else {
       alert("删除分享失败");
     }
   }
 
-  confirmDelete(){
-     this.identifyService.deleteShare(this.selectedShare.id).then(resultMessage=>this.checkDelete(resultMessage));
-     this.modalRef.hide();
+  confirmDelete() {
+    this.identifyService.deleteShare(this.selectedShare.id).then(resultMessage => this.checkDelete(resultMessage));
+    this.modalRef.hide();
   }
-
 
 
 }

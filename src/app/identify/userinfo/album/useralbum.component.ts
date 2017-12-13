@@ -1,15 +1,15 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { IdentifyService } from 'app/identify/identify.service';
-import { Album, ResultMessage, Comment, User } from 'app/entity/entity';
-import { CarouselConfig } from 'ngx-bootstrap/carousel';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {IdentifyService} from 'app/identify/identify.service';
+import {Album, ResultMessage, Comment, User} from 'app/entity/entity';
+import {CarouselConfig} from 'ngx-bootstrap/carousel';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'user-album',
   templateUrl: './useralbum.component.html',
   styleUrls: ['./useralbum.component.css'],
-  providers: [{ provide: CarouselConfig, useValue: { interval: false } }]
+  providers: [{provide: CarouselConfig, useValue: {interval: false}}]
 })
 export class UserAlbumComponent implements OnInit {
 
@@ -31,8 +31,8 @@ export class UserAlbumComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(private identifyService: IdentifyService,
-    private router: Router,
-    private modalService: BsModalService) {
+              private router: Router,
+              private modalService: BsModalService) {
 
   }
 
@@ -96,7 +96,8 @@ export class UserAlbumComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.identifyService.replyAlbumComment(this.userId, userId, this.selectedAlbum.id, commentId, content).then(result => this.check(result));;
+    this.identifyService.replyAlbumComment(this.userId, userId, this.selectedAlbum.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
@@ -174,7 +175,7 @@ export class UserAlbumComponent implements OnInit {
     };
   }
 
-  deleteAlbum(template: TemplateRef < any > ) {
+  deleteAlbum(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 

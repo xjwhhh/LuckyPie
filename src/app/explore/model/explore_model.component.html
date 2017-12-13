@@ -37,19 +37,20 @@
             <p style="height: 1px"></p>
           </div>
           <div class="row" *ngIf="followButtonContent[i]">
-            <button type="button" class="btn btn-primary" (click)='follow(user.id,i)'>{{followButtonContent[i]}}</button>
+            <button type="button" class="btn btn-primary" (click)='follow(user.id,i)'>{{followButtonContent[i]}}
+            </button>
           </div>
         </div>
       </div>
       <div class="col-md-9">
-                  <div class="row">
-            <p style="height: 1px"></p>
-          </div>
         <div class="row">
-        <div class="col-md-2" *ngFor="let share of user.shares;let j=index">
-          <img src="{{share.imageUrls[0]}}" width="100%" height="100%">
+          <p style="height: 1px"></p>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-md-2" *ngFor="let share of user.shares;let j=index">
+            <img src="{{share.imageUrls[0]}}" width="100%" height="100%">
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">

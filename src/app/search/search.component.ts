@@ -2,8 +2,8 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { SearchService } from 'app/search/search.service'
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {SearchService} from 'app/search/search.service'
 
 @Component({
   selector: 'search',
@@ -14,10 +14,10 @@ export class SearchComponent implements OnInit {
 
   userId: number;
 
-  content:string;
+  content: string;
 
   constructor(private route: ActivatedRoute,
-  	private searchService:SearchService) {
+              private searchService: SearchService) {
 
   }
 
@@ -27,12 +27,11 @@ export class SearchComponent implements OnInit {
     });
 
     let url = location.search;
-    let index=url.indexOf("=");
-    this.content=url.substr(index+1);
+    let index = url.indexOf("=");
+    this.content = url.substr(index + 1);
     this.searchService.setUserId(this.userId);
     this.searchService.setContent(this.content);
   }
-
 
 
 }

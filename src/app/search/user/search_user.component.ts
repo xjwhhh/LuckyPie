@@ -2,9 +2,9 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { SearchService } from 'app/search/search.service'
-import { User } from 'app/entity/entity';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {SearchService} from 'app/search/search.service'
+import {User} from 'app/entity/entity';
 
 @Component({
   selector: 'search-user',
@@ -19,8 +19,8 @@ export class SearchUserComponent implements OnInit {
   userArray: User[];
 
   constructor(private route: ActivatedRoute,
-    private searchService: SearchService,
-    private router:Router) {
+              private searchService: SearchService,
+              private router: Router) {
 
   }
 

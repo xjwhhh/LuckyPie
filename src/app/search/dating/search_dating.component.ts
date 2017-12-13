@@ -2,15 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { SearchService } from 'app/search/search.service'
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {SearchService} from 'app/search/search.service'
 import {
   Dating,
   User,
   Comment,
   ResultMessage
 } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'search-dating',
@@ -30,9 +30,10 @@ export class SearchDatingComponent implements OnInit {
   selectedDating: Dating = new Dating();
 
   constructor(private route: ActivatedRoute,
-    private searchService: SearchService,
-    private utilService: UtilService,
-    private router: Router) {}
+              private searchService: SearchService,
+              private utilService: UtilService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.userId = this.searchService.getUserId();
@@ -56,7 +57,7 @@ export class SearchDatingComponent implements OnInit {
 
   gotoTagDetail(tag: string): void {
     this.router.navigate(['/explore/' + this.userId +
-      '/tagdetail', tag
+    '/tagdetail', tag
     ]);
   }
 

@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import { Addresses, CostTypes, Tags, Share, Album, Dating, User } from 'app/entity/entity';
-import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
-import { Router } from '@angular/router';
+import {Addresses, CostTypes, Tags, Share, Album, Dating, User} from 'app/entity/entity';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class SearchService {
   userId: number = -1;
 
-  content:string="";
+  content: string = "";
 
-  headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  options = new RequestOptions({ headers: this.headers });
+  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+  options = new RequestOptions({headers: this.headers});
 
-  constructor(private http: Http, private router: Router) {}
+  constructor(private http: Http, private router: Router) {
+  }
 
-  private handleError(error: any): Promise < any > {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
@@ -28,8 +29,8 @@ export class SearchService {
     return this.userId;
   }
 
-    setContent(content:string) {
-    this.content=content;
+  setContent(content: string) {
+    this.content = content;
   }
 
   getContent(): string {
@@ -39,18 +40,18 @@ export class SearchService {
 
   private searchUserUrl = 'http://localhost/LuckyPie-Server/api/post/search/user';
 
-  searchUser(content: string): Promise < User[] > {
+  searchUser(content: string): Promise<User[]> {
     let data = new URLSearchParams();
     data.append("content", content);
     return this.http.post(this.searchUserUrl, data, this.options)
       .toPromise()
-      .then(response =>response.json() as User[])
+      .then(response => response.json() as User[])
       .catch(this.handleError);
   }
 
   private searchAlbumUrl = 'http://localhost/LuckyPie-Server/api/post/search/album';
 
-  searchAlbum(content: string): Promise < Album[] > {
+  searchAlbum(content: string): Promise<Album[]> {
     let data = new URLSearchParams();
     data.append("content", content);
     return this.http.post(this.searchAlbumUrl, data, this.options)
@@ -61,7 +62,7 @@ export class SearchService {
 
   private searchDatingUrl = 'http://localhost/LuckyPie-Server/api/post/search/dating';
 
-  searchDating(content: string): Promise < Dating[] > {
+  searchDating(content: string): Promise<Dating[]> {
     let data = new URLSearchParams();
     data.append("content", content);
     return this.http.post(this.searchDatingUrl, data, this.options)
@@ -73,7 +74,7 @@ export class SearchService {
 
   private searchShareUrl = 'http://localhost/LuckyPie-Server/api/post/search/share';
 
-  searchShare(content: string): Promise < Share[] > {
+  searchShare(content: string): Promise<Share[]> {
     let data = new URLSearchParams();
     data.append("content", content);
     return this.http.post(this.searchShareUrl, data, this.options)

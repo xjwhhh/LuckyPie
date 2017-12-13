@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
 import {
   ExploreService
 } from 'app/explore/explore.service';
@@ -9,7 +9,7 @@ import {
   Comment,
   ResultMessage
 } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'explore-tag-detail',
@@ -39,7 +39,8 @@ export class ExploreTagDetailComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private utilService: UtilService, private exploreService: ExploreService) {}
+              private utilService: UtilService, private exploreService: ExploreService) {
+  }
 
   ngOnInit(): void {
     this.userId = this.exploreService.getUserId();
@@ -114,7 +115,8 @@ export class ExploreTagDetailComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));;
+    this.utilService.replyShareComment(this.userId, userId, this.selectedShare.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
@@ -188,7 +190,6 @@ export class ExploreTagDetailComponent implements OnInit {
       'display': 'none'
     };
   }
-
 
 
 }

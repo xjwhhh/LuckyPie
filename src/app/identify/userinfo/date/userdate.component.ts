@@ -1,8 +1,8 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { IdentifyService } from 'app/identify/identify.service';
-import { Dating, User, ResultMessage } from 'app/entity/entity';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {IdentifyService} from 'app/identify/identify.service';
+import {Dating, User, ResultMessage} from 'app/entity/entity';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'user-activity',
@@ -21,9 +21,10 @@ export class UserActivityComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(private identifyService: IdentifyService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private modalService: BsModalService) {}
+              private route: ActivatedRoute,
+              private router: Router,
+              private modalService: BsModalService) {
+  }
 
   ngOnInit() {
     this.userId = this.identifyService.getUserId();
@@ -47,7 +48,7 @@ export class UserActivityComponent implements OnInit {
 
   gotoTagDetail(tag: string): void {
     this.router.navigate(['/explore/' + this.userId +
-      '/tagdetail', tag
+    '/tagdetail', tag
     ]);
   }
 
@@ -91,7 +92,7 @@ export class UserActivityComponent implements OnInit {
     };
   }
 
-  deleteDating(template: TemplateRef < any > ) {
+  deleteDating(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 

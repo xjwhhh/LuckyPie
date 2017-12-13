@@ -2,15 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { SearchService } from 'app/search/search.service'
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import {SearchService} from 'app/search/search.service'
 import {
   Album,
   User,
   Comment,
   ResultMessage
 } from 'app/entity/entity';
-import { UtilService } from 'app/util.service';
+import {UtilService} from 'app/util.service';
 
 @Component({
   selector: 'search-album',
@@ -42,9 +42,9 @@ export class SearchAlbumComponent implements OnInit {
   commentAreaStyle = [];
 
   constructor(private route: ActivatedRoute,
-    private searchService: SearchService,
-    private utilService: UtilService,
-    private router: Router) {
+              private searchService: SearchService,
+              private utilService: UtilService,
+              private router: Router) {
 
   }
 
@@ -117,7 +117,8 @@ export class SearchAlbumComponent implements OnInit {
   }
 
   replyComment(userId: number, commentId: number, content: string, i: number) {
-    this.utilService.replyAlbumComment(this.userId, userId, this.selectedAlbum.id, commentId, content).then(result => this.check(result));;
+    this.utilService.replyAlbumComment(this.userId, userId, this.selectedAlbum.id, commentId, content).then(result => this.check(result));
+    ;
     this.commentAreaStyle[i] = {
       'display': 'none',
       'width': '100%',
