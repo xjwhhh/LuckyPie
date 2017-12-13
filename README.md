@@ -42,4 +42,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## PS
-配合[LucyPie-Server](https://github.com/xjwhhh/LuckyPie-Server)食用更加哦
+配合[LucyPie-Server](https://github.com/xjwhhh/LuckyPie-Server)食用更佳哦
