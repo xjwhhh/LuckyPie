@@ -39,3 +39,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Document
 
 [document](https://github.com/xjwhhh/LuckyPie/tree/master/src/assets/document/LuckyPie说明文档.pdf)
+
+
+## PS
+配合[LucyPie-Server](https://github.com/xjwhhh/LuckyPie-Server)食用更加哦
