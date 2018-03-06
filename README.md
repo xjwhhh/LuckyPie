@@ -1,3 +1,4 @@
+
 # LuckyPie
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.8.
@@ -28,7 +29,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Preview
 
-![register](https://github.com/xjwhhh/LuckyPie/tree/master/src/assets/preview/1.png)
+![register](LuckyPie/src/assets/preview/1.png )
+
 
 ![post](https://github.com/xjwhhh/LuckyPie/tree/master/src/assets/preview/2.png)
 
